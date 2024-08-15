@@ -10,12 +10,13 @@ import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { dbConfig } from './database/database.config';
 import { provideStore } from '@ngxs/store';
 import { ApplicationState } from './core/states/application.state';
+import { HammerModule } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    importProvidersFrom([NgxIndexedDBModule.forRoot(dbConfig)]),
+    importProvidersFrom([NgxIndexedDBModule.forRoot(dbConfig), HammerModule]),
     provideStore([ApplicationState]),
   ],
 };

@@ -1,0 +1,24 @@
+<div class="input-carousel-container">
+  <div class="line"></div>
+  <div
+    class="input-carousel-content"
+    (panleft)="onSwipeLeft()"
+    (panright)="onSwipeRight()"
+  >
+    @for (number of visibleNumbers; track $index; let i = $index) {
+    <div class="input-carousel-item">
+      @if(i !== 1) { @if (number >= 0 || allowNegative) {
+      {{ number }}
+      } } @else {
+      <input
+        type="number"
+        [(ngModel)]="value"
+        (input)="onInputChange($event)"
+        (focus)="onInputFocus($event)"
+      />
+      }
+    </div>
+    }
+  </div>
+  <div class="line"></div>
+</div>
