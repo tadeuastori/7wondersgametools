@@ -1,0 +1,59 @@
+.input-carousel-container {
+  width: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  margin: 1px;
+}
+
+.input-carousel-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.input-carousel-item {
+  min-width: 50px;
+  text-align: center;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  user-select: none;
+  line-height: 1;
+}
+
+.input-carousel-item:not(:nth-child(2)) {
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+input[type="number"] {
+  min-width: 30px;
+  max-width: 50px;
+  text-align: center;
+  font-size: 15px;
+  border: none;
+  background: none;
+  outline: none;
+  color: inherit;
+  line-height: 1;
+}
+
+.line {
+  width: 1px;
+  height: 80%;
+  background-color: red;
+  position: absolute;
+}
+
+.line:first-child {
+  left: 50px;
+}
+
+.line:last-child {
+  right: 50px;
+}
