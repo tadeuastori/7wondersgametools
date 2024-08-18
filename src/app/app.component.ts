@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ApplicationStateSelectors } from './core/states/application.queries';
 import { IApplicationSettings } from './core/models/state/application-state-settings.model';
+import { HeadComponent } from './shared/components/head/head.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
 })
