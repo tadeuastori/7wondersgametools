@@ -1,0 +1,40 @@
+<mat-sidenav-container class="navbar-container">
+  <mat-sidenav #sidenav [mode]="mode">
+    <div class="navbar-menu-content">
+      <div class="menu-img">
+        <img src="/images/actionbar_icon.png" alt="" />
+      </div>
+      <div class="menu-link">
+        <mat-selection-list>
+          @for (group of menuGroupList; track group) {
+          <div mat-subheader class="subheader">{{ group.label }}</div>
+
+          @for (item of group.items; track $index) {
+          <mat-list-item>
+            <mat-icon matListItemIcon>{{ item.iconName }}</mat-icon>
+            <div matListItemTitle>{{ item.label }}</div>
+          </mat-list-item>
+          } }
+        </mat-selection-list>
+      </div>
+      <div class="menu-app-version">
+        <span>{{ appVersion }}</span>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="navbar-page-content">
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        class="head-menu-button"
+        aria-label="Example icon-button with menu icon"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{ appName }}</span>
+      <span class="head-spacer"></span>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

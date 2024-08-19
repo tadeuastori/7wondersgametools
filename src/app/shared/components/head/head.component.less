@@ -1,0 +1,73 @@
+@import "public/styles/variables.less";
+
+.navbar-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .mat-drawer {
+    width: 50%;
+  }
+
+  .navbar-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+
+    .menu-img {
+      height: 100px;
+      align-content: center;
+      background-color: @navbar-top-bgcolor;
+
+      img {
+        width: 70px;
+        margin-left: 10px;
+      }
+
+      span {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    .menu-link {
+      flex-grow: 1;
+      background-color: @navbar-link-bgcolor;
+
+      .subheader {
+        margin: 1rem 16px 0rem 16px;
+        font-size: small;
+      }
+    }
+
+    .menu-app-version {
+      height: 30px;
+      align-content: center;
+      text-align: center;
+      background-color: @navbar-bottom-bgcolor;
+      color: white;
+    }
+  }
+
+  .navbar-page-content {
+    mat-toolbar {
+      background-color: rgb(147, 115, 84);
+      padding: 0rem;
+      color: white;
+      font-size: medium;
+
+      .head-spacer {
+        flex: 1 1 auto;
+      }
+
+      .head-menu-button {
+        margin-right: 5px;
+        margin-left: 5px;
+        color: white;
+      }
+    }
+  }
+}
