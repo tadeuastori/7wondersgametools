@@ -1,4 +1,4 @@
-@import "public/styles/variables.less";
+@import "../../../../../public/styles/variables.less";
 
 .navbar-container {
   position: absolute;
@@ -54,9 +54,9 @@
 
   .navbar-page-content {
     mat-toolbar {
-      background-color: rgb(147, 115, 84);
+      background-color: @action-bar-bgcolor;
       padding: 0rem;
-      color: white;
+      color: @action-bar-font-color;
       font-size: medium;
 
       .head-spacer {
@@ -66,7 +66,7 @@
       .head-menu-button {
         margin-right: 5px;
         margin-left: 5px;
-        color: white;
+        color: @action-bar-font-color;
       }
     }
   }

@@ -1,0 +1,8 @@
+<div class="score-sheet-container">
+  @for (item of gameList; track $index) {
+  <button mat-fab extended [routerLink]="item.routerLink">
+    <!-- <mat-icon>favorite</mat-icon> -->
+    {{ item.label }}
+  </button>
+  }
+</div>

@@ -29,7 +29,7 @@ export class ApplicationMenuListService {
           order: 10,
           iconName: 'scoreboard',
           label: 'Score Sheet',
-          routerLink: '',
+          routerLink: 'score-sheet-menu',
           active: true,
         },
       ],
@@ -40,14 +40,20 @@ export class ApplicationMenuListService {
       label: 'Metrics',
       active: false,
       items: [
-        { order: 10, iconName: '', label: '', routerLink: '', active: false },
+        {
+          order: 10,
+          iconName: 'analytics',
+          label: 'Matches',
+          routerLink: '',
+          active: true,
+        },
       ],
     },
     {
       order: 30,
       iconName: 'settings',
       label: 'Configuration',
-      active: true,
+      active: false,
       items: [
         {
           order: 10,
@@ -71,7 +77,13 @@ export class ApplicationMenuListService {
       label: 'Information',
       active: false,
       items: [
-        { order: 10, iconName: '', label: '', routerLink: '', active: false },
+        {
+          order: 10,
+          iconName: 'question_mark',
+          label: 'Rules',
+          routerLink: '',
+          active: true,
+        },
       ],
     },
   ];
