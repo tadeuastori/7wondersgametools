@@ -18,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom([NgxIndexedDBModule.forRoot(dbConfig), HammerModule]),
-    provideStore([ApplicationState]), provideAnimationsAsync(),
+    provideStore([ApplicationState]),
+    provideAnimationsAsync(),
   ],
 };
