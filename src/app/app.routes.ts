@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
+import { ScoreSheetComponent } from './features/score-sheet/score-sheet.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-not-found' },
 
   // TODO: add routes
-  // {
-  //   path: 'game-base',
-  //   component: GameBaseComponent,
-  //   children: [{ path: '', redirectTo: 'home', pathMatch: 'full' }],
-  // },
+  {
+    path: 'score-sheet-menu',
+    component: ScoreSheetComponent,
+    // children: [{ path: '', redirectTo: 'home', pathMatch: 'full' }],
+  },
 ];

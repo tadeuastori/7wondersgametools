@@ -6,6 +6,7 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { environment } from '../../../../environments/environment';
 import { ApplicationMenuListService } from '../../../core/services/application-menu-list.service';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-head',
@@ -16,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    RouterModule,
   ],
   templateUrl: './head.component.html',
   styleUrl: './head.component.less',

@@ -10,7 +10,10 @@
           <div mat-subheader class="subheader">{{ group.label }}</div>
 
           @for (item of group.items; track $index) {
-          <mat-list-item>
+          <mat-list-item
+            [routerLink]="item.routerLink"
+            (click)="sidenav.close()"
+          >
             <mat-icon matListItemIcon>{{ item.iconName }}</mat-icon>
             <div matListItemTitle>{{ item.label }}</div>
           </mat-list-item>
