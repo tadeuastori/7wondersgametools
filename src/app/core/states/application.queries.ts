@@ -15,4 +15,19 @@ export class ApplicationStateSelectors {
     [ApplicationStateSelectors.getSlices.settings],
     (settings) => settings
   );
+
+  static getApplicationGames = createSelector(
+    [ApplicationStateSelectors.getSlices.games],
+    (games) => games
+  );
+
+  static getApplicationPlayers = createSelector(
+    [ApplicationStateSelectors.getSlices.players],
+    (players) => players
+  );
+
+  static isStateReady = createSelector(
+    [ApplicationStateSelectors.getSlices.isStateReady],
+    (isStateReady) => isStateReady
+  );
 }

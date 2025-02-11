@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DatabaseService {
   constructor(private dbService: NgxIndexedDBService) {}
 
-  public add<T>(storeName: string, data: T): Observable<Object> {
+  public add<T>(storeName: string, data: T): Observable<T> {
     return this.dbService.add<T>(storeName, data);
   }
 
@@ -34,5 +34,9 @@ export class DatabaseService {
       property,
       IDBKeyRange.only(value)
     );
+  }
+
+  public getAll<T>(storeName: string): Observable<T[]> {
+    return this.dbService.getAll<T>(storeName);
   }
 }

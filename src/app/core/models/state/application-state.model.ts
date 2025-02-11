@@ -6,12 +6,14 @@ import {
 } from './application-state-settings.model';
 
 export interface IApplicationStateModel {
+  isStateReady: boolean;
   settings: IApplicationSettings;
   players: IPlayer[];
   games: IGame[];
 }
 
 export const initialApplicationState: IApplicationStateModel = {
+  isStateReady: false,
   settings: new ApplicationSetting() as IApplicationSettings,
   players: [new Player()] as IPlayer[],
   games: [new Game()] as IGame[],

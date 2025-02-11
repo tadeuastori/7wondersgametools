@@ -1,14 +1,14 @@
 export const constGameList: Array<{ label: string; routerLink: string }> = [
   {
     label: '7w - Game Base',
-    routerLink: '',
+    routerLink: 'game-base',
   },
   {
     label: '7w - Duel',
-    routerLink: '',
+    routerLink: 'duel',
   },
   {
     label: '7w - Architects',
-    routerLink: '',
+    routerLink: 'architects',
   },
 ];

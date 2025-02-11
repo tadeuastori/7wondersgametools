@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../models/game/game.model';
+import { EGamesEnum } from '../enums/games.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -12,60 +13,102 @@ export class ApplicationDataService {
       name: '7w Game Base',
       description: '',
       version: 2,
+      gameType: EGamesEnum.GAME_BASE,
+      icon: '',
       expansions: [
         {
           name: 'Cities',
           description: '',
-          wonders: [],
+          icon: 'person_add',
+          wonders: [{ name: 'Petra' }, { name: 'Byzantium' }],
         },
         {
           name: 'Edifice',
           description: '',
-          wonders: [],
+          icon: 'person_add',
+          wonders: [{ name: 'Ur' }, { name: 'Carthage' }],
         },
         {
           name: 'Leaders',
           description: '',
-          wonders: [],
+          icon: 'person_add',
+          wonders: [{ name: 'Roma' }, { name: 'Abu Simbel' }],
         },
         {
           name: 'Armada',
           description: '',
-          wonders: [],
+          icon: 'person_add',
+          wonders: [{ name: 'Siracusa' }],
         },
       ],
-      wonders: [],
+      wonders: [
+        { name: 'Rhodos' },
+        { name: 'Olympia' },
+        { name: 'Halikarnassus' },
+        { name: 'Gizah' },
+        { name: 'Alexandria' },
+        { name: 'Ephesos' },
+        { name: 'Babylon' },
+      ],
     },
     {
       name: '7w Duel',
       description: '',
       version: 1,
+      gameType: EGamesEnum.GAME_DUEL,
+      icon: '',
       expansions: [
         {
           name: 'Agora',
           description: '',
-          wonders: [],
+          icon: '',
+          wonders: [{ name: 'The Sanctuary' }, { name: 'The Divine Theater' }],
         },
         {
           name: 'Pantheon',
           description: '',
-          wonders: [],
+          icon: '',
+          wonders: [{ name: 'Curia Julia' }, { name: 'Knossos' }],
         },
       ],
-      wonders: [],
+      wonders: [
+        { name: 'The Appian Way' },
+        { name: 'The Statue of Zeus' },
+        { name: 'The Temple of Artemis' },
+        { name: 'The Mausoleum' },
+        { name: 'The Hanging Gardens' },
+        { name: 'The Great Lighthouse' },
+        { name: 'The Sphinx' },
+        { name: 'Piraeus' },
+        { name: 'The Pyramids' },
+        { name: 'Circus Maximus' },
+        { name: 'The Colossus' },
+        { name: 'The Great Library' },
+      ],
     },
     {
       name: '7w Architects',
       description: '',
       version: 1,
+      gameType: EGamesEnum.GAME_ARCHITECTS,
+      icon: '',
       expansions: [
         {
           name: 'Medals',
           description: '',
-          wonders: [],
+          icon: '',
+          wonders: [{ name: 'Ur' }, { name: 'Rome' }],
         },
       ],
-      wonders: [],
+      wonders: [
+        { name: 'Rhodos' },
+        { name: 'Olympia' },
+        { name: 'Halikarnassus' },
+        { name: 'Gizah' },
+        { name: 'Alexandria' },
+        { name: 'Ephesos' },
+        { name: 'Babylon' },
+      ],
     },
   ];
 

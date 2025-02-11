@@ -2,14 +2,14 @@ import { EWonderSide } from '../../enums/wonder-side.enum';
 
 export interface IWonder {
   name: string;
-  description: string;
-  side: EWonderSide;
+  description?: string;
+  side?: EWonderSide;
 }
 
 export class Wonder implements IWonder {
   name: string;
-  description: string;
-  side: EWonderSide;
+  description?: string;
+  side?: EWonderSide;
 
   constructor(clone?: IWonder) {
     this.name = '';
