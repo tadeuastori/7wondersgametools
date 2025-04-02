@@ -7,11 +7,10 @@ import { HeadComponent } from './shared/components/head/head.component';
 import { ApplicationStateActions } from './core/states/application.actions';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, HeadComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less',
+    selector: 'app-root',
+    imports: [RouterOutlet, HeadComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.less'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _store = inject(Store);

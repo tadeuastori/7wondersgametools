@@ -3,11 +3,10 @@ import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 
 @Component({
-  selector: 'app-input-group-number-swipe',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './input-group-number-swipe.component.html',
-  styleUrl: './input-group-number-swipe.component.less',
+    selector: 'app-input-group-number-swipe',
+    imports: [FormsModule],
+    templateUrl: './input-group-number-swipe.component.html',
+    styleUrl: './input-group-number-swipe.component.less'
 })
 export class InputGroupNumberSwipeComponent implements OnInit {
   @Input() values: number[] = [0, 0, 0, 0];

@@ -40,20 +40,19 @@ import { IWonder } from '../../../../core/models/game/wonder.model';
 import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 
 @Component({
-  selector: 'app-configuration',
-  standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatButtonToggleModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
-  templateUrl: './configuration.component.html',
-  styleUrl: './configuration.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-configuration',
+    imports: [
+        MatToolbarModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        MatButtonToggleModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+    ],
+    templateUrl: './configuration.component.html',
+    styleUrl: './configuration.component.less',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfigurationComponent extends BaseComponent implements OnInit {
   readonly dialog = inject(MatDialog);
