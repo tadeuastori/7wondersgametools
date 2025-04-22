@@ -105,9 +105,10 @@ export class ApplicationState {
 
     let currentPlayers = ctx.getState().players;
 
-    const exists = currentPlayers.filter(
-      (item) => item.name.toLowerCase() === payload.name.toLowerCase()
-    );
+    const exists =
+      currentPlayers.filter(
+        (item) => item.name.toLowerCase() === payload.name.toLowerCase()
+      ).length > 0;
 
     if (exists) {
       ctx.patchState({
