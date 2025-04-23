@@ -4,7 +4,12 @@ export interface IMatchPlayer {
   name: string;
   wonder: string[];
   group: number;
-  stages: Array<{ stage: EStages; score: number }>;
+  stages: Array<{
+    stage: EStages;
+    score: number;
+    order: number;
+    color: string;
+  }>;
 
   totalStagesScore(): number;
   stageScore(stage: EStages): number;
@@ -14,7 +19,12 @@ export class MatchPlayer implements IMatchPlayer {
   name: string;
   wonder: string[];
   group: number;
-  stages: Array<{ stage: EStages; score: number }>;
+  stages: Array<{
+    stage: EStages;
+    score: number;
+    order: number;
+    color: string;
+  }>;
 
   public totalStagesScore(): number {
     return this.stages.length == 0

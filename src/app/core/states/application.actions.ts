@@ -20,14 +20,4 @@ export namespace ApplicationStateActions {
       ApplicationStateActionsTypes.AddPlayerApplicationState;
     constructor(public payload: IPlayerRequest) {}
   }
-
-  export class StartMatchApplicationState {
-    static readonly type =
-      ApplicationStateActionsTypes.StartMatchApplicationState;
-    constructor(
-      public game: EGamesEnum,
-      public expansions: string[],
-      public players: IMatchPlayers[]
-    ) {}
-  }
 }

@@ -38,6 +38,7 @@ import { Observable, takeUntil } from 'rxjs';
 import { IExpansion } from '../../../../core/models/game/expansions.model';
 import { IWonder } from '../../../../core/models/game/wonder.model';
 import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
+import { MatchStateActions } from '../../../../core/states/match.action';
 
 @Component({
   selector: 'app-configuration',
@@ -322,9 +323,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     this._loadWondersList();
   }
 
-  public startGame(): void {
+  public createAndStartMatch(): void {
     this._store.dispatch(
-      new ApplicationStateActions.StartMatchApplicationState(
+      new MatchStateActions.CreateAndStartMatch(
         this.gameType,
         this.originalExpansionList
           .filter((filter) => filter.value === true)

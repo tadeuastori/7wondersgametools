@@ -37,6 +37,8 @@ export class ApplicationState {
     });
   }
 
+  //################################################################################################
+
   private _successSnakBar(message: string) {}
 
   private _errorSnakBar(message: string) {}
@@ -131,21 +133,5 @@ export class ApplicationState {
           },
         });
     }
-  }
-
-  @Action(ApplicationStateActions.StartMatchApplicationState)
-  async startMatchApplicationState(
-    ctx: StateContext<IApplicationStateModel>,
-    {
-      game,
-      expansions,
-      players,
-    }: ApplicationStateActions.StartMatchApplicationState
-  ) {
-    this._startPathState(ctx);
-    //add logic to create new match
-    ctx.patchState({
-      isStateReady: true,
-    });
   }
 }

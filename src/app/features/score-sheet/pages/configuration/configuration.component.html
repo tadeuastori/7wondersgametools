@@ -97,7 +97,12 @@
     </div>
   </div>
   <div class="start-button">
-    <button mat-fab extended (click)="startGame()" [disabled]="!isStartReady">
+    <button
+      mat-fab
+      extended
+      (click)="createAndStartMatch()"
+      [disabled]="!isStartReady"
+    >
       <!-- <mat-icon>playing_cards</mat-icon> -->
       Start Game
     </button>

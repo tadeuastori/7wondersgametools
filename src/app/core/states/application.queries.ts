@@ -12,22 +12,22 @@ export class ApplicationStateSelectors {
   );
 
   static getApplicationSettings = createSelector(
-    [ApplicationStateSelectors.getSlices.settings],
+    [this.getSlices.settings],
     (settings) => settings
   );
 
   static getApplicationGames = createSelector(
-    [ApplicationStateSelectors.getSlices.games],
+    [this.getSlices.games],
     (games) => games
   );
 
   static getApplicationPlayers = createSelector(
-    [ApplicationStateSelectors.getSlices.players],
+    [this.getSlices.players],
     (players) => players
   );
 
   static isStateReady = createSelector(
-    [ApplicationStateSelectors.getSlices.isStateReady],
+    [this.getSlices.isStateReady],
     (isStateReady) => isStateReady
   );
 }
