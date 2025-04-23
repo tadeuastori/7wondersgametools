@@ -36,7 +36,8 @@
         <mat-option [value]="wonder.name">
           @if (wonder.icon) {
           <mat-icon>{{ wonder.icon }}</mat-icon>
-          }
+          } @else {
+          <mat-icon></mat-icon>}
           {{ wonder.name }}
         </mat-option>
         }

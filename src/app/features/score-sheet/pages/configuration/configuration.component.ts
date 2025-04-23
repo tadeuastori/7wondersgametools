@@ -40,19 +40,19 @@ import { IWonder } from '../../../../core/models/game/wonder.model';
 import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 
 @Component({
-    selector: 'app-configuration',
-    imports: [
-        MatToolbarModule,
-        MatSlideToggleModule,
-        MatDividerModule,
-        MatButtonToggleModule,
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule,
-    ],
-    templateUrl: './configuration.component.html',
-    styleUrl: './configuration.component.less',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-configuration',
+  imports: [
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatButtonToggleModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
+  templateUrl: './configuration.component.html',
+  styleUrl: './configuration.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigurationComponent extends BaseComponent implements OnInit {
   readonly dialog = inject(MatDialog);
@@ -62,16 +62,23 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   applicationPlayersList$: Observable<IPlayer[]>;
 
   readonly newPlayer: IMatchPlayers = signal(new MatchPlayers());
+
+  originalPlayersList: IPlayer[] = [];
   originalGameList: IGame[] = [];
+  originalExpansionList: Array<{
+    name: string;
+    icon?: string;
+    value: boolean;
+    wondersList?: IWonder[];
+  }> = [];
+
+  availableWonderList: Array<{ name: string; icon?: string }> = [];
 
   eGameType = EGamesEnum;
   gameType: EGamesEnum = EGamesEnum.GAME_BASE;
-  expansionsList: Array<{ name: string; icon?: string; value: boolean }> = [];
-  playersList: IMatchPlayers[] = [];
-  wondersList: Array<{ name: string; icon?: string }> = [];
 
-  dataSource = new MatchPlayerDataSource();
-  dataSourceList: IMatchPlayers[] = [];
+  matchPlayerDataSource = new MatchPlayerDataSource();
+  matchPlayersList: IMatchPlayers[] = [];
   displayedColumns: string[] = ['table-player', 'table-wonder', 'table-action'];
 
   isStartReady: boolean = false;
@@ -96,17 +103,18 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   public onChangeExpansionValue(idx: number): void {
-    this.expansionsList[idx].value = !this.expansionsList[idx].value;
+    this.originalExpansionList[idx].value =
+      !this.originalExpansionList[idx].value;
 
     this._loadWondersList();
 
-    if (!this.expansionsList[idx].value) {
-      this._loadDataSourceList();
+    if (!this.originalExpansionList[idx].value) {
+      this._refreshDataSourceList();
     }
   }
 
   private _loadPlayerList(): void {
-    this.playersList = [];
+    this.originalPlayersList = [];
 
     this.applicationPlayersList$
       .pipe(takeUntil(this.destroy$))
@@ -114,17 +122,21 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
         players
           .filter((player: IPlayer) => player.name)
           .forEach((player: IPlayer) => {
-            if (!this.playersList.map((p) => p.name).includes(player.name)) {
-              this.playersList.push({
+            if (
+              !this.originalPlayersList.map((p) => p.name).includes(player.name)
+            ) {
+              this.originalPlayersList.push({
                 id: player.id,
                 name: player.name,
-                wonder: undefined,
               });
             }
           });
       });
 
-    this.playersList = SortUtils.sortByProperty(this.playersList, 'name');
+    this.originalPlayersList = SortUtils.sortByProperty(
+      this.originalPlayersList,
+      'name'
+    );
   }
 
   private _loadGameInfo(): void {
@@ -141,89 +153,91 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
           )
           .forEach((game: IGame) => {
             game.expansions.forEach((gameExpansions: IExpansion) => {
-              this.expansionsList.push({
+              this.originalExpansionList.push({
                 name: gameExpansions.name,
                 icon: gameExpansions.icon,
                 value: false,
+                wondersList: gameExpansions.wonders,
               });
             });
           });
 
         this._loadWondersList();
-        this.expansionsList = SortUtils.sortByProperty(
-          this.expansionsList,
+        this.originalExpansionList = SortUtils.sortByProperty(
+          this.originalExpansionList,
           'name'
         );
       });
   }
 
   private _loadWondersList(): void {
-    this.wondersList = [];
+    this.availableWonderList = [];
 
     if (this.originalGameList.length === 0) return;
 
     this.originalGameList[0].wonders.forEach((wonders: IWonder) => {
-      if (
-        !this.dataSourceList.some((item) =>
-          item.wonder?.some((wonder) => wonder.name === wonders.name)
-        )
-      ) {
-        this.wondersList.push({ name: wonders.name, icon: '' });
+      this.availableWonderList.push({
+        name: wonders.name,
+      });
+    });
+
+    this.originalExpansionList.forEach((expansion: any) => {
+      if (expansion.value) {
+        expansion.wondersList?.forEach((wonders: IWonder) => {
+          this.availableWonderList.push({
+            name: wonders.name,
+            icon: expansion.icon,
+          });
+        });
       }
     });
 
-    const selectedExpansion = new Set(
-      this.expansionsList
-        .filter((filter) => filter.value === true)
-        .map((item) => item.name)
+    this.matchPlayersList.forEach((player: IMatchPlayers) => {
+      player.wonder?.forEach((wonder: any) => {
+        var idx = this.availableWonderList.findIndex(
+          (item) => item.name === wonder.name
+        );
+
+        if (idx > -1) {
+          this.availableWonderList.splice(idx, 1);
+        }
+      });
+    });
+
+    this.availableWonderList = SortUtils.sortByProperty(
+      this.availableWonderList,
+      'name'
     );
+  }
 
-    if (selectedExpansion) {
-      const expansions = this.originalGameList[0].expansions?.filter((item) =>
-        selectedExpansion.has(item.name)
-      );
-
-      expansions?.forEach((expansion: IExpansion) => {
-        expansion.wonders?.forEach((wonder: IWonder) => {
-          if (
-            !this.dataSourceList.some((item) =>
-              item.wonder
-                ?.map((item) => item.name)
-                .some((item) => item === wonder.name)
-            )
-          ) {
-            this.wondersList.push({ name: wonder.name, icon: expansion.icon });
-          }
+  private _refreshDataSourceList(): void {
+    if (this.matchPlayersList.length > 0) {
+      this.matchPlayersList.forEach((player: IMatchPlayers) => {
+        player.wonder?.forEach((wonder: any) => {
+          this.originalExpansionList.forEach((expansion: any) => {
+            expansion.wondersList?.forEach((wonders: IWonder) => {
+              if (wonders.name === wonder.name && !expansion.value) {
+                player.wonder?.splice(player.wonder?.indexOf(wonder), 1);
+              }
+            });
+          });
         });
       });
     }
 
-    this.wondersList = SortUtils.sortByProperty(this.wondersList, 'name');
-  }
-
-  private _loadDataSourceList(): void {
-    if (this.dataSourceList.length > 0) {
-      this.dataSourceList.forEach((player: IMatchPlayers) => {
-        if (
-          !this.wondersList.some((wonder) =>
-            player.wonder?.some((item) => item.name === wonder.name)
-          )
-        ) {
-          const wonder: Array<{ name: string; icon?: string }> = [{ name: '' }];
-
-          player.wonder = wonder;
-        }
-      });
-
-      this.dataSource.setData(this.dataSourceList);
-    }
+    this.matchPlayerDataSource.setData(this.matchPlayersList);
   }
 
   private _validatedConfiguration(): void {
     this.isStartReady =
       (this.gameType === this.eGameType.GAME_DUEL &&
-        this.dataSourceList.length === 2) ||
-      (this.dataSourceList.length >= 3 && this.dataSourceList.length <= 7);
+        this.matchPlayersList.length === 2) ||
+      (this.gameType === this.eGameType.GAME_ARCHITECTS &&
+        this.matchPlayersList.length >= 2 &&
+        this.matchPlayersList.length <= 7) ||
+      (this.gameType === this.eGameType.GAME_BASE &&
+        this.matchPlayersList.length >= 3 &&
+        this.matchPlayersList.length <= 7);
   }
 
   public addPlayer(player: IMatchPlayers): void {
@@ -237,33 +251,44 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       );
     }
 
-    const exist = this.dataSourceList.filter(
+    const exist = this.matchPlayersList.filter(
       (item) => item.name.toLowerCase() === player.name.toLowerCase()
     );
 
     if (exist.length > 0) {
-      this._snackBar.open('player exists', 'close');
+      this.openSnackBar('Player already added to the match');
 
       return;
     }
 
-    this.dataSourceList = [...this.dataSourceList, player];
-    this.dataSource.setData(this.dataSourceList);
+    this.matchPlayersList = [...this.matchPlayersList, player];
+    this.matchPlayerDataSource.setData(this.matchPlayersList);
 
     this._loadWondersList();
     this._validatedConfiguration();
   }
   public removePlayer(idx: number): void {
-    this.dataSourceList.splice(idx, 1);
-    this.dataSource.setData(this.dataSourceList);
+    this.matchPlayersList.splice(idx, 1);
+    this.matchPlayerDataSource.setData(this.matchPlayersList);
     this._loadWondersList();
   }
 
   public generateWonders(): void {
-    const availableWonders = [...this.wondersList];
+    const availableWonders = [...this.availableWonderList];
 
-    this.dataSourceList
-      .filter((item) => item.wonder?.length === 0)
+    const wonderValues = Object.values(EWonderSide);
+    const sideRandomIndex = Math.floor(Math.random() * wonderValues.length);
+
+    var hasPlayerWithoutWonder = this.matchPlayersList.some(
+      (item) => !item.wonder?.length
+    );
+
+    this.matchPlayersList
+      .filter(
+        (item) =>
+          (hasPlayerWithoutWonder && item.wonder?.length === 0) ||
+          (!hasPlayerWithoutWonder && item.wonder?.length != 0)
+      )
       .forEach((item) => {
         if (availableWonders.length > 0) {
           const totalWonders = this.gameType === EGamesEnum.GAME_DUEL ? 4 : 1;
@@ -273,14 +298,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
             side?: EWonderSide;
           }> = [];
 
-          const wonderValues = Object.values(EWonderSide);
-
           for (let i = 0; i < totalWonders; i++) {
             const wonderRandomIndex = Math.floor(
               Math.random() * availableWonders.length
-            );
-            const sideRandomIndex = Math.floor(
-              Math.random() * wonderValues.length
             );
 
             wonder.push({
@@ -298,36 +318,38 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
           item.wonder = wonder;
         }
       });
+
+    this._loadWondersList();
   }
 
   public startGame(): void {
     this._store.dispatch(
       new ApplicationStateActions.StartMatchApplicationState(
         this.gameType,
-        this.expansionsList
+        this.originalExpansionList
           .filter((filter) => filter.value === true)
           .map((item) => item.name),
-        this.dataSourceList
+        this.matchPlayersList
       )
     );
   }
 
   openSnackBar(message: string) {
     const horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    const verticalPosition: MatSnackBarVerticalPosition = 'top';
+    const verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
     this._snackBar.open(message, 'Close', {
       horizontalPosition: horizontalPosition,
       verticalPosition: verticalPosition,
-      duration: 500 * 1000,
+      duration: 5 * 1000,
     });
   }
 
   public openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerMatchComponent, {
       data: {
-        wonders: this.wondersList,
-        players: this.playersList,
+        wonders: this.availableWonderList,
+        players: this.originalPlayersList,
         multipleWonders: this.gameType === EGamesEnum.GAME_DUEL,
         hasWonderSide: this.gameType === EGamesEnum.GAME_BASE,
       },

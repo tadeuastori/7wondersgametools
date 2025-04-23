@@ -33,25 +33,25 @@ import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 import { EGamesEnum } from '../../../../core/enums/games.enum';
 
 @Component({
-    selector: 'app-dialog-add-player-match',
-    imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatButtonModule,
-        MatDialogTitle,
-        MatDialogContent,
-        MatDialogActions,
-        MatDialogClose,
-        MatSelectModule,
-        MatAutocompleteModule,
-        AsyncPipe,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatSlideToggleModule,
-    ],
-    templateUrl: './dialog-add-player-match.component.html',
-    styleUrl: './dialog-add-player-match.component.less'
+  selector: 'app-dialog-add-player-match',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    // MatDialogClose,
+    MatSelectModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatSlideToggleModule,
+  ],
+  templateUrl: './dialog-add-player-match.component.html',
+  styleUrl: './dialog-add-player-match.component.less',
 })
 export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
   @ViewChild('darkModeSwitch', { read: ElementRef }) element:
