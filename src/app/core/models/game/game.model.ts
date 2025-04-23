@@ -1,3 +1,4 @@
+import { EGamesEnum } from '../../enums/games.enum';
 import { Expansion, IExpansion } from './expansions.model';
 import { IWonder, Wonder } from './wonder.model';
 
@@ -7,6 +8,8 @@ export interface IGame {
   version: number;
   expansions: IExpansion[];
   wonders: IWonder[];
+  gameType: EGamesEnum;
+  icon: string;
 }
 
 export class Game implements IGame {
@@ -15,6 +18,8 @@ export class Game implements IGame {
   version: number;
   expansions: IExpansion[];
   wonders: IWonder[];
+  gameType: EGamesEnum;
+  icon: string;
 
   constructor(clone?: IGame) {
     this.name = '';
@@ -22,6 +27,8 @@ export class Game implements IGame {
     this.version = 2;
     this.expansions = [new Expansion()] as IExpansion[];
     this.wonders = [new Wonder()] as IWonder[];
+    this.gameType = EGamesEnum.GAME_BASE;
+    this.icon = '';
 
     if (clone) {
       this.name = clone.name;
@@ -29,6 +36,8 @@ export class Game implements IGame {
       this.version = clone.version;
       this.expansions = clone.expansions;
       this.wonders = clone.wonders;
+      this.gameType = clone.gameType;
+      this.icon = clone.icon;
     }
   }
 }

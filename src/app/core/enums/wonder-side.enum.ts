@@ -1,4 +1,4 @@
 export enum EWonderSide {
-  DAY = 'Day',
-  NIGHT = 'Night',
+  DAY = 'sunny',
+  NIGHT = 'dark_mode',
 }

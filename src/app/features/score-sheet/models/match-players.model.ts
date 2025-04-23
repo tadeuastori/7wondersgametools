@@ -1,0 +1,29 @@
+import { EWonderSide } from '../../../core/enums/wonder-side.enum';
+
+export interface IMatchPlayers {
+  id?: number;
+  name: string;
+  wonder?: Array<{ name: string; icon?: string; side?: EWonderSide }>;
+  group?: number;
+}
+
+export class MatchPlayers implements IMatchPlayers {
+  id?: number;
+  name: string;
+  wonder?: Array<{ name: string; icon?: string; side?: EWonderSide }>;
+  group?: number;
+
+  constructor(clone?: IMatchPlayers) {
+    id: undefined;
+    this.name = '';
+    this.wonder = undefined;
+    this.group = undefined;
+
+    if (clone) {
+      this.id = clone.id;
+      this.name = clone.name;
+      this.wonder = clone.wonder;
+      this.group = clone.group;
+    }
+  }
+}

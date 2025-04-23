@@ -2,7 +2,12 @@
   <mat-sidenav #sidenav [mode]="mode">
     <div class="navbar-menu-content">
       <div class="menu-img">
-        <img src="/images/actionbar_icon.png" alt="" />
+        <img
+          src="/images/actionbar_icon.png"
+          alt=""
+          [routerLink]="''"
+          (click)="sidenav.close()"
+        />
       </div>
       <div class="menu-link">
         <mat-selection-list>

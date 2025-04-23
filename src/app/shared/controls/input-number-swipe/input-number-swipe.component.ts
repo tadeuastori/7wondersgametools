@@ -3,11 +3,10 @@ import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 
 @Component({
-  selector: 'app-input-number-swipe',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './input-number-swipe.component.html',
-  styleUrl: './input-number-swipe.component.less',
+    selector: 'app-input-number-swipe',
+    imports: [FormsModule],
+    templateUrl: './input-number-swipe.component.html',
+    styleUrl: './input-number-swipe.component.less'
 })
 export class InputNumberSwipeComponent implements OnInit {
   @Input() value: number = 0;

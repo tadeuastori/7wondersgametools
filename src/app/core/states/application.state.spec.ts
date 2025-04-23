@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ApplicationState } from './application.state';
-import { ApplicationStateActions } from './application.actions';
-import { State, StateContext } from '@ngxs/store';
+import { StateContext } from '@ngxs/store';
 import { IApplicationStateModel } from '../models/state/application-state.model';
 
 describe('ApplicationState', () => {
