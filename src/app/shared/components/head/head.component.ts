@@ -15,17 +15,17 @@ import {
 import { filter, map } from 'rxjs';
 
 @Component({
-    selector: 'app-head',
-    imports: [
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        RouterModule,
-    ],
-    templateUrl: './head.component.html',
-    styleUrl: './head.component.less'
+  selector: 'app-head',
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    RouterModule,
+  ],
+  templateUrl: './head.component.html',
+  styleUrl: './head.component.less',
 })
 export class HeadComponent implements OnInit {
   appName: string = '7 Wonders Game Tools';
