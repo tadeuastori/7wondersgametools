@@ -20,6 +20,21 @@ export class ApplicationMenuListService {
     }>;
   }> = [
     {
+      order: 0,
+      iconName: 'home',
+      label: '',
+      active: true,
+      items: [
+        {
+          order: 10,
+          iconName: 'home',
+          label: 'Home',
+          routerLink: '',
+          active: true,
+        },
+      ],
+    },
+    {
       order: 10,
       iconName: 'calculate',
       label: 'Game Tools',
