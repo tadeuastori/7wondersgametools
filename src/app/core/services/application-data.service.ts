@@ -10,7 +10,7 @@ export class ApplicationDataService {
 
   private GameData: Game[] = [
     {
-      name: '7w Game Base',
+      name: '7 Wonders',
       description: '',
       version: 2,
       gameType: EGamesEnum.GAME_BASE,
@@ -52,7 +52,7 @@ export class ApplicationDataService {
       ],
     },
     {
-      name: '7w Duel',
+      name: '7w - Duel',
       description: '',
       version: 1,
       gameType: EGamesEnum.GAME_DUEL,
@@ -87,7 +87,7 @@ export class ApplicationDataService {
       ],
     },
     {
-      name: '7w Architects',
+      name: '7w - Architects',
       description: '',
       version: 1,
       gameType: EGamesEnum.GAME_ARCHITECTS,
