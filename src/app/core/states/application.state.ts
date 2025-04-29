@@ -13,17 +13,20 @@ import {
 import { ApplicationDataService } from '../services/application-data.service';
 import { PlayerService } from '../services/player.service';
 import { first } from 'rxjs';
+import { BaseState } from './base/base.state';
 
 @State<IApplicationStateModel>({
   name: AppStoreKeys.ApplicationState,
   defaults: initialApplicationState,
 })
 @Injectable()
-export class ApplicationState {
+export class ApplicationState extends BaseState {
   constructor(
     private _applicationDataService: ApplicationDataService,
     private _PlayerService: PlayerService
-  ) {}
+  ) {
+    super();
+  }
 
   private _startPathState(ctx: StateContext<IApplicationStateModel>) {
     ctx.patchState({
@@ -38,14 +41,6 @@ export class ApplicationState {
   }
 
   //################################################################################################
-
-  private _successSnakBar(message: string) {}
-
-  private _errorSnakBar(message: string) {}
-
-  private _warningSnakBar(message: string) {}
-
-  private _infoSnakBar(message: string) {}
 
   @Action(ApplicationStateActions.InitializeApplicationState)
   async initializeApplicationState(ctx: StateContext<IApplicationStateModel>) {
@@ -62,6 +57,7 @@ export class ApplicationState {
             games: this._applicationDataService.getGameData(),
             players: player,
           });
+          this._successSnakBar('Application State Initialized');
         },
         error: (err) => {
           console.log('[initializeApplicationState] - ' + err);
@@ -91,6 +87,8 @@ export class ApplicationState {
         players: ctx.getState().players,
         games: ctx.getState().games,
       });
+
+      this._successSnakBar('Application Settings Saved');
     } catch (error) {
       console.log('[saveApplicationSettings] - ' + error);
       this._errorSnakBar('[saveApplicationSettings]');
@@ -116,6 +114,7 @@ export class ApplicationState {
       ctx.patchState({
         isStateReady: true,
       });
+      this._infoSnakBar('Player already added to the database');
     } else {
       this._PlayerService
         .addPlayer(payload)
@@ -126,6 +125,7 @@ export class ApplicationState {
               isStateReady: true,
               players: [...currentPlayers, player],
             });
+            this._successSnakBar('Player Added');
           },
           error: (err) => {
             console.log('[addPlayerApplicationState] - ' + err);

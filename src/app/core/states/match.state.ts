@@ -6,14 +6,17 @@ import {
 } from '../models/state/match-state.model';
 import { Action, State, StateContext } from '@ngxs/store';
 import { MatchStateActions } from './match.action';
+import { BaseState } from './base/base.state';
 
 @State<IMatchStateModel>({
   name: AppStoreKeys.MatchState,
   defaults: initialMatchState,
 })
 @Injectable()
-export class MatchState {
-  constructor() {}
+export class MatchState extends BaseState {
+  constructor() {
+    super();
+  }
 
   private _startPathState(ctx: StateContext<IMatchStateModel>) {
     ctx.patchState({
@@ -39,6 +42,8 @@ export class MatchState {
       match: null,
     });
 
+    this._successSnakBar('Match State Initialized');
+
     this._endPathState(ctx);
   }
 
@@ -52,6 +57,8 @@ export class MatchState {
     ctx.patchState({
       isStateReady: true,
     });
+
+    this._successSnakBar('Match Created');
   }
 
   @Action(MatchStateActions.EndMatch)
@@ -61,5 +68,7 @@ export class MatchState {
       isMatchStarted: false,
       isStateReady: true,
     });
+
+    this._successSnakBar('Match Ended');
   }
 }
