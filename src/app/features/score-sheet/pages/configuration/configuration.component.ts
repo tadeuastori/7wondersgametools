@@ -318,6 +318,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   public createAndStartMatch(): void {
+    console.log('btn start');
     this._store.dispatch(
       new MatchStateActions.CreateAndStartMatch(
         this.gameType,
