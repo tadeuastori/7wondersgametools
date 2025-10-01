@@ -33,7 +33,7 @@
         @if(!multipleWonders()){
         <mat-option></mat-option>
         } @for (wonder of wonderList(); track wonder) {
-        <mat-option [value]="wonder.name">
+        <mat-option [value]="wonder.name" [disabled]="!selectedWonder.includes(wonder.name) && selectedWonder.length >= 1 && selectedWonder.length >= 4">
           @if (wonder.icon) {
           <mat-icon>{{ wonder.icon }}</mat-icon>
           } @else {
@@ -60,7 +60,10 @@
     <button
       mat-button
       (click)="onAddPlayer()"
-      [disabled]="!newPlayerControl.valid"
+      [disabled]="
+        !newPlayerControl.valid ||
+        (multipleWonders() && selectedWonder.length >= 1 && selectedWonder.length !== 4)
+        "
     >
       Add
     </button>
