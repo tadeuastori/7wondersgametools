@@ -1,6 +1,6 @@
 export const constGameList: Array<{ label: string; routerLink: string }> = [
   {
-    label: '7w - Game Base',
+    label: '7 Wonders',
     routerLink: 'game-base',
   },
   {

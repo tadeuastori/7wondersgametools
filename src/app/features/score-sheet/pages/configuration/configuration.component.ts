@@ -11,11 +11,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { BaseComponent } from '../../components/base.component';
 
 import { MatTableModule } from '@angular/material/table';
@@ -57,7 +52,6 @@ import { MatchStateActions } from '../../../../core/states/match.action';
 })
 export class ConfigurationComponent extends BaseComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  private _snackBar = inject(MatSnackBar);
 
   applicationGames$: Observable<IGame[]>;
   applicationPlayersList$: Observable<IPlayer[]>;
@@ -333,17 +327,6 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
         this.matchPlayersList
       )
     );
-  }
-
-  openSnackBar(message: string) {
-    const horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    const verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
-    this._snackBar.open(message, 'Close', {
-      horizontalPosition: horizontalPosition,
-      verticalPosition: verticalPosition,
-      duration: 5 * 1000,
-    });
   }
 
   public openDialog(): void {
