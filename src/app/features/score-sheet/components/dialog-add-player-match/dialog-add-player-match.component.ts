@@ -146,9 +146,9 @@ export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
           name: this.selectedWonder,
           icon: '',
           side:
-            this.hasWonderSide() && this.wonderSide
-              ? EWonderSide.NIGHT
-              : EWonderSide.DAY,
+            this.hasWonderSide() 
+              ? (this.wonderSide ? EWonderSide.NIGHT : EWonderSide.DAY) 
+              : undefined
         });
       }
 
