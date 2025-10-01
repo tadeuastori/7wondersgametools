@@ -266,6 +266,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     this.matchPlayersList.splice(idx, 1);
     this.matchPlayerDataSource.setData(this.matchPlayersList);
     this._loadWondersList();
+    this._validatedConfiguration();
   }
 
   public generateWonders(): void {
