@@ -50,7 +50,7 @@
       <mat-slide-toggle
         #darkModeSwitch
         [(ngModel)]="wonderSide"
-        [disabled]="selectedWonder.length === 0"
+        [disabled]="!selectedWonder || selectedWonder.length === 0"
       ></mat-slide-toggle>
     </div>
     }
