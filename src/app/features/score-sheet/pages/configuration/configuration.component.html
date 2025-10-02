@@ -75,16 +75,26 @@
           </button>
         </td>
       </ng-container>
-
-      <ng-container matColumnDef="buttons">
-        <td mat-footer-cell *matFooterCellDef colspan="3"></td>
+      
+      <ng-container matColumnDef="disclaimer">        
+          <td mat-footer-cell *matFooterCellDef colspan="3">          
+            <div class="table-footer">
+              @if (matchPlayersList.length > 0) {
+                <button mat-fab class="table_buttons" (click)="generateWonders()">
+                  <mat-icon>shuffle</mat-icon>
+                  <mat-icon>temple_hindu</mat-icon>
+                </button>  
+              }
+            </div>                        
+          </td>        
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky: true"></tr>
     </table>
   </div>
-  <div class="players-action">
+  <!-- <div class="players-action">
     <div class="table_buttons"></div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="table_buttons"></div>
@@ -95,7 +105,7 @@
         <mat-icon>temple_hindu</mat-icon>
       </button>
     </div>
-  </div>
+  </div> -->
   <div class="start-button">
     <button
       mat-fab
