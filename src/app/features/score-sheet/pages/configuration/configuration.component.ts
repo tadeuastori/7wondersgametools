@@ -165,7 +165,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       });
   }
 
-  private _loadWondersList(): void {
+  private _loadWondersList(resetList: boolean = false): void {
     this.availableWonderList = [];
 
     if (this.originalGameList.length === 0) return;
@@ -187,17 +187,19 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.matchPlayersList.forEach((player: IMatchPlayers) => {
-      player.wonder?.forEach((wonder: any) => {
-        var idx = this.availableWonderList.findIndex(
-          (item) => item.name === wonder.name
-        );
+    if(!resetList){
+      this.matchPlayersList.forEach((player: IMatchPlayers) => {
+        player.wonder?.forEach((wonder: any) => {
+          var idx = this.availableWonderList.findIndex(
+            (item) => item.name === wonder.name
+          );
 
-        if (idx > -1) {
-          this.availableWonderList.splice(idx, 1);
-        }
+          if (idx > -1) {
+            this.availableWonderList.splice(idx, 1);
+          }
+        });
       });
-    });
+    }
 
     this.availableWonderList = SortUtils.sortByProperty(
       this.availableWonderList,
@@ -270,14 +272,17 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   public generateWonders(): void {
-    const availableWonders = [...this.availableWonderList];
-
     const wonderValues = Object.values(EWonderSide);
     const sideRandomIndex = Math.floor(Math.random() * wonderValues.length);
 
     var hasPlayerWithoutWonder = this.matchPlayersList.some(
       (item) => !item.wonder?.length
     );
+
+    if (!hasPlayerWithoutWonder) {
+      this._loadWondersList(true);
+    }
+    const availableWonders = [...this.availableWonderList];
 
     this.matchPlayersList
       .filter(
