@@ -38,10 +38,21 @@
         aria-label="Example icon-button with menu icon"
         (click)="sidenav.toggle()"
       >
-        <mat-icon>menu</mat-icon>
+      <mat-icon>menu</mat-icon>        
       </button>
       <span>{{ appName }}</span>
       <span class="head-spacer"></span>
+      @if (!isHome()) {
+       <div class="head-undo-icon">        
+        <button
+        mat-icon-button
+        class="head-menu-button"        
+        (click)="undoPage()"
+      >
+        <mat-icon>reply</mat-icon>       
+      </button>
+      </div> 
+      }      
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

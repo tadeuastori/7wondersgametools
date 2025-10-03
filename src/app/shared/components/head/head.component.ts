@@ -37,7 +37,7 @@ export class HeadComponent implements OnInit {
   constructor(
     _menuListService: ApplicationMenuListService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.menuGroupList = _menuListService.getFullMenuList();
   }
@@ -68,5 +68,13 @@ export class HeadComponent implements OnInit {
       .subscribe((title: string) => {
         this.appName = title || '7 Wonders Game Tools';
       });
+  }
+
+  undoPage() {
+    window.history.back();
+  }
+
+  public isHome(): boolean {
+    return this.router.url === '/';
   }
 }
