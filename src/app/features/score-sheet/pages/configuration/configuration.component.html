@@ -53,10 +53,10 @@
         <td mat-cell *matCellDef="let element">
           @for (item of element.wonder; track $index) {
           <p>
+            {{ item.name }}
             @if(item.side) {
             <mat-icon>{{ item.side }}</mat-icon>
-            }
-            {{ item.name }}
+            }            
           </p>
           }
         </td>
@@ -76,7 +76,7 @@
         </td>
       </ng-container>
       
-      <ng-container matColumnDef="disclaimer">        
+      <ng-container matColumnDef="disclaimer">
           <td mat-footer-cell *matFooterCellDef colspan="3">          
             <div class="table-footer">
               @if (matchPlayersList.length > 0) {
@@ -94,18 +94,6 @@
       <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky: true"></tr>
     </table>
   </div>
-  <!-- <div class="players-action">
-    <div class="table_buttons"></div>
-    <mat-divider [vertical]="true"></mat-divider>
-    <div class="table_buttons"></div>
-    <mat-divider [vertical]="true"></mat-divider>
-    <div class="table_buttons">
-      <button mat-fab (click)="generateWonders()">
-        <mat-icon>shuffle</mat-icon>
-        <mat-icon>temple_hindu</mat-icon>
-      </button>
-    </div>
-  </div> -->
   <div class="start-button">
     <button
       mat-fab
@@ -113,7 +101,6 @@
       (click)="createAndStartMatch()"
       [disabled]="!isStartReady"
     >
-      <!-- <mat-icon>playing_cards</mat-icon> -->
       Start Game
     </button>
   </div>
