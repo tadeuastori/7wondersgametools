@@ -1,0 +1,23 @@
+@import "../../public/styles/variables.less";
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  z-index: 0; /* conteúdo fica acima da marca d’água */
+}
+
+.app-container::before {
+  content: "";
+  position: fixed;     /* cobre toda a tela */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: url(@background-watermark-image) no-repeat center center;
+  background-size: 200px 200px; /* ajuste do tamanho da imagem */
+  opacity: 0.1;        
+
+  z-index: -1;         /* garante que fique atrás do conteúdo */
+  pointer-events: none; /* impede que a marca d’água bloqueie cliques */
+}
