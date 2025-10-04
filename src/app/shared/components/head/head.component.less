@@ -18,10 +18,10 @@
     align-items: stretch;
     height: 100%;
 
-    .menu-img {
+    .menu-header {
       height: 100px;
       align-content: center;
-      background-color: @navbar-top-bgcolor;
+      background-color: @navbar-header-bgcolor;
 
       img {
         width: 70px;
@@ -34,30 +34,31 @@
       }
     }
 
-    .menu-link {
+    .menu-content {
       flex-grow: 1;
-      background-color: @navbar-link-bgcolor;
+      background-color: @navbar-content-bgcolor;
 
       .subheader {
         margin: 1rem 16px 0rem 16px;
         font-size: small;
+        color: @navbar-content-font-color;
       }
     }
 
-    .menu-app-version {
+    .menu-footer {
       height: 30px;
       align-content: center;
       text-align: center;
-      background-color: @navbar-bottom-bgcolor;
-      color: white;
+      background-color: @navbar-footer-bgcolor;
+      color: @navbar-footer-font-color;
     }
   }
 
   .navbar-page-content {
     mat-toolbar {
-      background-color: @action-bar-bgcolor;
+      background-color: @header-bgcolor;
       padding: 0rem;
-      color: @action-bar-font-color;
+      color: @header-font-color;
       font-size: medium;
 
       .head-spacer {
@@ -67,7 +68,7 @@
       .head-menu-button {
         margin-right: 5px;
         margin-left: 5px;
-        color: @action-bar-font-color;
+        color: @header-icon-color;
       }
 
       span {
