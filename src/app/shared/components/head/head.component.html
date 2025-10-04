@@ -1,7 +1,7 @@
 <mat-sidenav-container class="navbar-container">
   <mat-sidenav #sidenav [mode]="mode">
     <div class="navbar-menu-content">
-      <div class="menu-img">
+      <div class="menu-header">
         <img
           src="/images/actionbar_icon.png"
           alt=""
@@ -9,7 +9,7 @@
           (click)="sidenav.close()"
         />
       </div>
-      <div class="menu-link">
+      <div class="menu-content">
         <mat-selection-list>
           @for (group of menuGroupList; track group) {
           <div mat-subheader class="subheader">{{ group.label }}</div>
@@ -25,7 +25,7 @@
           } }
         </mat-selection-list>
       </div>
-      <div class="menu-app-version">
+      <div class="menu-footer">
         <span>{{ appVersion }}</span>
       </div>
     </div>

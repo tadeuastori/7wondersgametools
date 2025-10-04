@@ -29,14 +29,15 @@
 
     .button-toggle {
       width: 40%;
-      background-color: @score-sheet-config-button-color;
+      background-color: @score-sheet-config-expansion-button-bgcolor-unselected;
       font-family: gameFont;
       border-radius: 0%;
+      color: @score-sheet-config-expansion-button-font-color-unselected;
     }
 
     .mat-button-toggle-checked {
-      color: @score-sheet-config-selected-font-color;
-      background-color: @score-sheet-config-selected-button-color;
+      color: @score-sheet-config-expansion-button-font-color-selected;
+      background-color: @score-sheet-config-expansion-button-bgcolor-selected;
     }
   }
 
@@ -75,7 +76,6 @@
 
         .mat-icon {
           scale: 0.8;
-          // height: 1rem;
         }
       }
     }
@@ -115,7 +115,7 @@
         width: 30px;
 
         .mat-mdc-icon-button {
-          color: red;
+          color: @base-bgcolor-red;
         }
       }
     }
@@ -146,7 +146,7 @@
         scale: 0.8;
         border: none;
         box-shadow: none;
-        color: black;
+        color: @base-bgcolor-black;
 
         .mat-icon {
           height: 19.5px;
@@ -168,8 +168,8 @@
     button {
       width: 100%;
       height: 100%;
-      background-color: @score-sheet-config-start-button-color; /* Cor de fundo do botão */
-      color: @score-sheet-config-selected-font-color;
+      background-color: @score-sheet-config-start-button-bgcolor-enabled; /* Cor de fundo do botão */
+      color: @score-sheet-config-start-button-font-color-enabled;
       border: none;
       padding: 15px 0;
       font-size: 18px;
@@ -179,16 +179,8 @@
     }
 
     .mdc-fab.mat-mdc-button-disabled {
-      background-color: #bdbdbd !important;
-      color: @score-sheet-config-selected-button-color !important;
+      background-color: @score-sheet-config-start-button-bgcolor-disabled !important;
+      color: @score-sheet-config-start-button-font-color-disabled !important;
     }
   }
-}
-
-.success {
-  background-color: green;
-}
-
-.error {
-  color: red;
 }
