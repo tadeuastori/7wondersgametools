@@ -163,29 +163,24 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    // background-color: #333; /* Cor de fundo da div */
     text-align: center;
-    // padding: 10px 0;
 
     button {
       width: 100%;
       height: 100%;
-      background-color: @score-sheet-config-button-color; /* Cor de fundo do botão */
-      color: black;
+      background-color: @score-sheet-config-start-button-color; /* Cor de fundo do botão */
+      color: @score-sheet-config-selected-font-color;
       border: none;
       padding: 15px 0;
       font-size: 18px;
       cursor: pointer;
 
-      border-radius: 0;
+      border-radius: 20px 20px 0px 0px;
     }
 
-    button::disabled {
-      color: red;
-    }
-
-    button:hover {
-      background-color: #45a049; /* Cor ao passar o mouse */
+    .mdc-fab.mat-mdc-button-disabled {
+      background-color: #bdbdbd !important;
+      color: @score-sheet-config-selected-button-color !important;
     }
   }
 }
