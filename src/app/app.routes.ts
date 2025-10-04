@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { ScoreSheetComponent } from './features/score-sheet/score-sheet.component';
-import { ConfigurationComponent } from './features/score-sheet/pages/configuration/configuration.component';
 import { EGamesEnum } from './core/enums/games.enum';
+import { ERoutePaths } from './core/enums/route-paths.enum';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home' },
@@ -9,25 +8,29 @@ export const routes: Routes = [
 
   // TODO: add routes
   {
-    path: 'score-sheet-menu',
-    component: ScoreSheetComponent,
-    title: 'Score Sheet',
+    path: ERoutePaths.ScoreSheetMenu,
+    loadComponent: () => import('@score-sheet-menu/score-sheet.component')
+        .then((c) => c.ScoreSheetComponent),
+    title: 'Score Sheet'
   },
   {
-    path: 'score-sheet-menu/game-base',
-    component: ConfigurationComponent,
+    path: ERoutePaths.ScoreSheetMenuGameBase,
+    loadComponent: () => import('@score-sheet-configuration/configuration.component')
+        .then((c) => c.ConfigurationComponent),
     title: 'Score Sheet > 7 Wonders',
     data: { gameType: EGamesEnum.GAME_BASE },
   },
   {
-    path: 'score-sheet-menu/duel',
-    component: ConfigurationComponent,
+    path: ERoutePaths.ScoreSheetMenuDuel,
+    loadComponent: () => import('@score-sheet-configuration/configuration.component')
+        .then((c) => c.ConfigurationComponent),
     title: 'Score Sheet > 7w - Duel',
     data: { gameType: EGamesEnum.GAME_DUEL },
   },
   {
-    path: 'score-sheet-menu/architects',
-    component: ConfigurationComponent,
+    path: ERoutePaths.ScoreSheetMenuArchitects,
+    loadComponent: () => import('@score-sheet-configuration/configuration.component')
+        .then((c) => c.ConfigurationComponent),
     title: 'Score Sheet > 7w - Architects',
     data: { gameType: EGamesEnum.GAME_ARCHITECTS },
   },
