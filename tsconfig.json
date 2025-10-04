@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -21,7 +22,14 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@score-sheet-menu/*": [
+        "src/app/features/score-sheet/*"
+    ],
+      "@score-sheet-configuration/*": [
+        "src/app/features/score-sheet/pages/configuration/*"
+    ]}
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
