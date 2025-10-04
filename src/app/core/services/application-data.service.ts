@@ -61,13 +61,13 @@ export class ApplicationDataService {
         {
           name: 'Agora',
           description: '',
-          icon: '',
+          icon: 'groups',
           wonders: [{ name: 'The Sanctuary' }, { name: 'The Divine Theater' }],
         },
         {
           name: 'Pantheon',
           description: '',
-          icon: '',
+          icon: 'synagogue',
           wonders: [{ name: 'Curia Julia' }, { name: 'Knossos' }],
         },
       ],
@@ -96,7 +96,7 @@ export class ApplicationDataService {
         {
           name: 'Medals',
           description: '',
-          icon: '',
+          icon: 'workspace_premium',
           wonders: [{ name: 'Ur' }, { name: 'Rome' }],
         },
       ],
