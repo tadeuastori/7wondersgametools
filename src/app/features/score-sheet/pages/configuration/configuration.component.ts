@@ -226,13 +226,35 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   private _validatedConfiguration(): void {
+
+    var hasWonder: boolean = false;
+    var wondersList = this.matchPlayersList.map((player: IMatchPlayers) => player.wonder).flat();
+
+    this.matchPlayersList.forEach(player => {
+      
+      if (
+        ((this.gameType === this.eGameType.GAME_BASE || this.gameType === this.eGameType.GAME_ARCHITECTS) && player.wonder && player.wonder?.length == 1) ||
+        (this.gameType === this.eGameType.GAME_DUEL && player.wonder && player.wonder?.length == 4)
+         ) {
+        hasWonder = true;
+      } else {
+        hasWonder = false;
+      }
+
+    });
+
     this.isStartReady =
-      (this.gameType === this.eGameType.GAME_DUEL &&
+      (this.gameType === this.eGameType.GAME_DUEL && 
+        hasWonder &&
         this.matchPlayersList.length === 2) ||
+
       (this.gameType === this.eGameType.GAME_ARCHITECTS &&
+        hasWonder &&
         this.matchPlayersList.length >= 2 &&
         this.matchPlayersList.length <= 7) ||
+
       (this.gameType === this.eGameType.GAME_BASE &&
+        hasWonder &&
         this.matchPlayersList.length >= 3 &&
         this.matchPlayersList.length <= 7);
   }
@@ -321,6 +343,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       });
 
     this._loadWondersList();
+    this._validatedConfiguration();
   }
 
   public createAndStartMatch(): void {
