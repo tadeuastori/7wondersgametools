@@ -1,18 +1,14 @@
-import { Directive, inject, OnDestroy, OnInit, Signal } from '@angular/core';
+import { Directive, inject, OnDestroy, Signal } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { ApplicationStateSelectors } from '../../../core/states/application.queries';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Directive()
 export abstract class BaseComponent implements OnDestroy {
   _store = inject(Store);
   destroy$ = new Subject<void>();
-  private _snackBar = inject(MatSnackBar);
+  protected _snackbarService = inject(SnackbarService);
 
   applicationStateIsReady: Signal<boolean> = this._store.selectSignal(
     ApplicationStateSelectors.isStateReady
@@ -25,14 +21,4 @@ export abstract class BaseComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  public openSnackBar(message: string) {
-    const horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    const verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
-    this._snackBar.open(message, 'Close', {
-      horizontalPosition: horizontalPosition,
-      verticalPosition: verticalPosition,
-      duration: 5 * 1000,
-    });
-  }
 }

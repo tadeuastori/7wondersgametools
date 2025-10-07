@@ -1,4 +1,6 @@
 
+@import "../public/styles/variables.less";
+
 html,
 body {
   height: 100%;
@@ -6,4 +8,38 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* --mdc-snackbar-container-color: > Red background */
+/* --mdc-snackbar-supporting-text-color: > White text */
+/* --mat-snack-bar-button-color: > Green button */
+.snackbar-success {
+  --mdc-snackbar-container-color: @snackbar-bgcolor-success;
+  --mdc-snackbar-supporting-text-color: @base-bgcolor-white;
+  --mat-snack-bar-button-color: @base-bgcolor-white; 
+}
+
+.snackbar-warning {
+  --mdc-snackbar-container-color: @snackbar-bgcolor-warning;
+  --mdc-snackbar-supporting-text-color: @base-bgcolor-black;
+  --mat-snack-bar-button-color: @base-bgcolor-black;
+}
+
+.snackbar-info {
+  --mdc-snackbar-container-color: @snackbar-bgcolor-info; 
+  --mdc-snackbar-supporting-text-color: @base-bgcolor-black;
+  --mat-snack-bar-button-color: @base-bgcolor-black; 
+}
+
+.snackbar-danger {
+  --mdc-snackbar-container-color: @snackbar-bgcolor-danger;
+  --mdc-snackbar-supporting-text-color: @base-bgcolor-white;
+  --mat-snack-bar-button-color: @base-bgcolor-white;
+}
+
+.snackbar-primary {
+  --mdc-snackbar-container-color: @snackbar-bgcolor-primary;
+  --mdc-snackbar-supporting-text-color: @base-bgcolor-black;
+  --mat-snack-bar-button-color: @base-bgcolor-black;
 }
