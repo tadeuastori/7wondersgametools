@@ -275,8 +275,8 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     );
 
     if (exist.length > 0) {
-      this.openSnackBar('Player already added to the match');
-
+      this._snackbarService.openDangerSnackBar('Player already added to the match');
+       
       return;
     }
 
