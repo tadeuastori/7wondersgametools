@@ -11,12 +11,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { BaseComponent } from '../../components/base.component';
+import { BaseComponent } from '../../pages/base.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { IMatchPlayers, MatchPlayers } from '../../models/match-players.model';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddPlayerMatchComponent } from '../../components/dialog-add-player-match/dialog-add-player-match.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplicationStateSelectors } from '../../../../core/states/application.queries';
@@ -36,6 +35,7 @@ import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 import { MatchStateActions } from '../../../../core/states/match.action';
 import { configurationHasWonderValid, configurationIsReady } from '@score-sheet-menu/score-sheet.validation';
 import { PLAYER_ALREADY_EXISTS } from 'src/app/core/constants/snackbar-message';
+import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/add-player.component';
 
 @Component({
   selector: 'app-configuration',
@@ -339,7 +339,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerMatchComponent, {
+    const dialogRef = this.dialog.open(AddPlayerComponent, {
       data: {
         wonders: this.availableWonderList,
         players: this.originalPlayersList,

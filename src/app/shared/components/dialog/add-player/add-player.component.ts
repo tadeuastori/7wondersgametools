@@ -1,39 +1,21 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  model,
-  ModelSignal,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { IMatchPlayers, MatchPlayers } from '../../models/match-players.model';
-import { MatSelectModule } from '@angular/material/select';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
-import { map, Observable, startWith } from 'rxjs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Player } from '../../../../core/models/player/player.model';
+import { AfterViewInit, Component, ElementRef, inject, model, ModelSignal, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
-import { EGamesEnum } from '../../../../core/enums/games.enum';
+import { IMatchPlayers, MatchPlayers } from '@score-sheet-menu/models/match-players.model';
+import { Observable, startWith, map } from 'rxjs';
+import { EWonderSide } from 'src/app/core/enums/wonder-side.enum';
+import { IPlayer, Player } from 'src/app/core/models/player/player.model';
 
 @Component({
-  selector: 'app-dialog-add-player-match',
+  selector: 'app-add-player',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -42,7 +24,6 @@ import { EGamesEnum } from '../../../../core/enums/games.enum';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    // MatDialogClose,
     MatSelectModule,
     MatAutocompleteModule,
     AsyncPipe,
@@ -50,22 +31,19 @@ import { EGamesEnum } from '../../../../core/enums/games.enum';
     MatIconModule,
     MatSlideToggleModule,
   ],
-  templateUrl: './dialog-add-player-match.component.html',
-  styleUrl: './dialog-add-player-match.component.less',
+  templateUrl: './add-player.component.html',
+  styleUrl: './add-player.component.less'
 })
-export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
+export class AddPlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('darkModeSwitch', { read: ElementRef }) element:
     | ElementRef
     | undefined;
 
-  readonly dialogRef = inject(MatDialogRef<DialogAddPlayerMatchComponent>);
+  readonly dialogRef = inject(MatDialogRef<AddPlayerComponent>);
   readonly data = inject<any>(MAT_DIALOG_DATA);
-  readonly wonderList: ModelSignal<Array<{ name: string; icon?: string }>> =
-    model(this.data.wonders);
-  readonly playerList: ModelSignal<IMatchPlayers[]> = model(this.data.players);
-  readonly multipleWonders: ModelSignal<boolean> = model(
-    this.data.multipleWonders
-  );
+  readonly wonderList: ModelSignal<Array<{ name: string; icon?: string }>> = model(this.data.wonders);
+  readonly playerList: ModelSignal<IPlayer[]> = model(this.data.players);
+  readonly multipleWonders: ModelSignal<boolean> = model(this.data.multipleWonders);
   readonly hasWonderSide: ModelSignal<boolean> = model(this.data.hasWonderSide);
 
   autoCompleteOptions: Observable<string[]> = new Observable<string[]>();
