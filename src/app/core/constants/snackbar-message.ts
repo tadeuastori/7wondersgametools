@@ -1,0 +1,1 @@
+export const PLAYER_ALREADY_EXISTS = 'Player already added to the match';
