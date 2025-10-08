@@ -342,7 +342,6 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialog.open(AddPlayerComponent, {
       data: {
         wonders: this.availableWonderList,
-        players: this.originalPlayersList,
         multipleWonders: this.gameType === EGamesEnum.GAME_DUEL,
         hasWonderSide: this.gameType === EGamesEnum.GAME_BASE,
       },

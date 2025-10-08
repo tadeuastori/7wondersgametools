@@ -23,37 +23,39 @@
         }
       </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Wonder's name</mat-label>
-      <mat-select
-        [(ngModel)]="selectedWonder"
-        name="wonder"
-        [multiple]="multipleWonders()"
-      >
-        @if(!multipleWonders()){
-        <mat-option></mat-option>
-        } @for (wonder of wonderList(); track wonder) {
-        <mat-option [value]="wonder.name" [disabled]="!selectedWonder.includes(wonder.name) && selectedWonder.length >= 1 && selectedWonder.length >= 4">
-          @if (wonder.icon) {
-          <mat-icon>{{ wonder.icon }}</mat-icon>
-          } @else {
-          <mat-icon></mat-icon>}
-          {{ wonder.name }}
-        </mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-    @if(hasWonderSide()){
-    <div class="wonder-side">
-      <mat-label>Wonder's Side</mat-label>
-      <span class="example-spacer"></span>
-      <mat-slide-toggle
-        #darkModeSwitch
-        [(ngModel)]="wonderSide"
-        [disabled]="!selectedWonder || selectedWonder.length === 0"
-      ></mat-slide-toggle>
-    </div>
-    }
+    @if(fromMatchPages()) {
+        <mat-form-field>
+        <mat-label>Wonder's name</mat-label>
+        <mat-select
+          [(ngModel)]="selectedWonder"
+          name="wonder"
+          [multiple]="multipleWonders()"
+        >
+          @if(!multipleWonders()){
+          <mat-option></mat-option>
+          } @for (wonder of wonderList(); track wonder) {
+          <mat-option [value]="wonder.name" [disabled]="!selectedWonder.includes(wonder.name) && selectedWonder.length >= 1 && selectedWonder.length >= 4">
+            @if (wonder.icon) {
+            <mat-icon>{{ wonder.icon }}</mat-icon>
+            } @else {
+            <mat-icon></mat-icon>}
+            {{ wonder.name }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if(hasWonderSide()){
+      <div class="wonder-side">
+        <mat-label>Wonder's Side</mat-label>
+        <span class="example-spacer"></span>
+        <mat-slide-toggle
+          #darkModeSwitch
+          [(ngModel)]="wonderSide"
+          [disabled]="!selectedWonder || selectedWonder.length === 0"
+        ></mat-slide-toggle>
+      </div>
+      }
+    }    
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
