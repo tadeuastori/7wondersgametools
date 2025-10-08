@@ -44,13 +44,22 @@
         "score_sheet": {
             "configuration":{
                 "expansions": "Expansions",
-                "players": "Players",
-                "btn_start_game":"Start Game"
+                "players": "Players"                
             }
         }        
     },
     "table_forms": {
         "player": "Player",
-        "wonder": "Wonder"
+        "wonder": "Wonder",
+        "players_name": "Player's name",
+        "wonders_name": "Wonder's name",
+        "wonders_side": "Wonder's side"        
+    },
+    "buttons": {
+        "start_game":"Start Game",
+        "add":"Add",
+        "cancel":"Cancel"    },
+    "dialogs": {
+        "add_player": "Add player"        
     }
 }

@@ -16,6 +16,7 @@ import { IPlayer, Player } from 'src/app/core/models/player/player.model';
 import { ApplicationStateSelectors } from 'src/app/core/states/application.queries';
 import { SortUtils } from 'src/app/core/utils/sort.util';
 import { BaseComponent } from '../../base.component';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-add-player',
@@ -33,6 +34,7 @@ import { BaseComponent } from '../../base.component';
     ReactiveFormsModule,
     MatIconModule,
     MatSlideToggleModule,
+    TranslocoModule
   ],
   templateUrl: './add-player.component.html',
   styleUrl: './add-player.component.less'
