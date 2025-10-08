@@ -15,7 +15,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
@@ -26,10 +26,11 @@
     "paths": {
       "@score-sheet-menu/*": [
         "src/app/features/score-sheet/*"
-    ],
+      ],
       "@score-sheet-configuration/*": [
         "src/app/features/score-sheet/pages/configuration/*"
-    ]}
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
