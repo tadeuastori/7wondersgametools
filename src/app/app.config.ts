@@ -15,6 +15,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideTransloco } from '@jsverse/transloco';
 import { environment } from 'src/environments/environment';
 import { TranslocoHttpLoader } from './core/services/transloco/transloco-http.loader';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,9 +24,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([NgxIndexedDBModule.forRoot(dbConfig), HammerModule]),
     provideStore([ApplicationState]),
     provideAnimationsAsync(),
+    provideHttpClient(),
     provideTransloco({
       config: {
-        availableLangs: ['pt-br', 'en'],
+        availableLangs: ['en', 'pt-br'],
         defaultLang: 'en',
         reRenderOnLangChange: true,
         prodMode: environment.production,

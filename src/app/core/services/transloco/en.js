@@ -1,0 +1,6 @@
+{
+    "application": {
+        "title": "7 Wonders Game Tools",
+        "description": "Application description"
+    }
+}
