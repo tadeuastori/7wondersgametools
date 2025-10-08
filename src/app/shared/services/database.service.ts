@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 
 @Injectable({
