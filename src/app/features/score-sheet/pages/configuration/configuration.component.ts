@@ -36,6 +36,7 @@ import { MatchStateActions } from '../../../../core/states/match.action';
 import { configurationHasWonderValid, configurationIsReady } from '@score-sheet-menu/score-sheet.validation';
 import { PLAYER_ALREADY_EXISTS } from 'src/app/core/constants/snackbar-message';
 import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/add-player.component';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-configuration',
@@ -47,6 +48,7 @@ import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    TranslocoModule
   ],
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.less',
@@ -64,6 +66,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   originalGameList: IGame[] = [];
   originalExpansionList: Array<{
     name: string;
+    label: string;
     icon?: string;
     value: boolean;
     wondersList?: IWonder[];
@@ -153,6 +156,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
               this.originalExpansionList.push({
                 name: gameExpansions.name,
                 icon: gameExpansions.icon,
+                label: gameExpansions.label,
                 value: false,
                 wondersList: gameExpansions.wonders,
               });

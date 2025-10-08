@@ -11,6 +11,7 @@ export class ApplicationDataService {
   private GameData: Game[] = [
     {
       name: '7 Wonders',
+      label: 'game.game_base',
       description: '',
       version: 2,
       gameType: EGamesEnum.GAME_BASE,
@@ -18,24 +19,28 @@ export class ApplicationDataService {
       expansions: [
         {
           name: 'Cities',
+          label: 'expansions.cities',
           description: '',
           icon: 'fort',
           wonders: [{ name: 'Petra' }, { name: 'Byzantium' }],
         },
         {
           name: 'Edifice',
+          label: 'expansions.edifice',
           description: '',
           icon: 'apartment',
           wonders: [{ name: 'Ur' }, { name: 'Carthage' }],
         },
         {
           name: 'Leaders',
+          label: 'expansions.leaders',
           description: '',
           icon: 'groups',
           wonders: [{ name: 'Roma' }, { name: 'Abu Simbel' }],
         },
         {
           name: 'Armada',
+          label: 'expansions.armada',
           description: '',
           icon: 'sailing',
           wonders: [{ name: 'Siracusa' }],
@@ -53,6 +58,7 @@ export class ApplicationDataService {
     },
     {
       name: '7w - Duel',
+      label: 'game.game_duel',
       description: '',
       version: 1,
       gameType: EGamesEnum.GAME_DUEL,
@@ -60,12 +66,14 @@ export class ApplicationDataService {
       expansions: [
         {
           name: 'Agora',
+          label: 'expansions.agora',
           description: '',
           icon: 'groups',
           wonders: [{ name: 'The Sanctuary' }, { name: 'The Divine Theater' }],
         },
         {
           name: 'Pantheon',
+          label: 'expansions.pantheon',
           description: '',
           icon: 'synagogue',
           wonders: [{ name: 'Curia Julia' }, { name: 'Knossos' }],
@@ -88,6 +96,7 @@ export class ApplicationDataService {
     },
     {
       name: '7w - Architects',
+      label: 'game.game_architects',
       description: '',
       version: 1,
       gameType: EGamesEnum.GAME_ARCHITECTS,
@@ -95,6 +104,7 @@ export class ApplicationDataService {
       expansions: [
         {
           name: 'Medals',
+          label: 'expansions.medals',
           description: '',
           icon: 'workspace_premium',
           wonders: [{ name: 'Ur' }, { name: 'Rome' }],

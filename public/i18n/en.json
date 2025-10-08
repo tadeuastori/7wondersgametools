@@ -9,6 +9,21 @@
             "game_architects":"Score Sheet > 7w - Architects"
         }
     },
+    "games": {
+        "game_base":"7 Wonders",
+        "game_duel":"7w - Duel",
+        "game_architects":"7w - Architects"
+    },
+    "expansions": {
+        "cities": "Cities",
+        "edifice": "Edifice",
+        "leaders": "Leaders",
+        "armada": "Armada",
+        "agora": "Agora",
+        "pantheon": "Pantheon",
+        "medals": "Medals"        
+    },
+    "wonders": {},
     "menu": {
         "submenu":{
             "game_tools": "Game Tools",
@@ -27,11 +42,15 @@
     },
     "pages": {
         "score_sheet": {
-            "menu":{
-                "game_base":"7 Wonders",
-                "game_duel":"7w - Duel",
-                "game_architects":"7w - Architects"
+            "configuration":{
+                "expansions": "Expansions",
+                "players": "Players",
+                "btn_start_game":"Start Game"
             }
         }        
+    },
+    "table_forms": {
+        "player": "Player",
+        "wonder": "Wonder"
     }
 }
