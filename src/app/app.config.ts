@@ -20,8 +20,8 @@ export const appConfig: ApplicationConfig = {
     provideStore([ApplicationState]),
     provideIndexedDb(dbConfig), provideHttpClient(), provideTransloco({
         config: { 
-          availableLangs: ['en'],
-          defaultLang: 'en',
+          availableLangs: ['pt-br','en'],
+          defaultLang: 'pt-br',
           reRenderOnLangChange: true,
           prodMode: !isDevMode(),
         },
