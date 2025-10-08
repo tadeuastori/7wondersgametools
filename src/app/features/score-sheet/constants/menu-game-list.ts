@@ -1,14 +1,17 @@
-export const constGameList: Array<{ label: string; routerLink: string }> = [
+export const constGameList: Array<{ game: string; label: string; routerLink: string }> = [
   {
-    label: '7 Wonders',
+    game: '7 Wonders',
+    label: 'games.game_base',
     routerLink: 'game-base',
   },
   {
-    label: '7w - Duel',
+    game: '7 Wonders - Duel',
+    label: 'games.game_duel',
     routerLink: 'duel',
   },
   {
-    label: '7w - Architects',
+    game: '7 Wonders - Architects',
+    label: 'games.game_architects',
     routerLink: 'architects',
   },
 ];

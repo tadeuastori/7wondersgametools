@@ -4,6 +4,7 @@ import { IWonder, Wonder } from './wonder.model';
 
 export interface IGame {
   name: string;
+  label: string;
   description: string;
   version: number;
   expansions: IExpansion[];
@@ -14,6 +15,7 @@ export interface IGame {
 
 export class Game implements IGame {
   name: string;
+  label: string;
   description: string;
   version: number;
   expansions: IExpansion[];
@@ -23,6 +25,7 @@ export class Game implements IGame {
 
   constructor(clone?: IGame) {
     this.name = '';
+    this.label = '';
     this.description = '';
     this.version = 2;
     this.expansions = [new Expansion()] as IExpansion[];
@@ -32,6 +35,7 @@ export class Game implements IGame {
 
     if (clone) {
       this.name = clone.name;
+      this.label = clone.label;
       this.description = clone.description;
       this.version = clone.version;
       this.expansions = clone.expansions;

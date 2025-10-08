@@ -1,0 +1,65 @@
+{
+    "application": {
+        "app_name": "7 Wonders Game Tools",
+        "description": "Application description",
+        "routes": {
+            "score_sheet": "Score Sheet",
+            "game_base":"Score Sheet > 7 Wonders",
+            "game_duel":"Score Sheet > 7w - Duel",
+            "game_architects":"Score Sheet > 7w - Architects"
+        }
+    },
+    "games": {
+        "game_base":"7 Wonders",
+        "game_duel":"7w - Duel",
+        "game_architects":"7w - Architects"
+    },
+    "expansions": {
+        "cities": "Cities",
+        "edifice": "Edifice",
+        "leaders": "Leaders",
+        "armada": "Armada",
+        "agora": "Agora",
+        "pantheon": "Pantheon",
+        "medals": "Medals"        
+    },
+    "wonders": {},
+    "menu": {
+        "submenu":{
+            "game_tools": "Game Tools",
+            "metrics": "Metrics",
+            "configuration": "Configuration",
+            "information": "Information"
+        },
+        "items":{
+            "home": "Home",
+            "score_sheet": "Score Sheet",
+            "matches": "Matches",
+            "players": "Players",
+            "wonders": "Wonders",
+            "Rules": "Rules"
+        }        
+    },
+    "pages": {
+        "score_sheet": {
+            "configuration":{
+                "expansions": "Expansions",
+                "players": "Players"                
+            }
+        }        
+    },
+    "table_forms": {
+        "player": "Player",
+        "wonder": "Wonder",
+        "players_name": "Player's name",
+        "wonders_name": "Wonder's name",
+        "wonders_side": "Wonder's side"        
+    },
+    "buttons": {
+        "start_game":"Start Game",
+        "add":"Add",
+        "cancel":"Cancel"    },
+    "dialogs": {
+        "add_player": "Add player"        
+    }
+}

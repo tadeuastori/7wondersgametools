@@ -28,7 +28,7 @@ export class ApplicationMenuListService {
         {
           order: 10,
           iconName: 'home',
-          label: 'Home',
+          label: 'home',
           routerLink: '',
           active: true,
         },
@@ -37,13 +37,13 @@ export class ApplicationMenuListService {
     {
       order: 10,
       iconName: 'calculate',
-      label: 'Game Tools',
+      label: 'game_tools',
       active: true,
       items: [
         {
           order: 10,
           iconName: 'scoreboard',
-          label: 'Score Sheet',
+          label: 'score_sheet',
           routerLink: 'score-sheet-menu',
           active: true,
         },
@@ -52,13 +52,13 @@ export class ApplicationMenuListService {
     {
       order: 20,
       iconName: 'analytics',
-      label: 'Metrics',
+      label: 'metrics',
       active: false,
       items: [
         {
           order: 10,
           iconName: 'analytics',
-          label: 'Matches',
+          label: 'matches',
           routerLink: '',
           active: true,
         },
@@ -67,20 +67,20 @@ export class ApplicationMenuListService {
     {
       order: 30,
       iconName: 'settings',
-      label: 'Configuration',
+      label: 'configuration',
       active: false,
       items: [
         {
           order: 10,
           iconName: 'group',
-          label: 'Players',
+          label: 'players',
           routerLink: '',
           active: true,
         },
         {
           order: 20,
           iconName: 'account_balance',
-          label: 'Wonders',
+          label: 'wonders',
           routerLink: '',
           active: true,
         },
@@ -89,13 +89,13 @@ export class ApplicationMenuListService {
     {
       order: 40,
       iconName: 'account_balance',
-      label: 'Information',
+      label: 'information',
       active: false,
       items: [
         {
           order: 10,
           iconName: 'question_mark',
-          label: 'Rules',
+          label: 'rules',
           routerLink: '',
           active: true,
         },

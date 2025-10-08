@@ -11,27 +11,27 @@ export const routes: Routes = [
     path: ERoutePaths.ScoreSheetMenu,
     loadComponent: () => import('@score-sheet-menu/score-sheet.component')
         .then((c) => c.ScoreSheetComponent),
-    title: 'Score Sheet'
+    title: 'application.routes.score_sheet',
   },
   {
     path: ERoutePaths.ScoreSheetMenuGameBase,
     loadComponent: () => import('@score-sheet-configuration/configuration.component')
         .then((c) => c.ConfigurationComponent),
-    title: 'Score Sheet > 7 Wonders',
+    title: 'application.routes.game_base',
     data: { gameType: EGamesEnum.GAME_BASE },
   },
   {
     path: ERoutePaths.ScoreSheetMenuDuel,
     loadComponent: () => import('@score-sheet-configuration/configuration.component')
         .then((c) => c.ConfigurationComponent),
-    title: 'Score Sheet > 7w - Duel',
+    title: 'application.routes.game_duel',
     data: { gameType: EGamesEnum.GAME_DUEL },
   },
   {
     path: ERoutePaths.ScoreSheetMenuArchitects,
     loadComponent: () => import('@score-sheet-configuration/configuration.component')
         .then((c) => c.ConfigurationComponent),
-    title: 'Score Sheet > 7w - Architects',
+    title: 'application.routes.game_architects',
     data: { gameType: EGamesEnum.GAME_ARCHITECTS },
   },
 ];
