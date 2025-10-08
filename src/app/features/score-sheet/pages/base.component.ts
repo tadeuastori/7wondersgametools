@@ -1,8 +1,8 @@
-import { Directive, inject, OnDestroy, Signal } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Subject } from 'rxjs';
-import { ApplicationStateSelectors } from '../../../core/states/application.queries';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Directive, OnDestroy, inject, Signal } from "@angular/core";
+import { Store } from "@ngxs/store";
+import { Subject } from "rxjs";
+import { ApplicationStateSelectors } from "src/app/core/states/application.queries";
+import { SnackbarService } from "src/app/shared/services/snackbar.service";
 
 @Directive()
 export abstract class BaseComponent implements OnDestroy {

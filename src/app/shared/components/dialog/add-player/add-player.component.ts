@@ -1,39 +1,24 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  model,
-  ModelSignal,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { IMatchPlayers, MatchPlayers } from '../../models/match-players.model';
-import { MatSelectModule } from '@angular/material/select';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
-import { map, Observable, startWith } from 'rxjs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Player } from '../../../../core/models/player/player.model';
+import { AfterViewInit, Component, ElementRef, inject, model, ModelSignal, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
-import { EGamesEnum } from '../../../../core/enums/games.enum';
+import { IMatchPlayers, MatchPlayers } from '@score-sheet-menu/models/match-players.model';
+import { Observable, startWith, map, takeUntil } from 'rxjs';
+import { EWonderSide } from 'src/app/core/enums/wonder-side.enum';
+import { IPlayer, Player } from 'src/app/core/models/player/player.model';
+import { ApplicationStateSelectors } from 'src/app/core/states/application.queries';
+import { SortUtils } from 'src/app/core/utils/sort.util';
+import { BaseComponent } from '../../base.component';
 
 @Component({
-  selector: 'app-dialog-add-player-match',
+  selector: 'app-add-player',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -42,7 +27,6 @@ import { EGamesEnum } from '../../../../core/enums/games.enum';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    // MatDialogClose,
     MatSelectModule,
     MatAutocompleteModule,
     AsyncPipe,
@@ -50,37 +34,44 @@ import { EGamesEnum } from '../../../../core/enums/games.enum';
     MatIconModule,
     MatSlideToggleModule,
   ],
-  templateUrl: './dialog-add-player-match.component.html',
-  styleUrl: './dialog-add-player-match.component.less',
+  templateUrl: './add-player.component.html',
+  styleUrl: './add-player.component.less'
 })
-export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
+export class AddPlayerComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('darkModeSwitch', { read: ElementRef }) element:
     | ElementRef
     | undefined;
 
-  readonly dialogRef = inject(MatDialogRef<DialogAddPlayerMatchComponent>);
+  readonly dialogRef = inject(MatDialogRef<AddPlayerComponent>);
   readonly data = inject<any>(MAT_DIALOG_DATA);
-  readonly wonderList: ModelSignal<Array<{ name: string; icon?: string }>> =
-    model(this.data.wonders);
-  readonly playerList: ModelSignal<IMatchPlayers[]> = model(this.data.players);
-  readonly multipleWonders: ModelSignal<boolean> = model(
-    this.data.multipleWonders
-  );
-  readonly hasWonderSide: ModelSignal<boolean> = model(this.data.hasWonderSide);
+  readonly wonderList: ModelSignal<Array<{ name: string; icon?: string }>> = model(this.data?.wonders ?? null);
+  readonly multipleWonders: ModelSignal<boolean> = model(this.data?.multipleWonders ?? null);
+  readonly hasWonderSide: ModelSignal<boolean> = model(this.data?.hasWonderSide ?? null);
 
   autoCompleteOptions: Observable<string[]> = new Observable<string[]>();
+  applicationPlayersList$: Observable<IPlayer[]>;
+  playersList: IPlayer[] = [];
 
   selectedWonder: string[] = [];
   newPlayerControl = new FormControl<string>('');
   wonderSide: boolean = !this.hasWonderSide();
 
+  constructor() {
+    super();
+    this.applicationPlayersList$ = this._store.select(
+      ApplicationStateSelectors.getApplicationPlayers
+    );
+  }
+
   ngOnInit() {
+    this._loadPlayerList();
+
     this.autoCompleteOptions = this.newPlayerControl.valueChanges.pipe(
       startWith(''),
       map((value) => {
         return value
           ? this._filter(value as string)
-          : this.playerList()
+          : this.playersList
               .map((player) => player.name)
               .slice();
       })
@@ -98,6 +89,10 @@ export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   displayFn(player: string): string {
     return player;
   }
@@ -105,21 +100,21 @@ export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.playerList()
+    return this.playersList
       .map((player) => player.name)
       .filter((option) => option.toLowerCase().includes(filterValue));
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  public fromMatchPages(): boolean{
+    return this.data ?? false;
   }
 
   onAddPlayer(): void {
-    let newPlayer: IMatchPlayers = new MatchPlayers();
+    let newPlayer: IPlayer = new Player();
 
     newPlayer.name = this.newPlayerControl.value ?? '';
 
-    let selectedPlayer = this.playerList().filter(
+    let selectedPlayer = this.playersList.filter(
       (player) => player.name.toLowerCase() === newPlayer.name.toLowerCase()
     )[0] as Player;
 
@@ -130,32 +125,69 @@ export class DialogAddPlayerMatchComponent implements OnInit, AfterViewInit {
       newPlayer.name = this.newPlayerControl.value ?? '';
     }
 
-    if (this.selectedWonder) {
-      let newWonderList: Array<{
-        name: string;
-        icon?: string;
-        side?: EWonderSide;
-      }> = [];
+    if(this.fromMatchPages()){
+      let newMatchPlayer: IMatchPlayers = new MatchPlayers();
 
-      if (Array.isArray(this.selectedWonder)) {
-        this.selectedWonder.forEach((item) => {
-          newWonderList.push({ name: item, icon: '' });
-        });
-      } else {
-        newWonderList.push({
-          name: this.selectedWonder,
-          icon: '',
-          side:
-            this.hasWonderSide() 
-              ? (this.wonderSide ? EWonderSide.NIGHT : EWonderSide.DAY) 
-              : undefined
-        });
+      newMatchPlayer.name = newPlayer.name;
+      newMatchPlayer.id = newPlayer.id;
+
+      if (this.selectedWonder) {
+        let newWonderList: Array<{
+          name: string;
+          icon?: string;
+          side?: EWonderSide;
+        }> = [];
+
+        if (Array.isArray(this.selectedWonder)) {
+          this.selectedWonder.forEach((item) => {
+            newWonderList.push({ name: item, icon: '' });
+          });
+        } else {
+          newWonderList.push({
+            name: this.selectedWonder,
+            icon: '',
+            side:
+              this.hasWonderSide() 
+                ? (this.wonderSide ? EWonderSide.NIGHT : EWonderSide.DAY) 
+                : undefined
+          });
+        }
+
+        newMatchPlayer.wonder = newWonderList;
       }
 
-      newPlayer.wonder = newWonderList;
+      this.dialogRef.close(newMatchPlayer);  
+    } else {
+      this.dialogRef.close(newPlayer);
     }
 
-    this.dialogRef.close(newPlayer);
+    
+  }
+
+  private _loadPlayerList(): void {
+    this.playersList = [];
+
+    this.applicationPlayersList$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((players: IPlayer[]) => {
+        players
+          .filter((player: IPlayer) => player.name)
+          .forEach((player: IPlayer) => {
+            if (
+              !this.playersList.map((p) => p.name).includes(player.name)
+            ) {
+              this.playersList.push({
+                id: player.id,
+                name: player.name,
+              });
+            }
+          });
+      });
+
+    this.playersList = SortUtils.sortByProperty(
+      this.playersList,
+      'name'
+    );
   }
 
   sun: string =
