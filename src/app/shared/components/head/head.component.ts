@@ -13,6 +13,8 @@ import {
   RouterModule,
 } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { TranslocoDirective, TranslocoModule } from "@jsverse/transloco";
+import { BaseComponent } from '../base.component';
 
 @Component({
   selector: 'app-head',
@@ -23,22 +25,24 @@ import { filter, map } from 'rxjs';
     MatSidenavModule,
     MatListModule,
     RouterModule,
-  ],
+    TranslocoModule
+],
   templateUrl: './head.component.html',
   styleUrl: './head.component.less',
 })
-export class HeadComponent implements OnInit {
-  appName: string = '7 Wonders Game Tools';
+export class HeadComponent extends BaseComponent implements OnInit {
+  appName: string = 'application.app_name';
   mode: MatDrawerMode = 'over';
   appVersion: string = environment.appVersion;
 
   menuGroupList: Array<any>;
 
-  constructor(
+  constructor(    
     _menuListService: ApplicationMenuListService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
+    super();
     this.menuGroupList = _menuListService.getFullMenuList();
   }
 
@@ -66,7 +70,7 @@ export class HeadComponent implements OnInit {
         })
       )
       .subscribe((title: string) => {
-        this.appName = title || '7 Wonders Game Tools';
+        this.appName = title || 'application.app_name';
       });
   }
 

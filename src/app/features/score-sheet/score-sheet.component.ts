@@ -3,10 +3,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { constGameList } from './constants/menu-game-list';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-score-sheet',
-    imports: [MatButtonModule, MatIconModule, RouterModule],
+    imports: [MatButtonModule, MatIconModule, RouterModule, TranslocoModule],
     templateUrl: './score-sheet.component.html',
     styleUrl: './score-sheet.component.less'
 })

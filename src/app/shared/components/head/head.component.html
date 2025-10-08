@@ -1,3 +1,4 @@
+<ng-container *transloco="let t">
 <mat-sidenav-container class="navbar-container">
   <mat-sidenav #sidenav [mode]="mode">
     <div class="navbar-menu-content">
@@ -12,17 +13,25 @@
       <div class="menu-content">
         <mat-selection-list>
           @for (group of menuGroupList; track group) {
-          <div mat-subheader class="subheader">{{ group.label }}</div>
 
-          @for (item of group.items; track $index) {
-          <mat-list-item
-            [routerLink]="item.routerLink"
-            (click)="sidenav.close()"
-          >
-            <mat-icon matListItemIcon>{{ item.iconName }}</mat-icon>
-            <div matListItemTitle>{{ item.label }}</div>
-          </mat-list-item>
-          } }
+            <div mat-subheader class="subheader">
+              @if(group.label) {
+                {{ t("menu.submenu." + group.label) }}
+              } @else {
+                {{ group.label }}
+              }    
+            </div>        
+
+            @for (item of group.items; track $index) {
+            <mat-list-item
+              [routerLink]="item.routerLink"
+              (click)="sidenav.close()"
+            >
+              <mat-icon matListItemIcon>{{ item.iconName }}</mat-icon>
+              <div matListItemTitle>{{ t("menu.items." + item.label) }}</div>
+            </mat-list-item>
+            } 
+          }
         </mat-selection-list>
       </div>
       <div class="menu-footer">
@@ -40,7 +49,7 @@
       >
       <mat-icon>menu</mat-icon>        
       </button>
-      <span>{{ appName }}</span>
+      <span>{{ t(appName) }}</span>
       <span class="head-spacer"></span>
       @if (!isHome()) {
        <div class="head-undo-icon">        
@@ -57,3 +66,7 @@
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</ng-container>
+
+
+

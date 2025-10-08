@@ -1,8 +1,11 @@
+<ng-container *transloco="let t">
 <div class="score-sheet-container">
   @for (item of gameList; track $index) {
   <button mat-fab extended [routerLink]="item.routerLink">
     <!-- <mat-icon>favorite</mat-icon> -->
-    {{ item.label }}
+    {{ t(item.label) }}
   </button>
   }
 </div>
+</ng-container>
+
