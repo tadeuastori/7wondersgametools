@@ -1,0 +1,37 @@
+{
+    "application": {
+        "app_name": "7 Wonders Game Tools",
+        "description": "Application description",
+        "routes": {
+            "score_sheet": "Score Sheet",
+            "game_base":"Score Sheet > 7 Wonders",
+            "game_duel":"Score Sheet > 7w - Duel",
+            "game_architects":"Score Sheet > 7w - Architects"
+        }
+    },
+    "menu": {
+        "submenu":{
+            "game_tools": "Game Tools",
+            "metrics": "Metrics",
+            "configuration": "Configuration",
+            "information": "Information"
+        },
+        "items":{
+            "home": "Home",
+            "score_sheet": "Score Sheet",
+            "matches": "Matches",
+            "players": "Players",
+            "wonders": "Wonders",
+            "Rules": "Rules"
+        }        
+    },
+    "pages": {
+        "score_sheet": {
+            "menu":{
+                "game_base":"7 Wonders",
+                "game_duel":"7w - Duel",
+                "game_architects":"7w - Architects"
+            }
+        }        
+    }
+}
