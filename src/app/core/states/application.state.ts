@@ -12,7 +12,7 @@ import {
 } from '../models/state/application-state-settings.model';
 import { ApplicationDataService } from '../services/application-data.service';
 import { PlayerService } from '../services/player.service';
-import { first } from 'rxjs';
+import { catchError, EmptyError, first, tap } from 'rxjs';
 import { BaseState } from './base/base.state';
 
 @State<IApplicationStateModel>({
@@ -40,32 +40,31 @@ export class ApplicationState extends BaseState {
     });
   }
 
-  //################################################################################################
-
   @Action(ApplicationStateActions.InitializeApplicationState)
   async initializeApplicationState(ctx: StateContext<IApplicationStateModel>) {
     this._startPathState(ctx);
 
-    this._PlayerService
-      .getPlayers()
-      .pipe(first())
-      .subscribe({
-        next: (player) => {
-          ctx.setState({
-            isStateReady: true,
-            settings: new ApplicationSetting() as IApplicationSettings,
-            games: this._applicationDataService.getGameData(),
-            players: player,
-          });
-          this._successSnakBar('Application State Initialized');
-        },
-        error: (err) => {
-          console.log('[initializeApplicationState] - ' + err);
-          this._errorSnakBar('[initializeApplicationState]');
-          this._endPathState(ctx);
-        },
-      });
+    return this._PlayerService.getPlayers().pipe(
+      first(),
+      tap((player) => {
+        ctx.patchState({
+          isStateReady: true,
+          settings: new ApplicationSetting() as IApplicationSettings,
+          games: this._applicationDataService.getGameData(),
+          players: player,
+        });
+
+        this._successSnakBar('Application State Initialized');
+      }),
+      catchError((err) => {
+        console.error('[initializeApplicationState] - ', err);
+        this._errorSnakBar('[initializeApplicationState]');
+        this._endPathState(ctx);
+        return '';
+      })
+    );
   }
+
 
   @Action(ApplicationStateActions.SaveApplicationSettings)
   async saveApplicationSettings(

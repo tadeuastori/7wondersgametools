@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class DatabaseService {
     return this.dbService.update(storeName, data);
   }
 
-  public deleteByKey(storeName: string, id: number): Observable<boolean> {
-    return this.dbService.deleteByKey(storeName, id);
+  public deleteByKey(storeName: string, id: number): void {
+    this.dbService.deleteByKey(storeName, id);
   }
 
   public getByKey<T>(storeName: string, key: number): Observable<T> {
