@@ -228,15 +228,11 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   }
 
   private _validatedConfiguration(): void {
+    const hasWonder = this.matchPlayersList.every(player =>
+      configurationHasWonderValid(this.gameType, player.wonder?.length)
+    );
 
-    var hasWonder: boolean = false;
-
-    this.matchPlayersList.forEach(player => {
-
-      hasWonder = configurationHasWonderValid(this.gameType, player.wonder?.length);
-    });    
-
-      this.isStartReady = configurationIsReady(this.gameType, this.matchPlayersList.length, hasWonder);
+    this.isStartReady = configurationIsReady(this.gameType, this.matchPlayersList.length, hasWonder);
   }
 
   public addPlayer(player: IMatchPlayers): void {
