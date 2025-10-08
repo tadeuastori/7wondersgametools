@@ -12,6 +12,9 @@ import { provideStore } from '@ngxs/store';
 import { ApplicationState } from './core/states/application.state';
 import { HammerModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideTransloco } from '@jsverse/transloco';
+import { environment } from 'src/environments/environment';
+import { TranslocoHttpLoader } from './core/services/transloco/transloco-http.loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +23,14 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([NgxIndexedDBModule.forRoot(dbConfig), HammerModule]),
     provideStore([ApplicationState]),
     provideAnimationsAsync(),
+    provideTransloco({
+      config: {
+        availableLangs: ['pt-br', 'en'],
+        defaultLang: 'en',
+        reRenderOnLangChange: true,
+        prodMode: environment.production,
+      },
+      loader: TranslocoHttpLoader,
+    }),
   ],
 };
