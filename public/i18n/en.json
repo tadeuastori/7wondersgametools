@@ -6,7 +6,8 @@
             "score_sheet": "Score Sheet",
             "game_base":"Score Sheet > 7 Wonders",
             "game_duel":"Score Sheet > 7w - Duel",
-            "game_architects":"Score Sheet > 7w - Architects"
+            "game_architects":"Score Sheet > 7w - Architects",
+            "settings_wonders":"Settings > Wonders"
         }
     },
     "games": {
