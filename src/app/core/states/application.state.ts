@@ -6,14 +6,14 @@ import {
 } from '../models/state/application-state.model';
 import { Injectable } from '@angular/core';
 import { ApplicationStateActions } from './application.actions';
-import {
-  ApplicationSetting,
-  IApplicationSettings,
-} from '../models/state/application-state-settings.model';
 import { ApplicationDataService } from '../services/application-data.service';
 import { PlayerService } from '../services/player.service';
-import { catchError, EmptyError, first, tap } from 'rxjs';
+import { catchError, combineLatest, combineLatestAll, first, map, of, switchMap, tap } from 'rxjs';
 import { BaseState } from './base/base.state';
+import { ISetting, Setting } from '../models/setting/setting.model';
+import { ApplicationSettingsService } from '../services/application-settings.service';
+import { SettingRequest } from '../models/setting/setting-request.model';
+import { IPlayer } from '../models/player/player.model';
 
 @State<IApplicationStateModel>({
   name: AppStoreKeys.ApplicationState,
@@ -23,7 +23,8 @@ import { BaseState } from './base/base.state';
 export class ApplicationState extends BaseState {
   constructor(
     private _applicationDataService: ApplicationDataService,
-    private _PlayerService: PlayerService
+    private _PlayerService: PlayerService,
+    private _SettingsService: ApplicationSettingsService
   ) {
     super();
   }
@@ -40,30 +41,39 @@ export class ApplicationState extends BaseState {
     });
   }
 
-  @Action(ApplicationStateActions.InitializeApplicationState)
-  async initializeApplicationState(ctx: StateContext<IApplicationStateModel>) {
-    this._startPathState(ctx);
+ @Action(ApplicationStateActions.InitializeApplicationState)
+initializeApplicationState(ctx: StateContext<IApplicationStateModel>) {
+  this._startPathState(ctx);
 
-    return this._PlayerService.getPlayers().pipe(
-      first(),
-      tap((player) => {
-        ctx.patchState({
-          isStateReady: true,
-          settings: new ApplicationSetting() as IApplicationSettings,
-          games: this._applicationDataService.getGameData(),
-          players: player,
-        });
+  return combineLatest([
+    this._PlayerService.getPlayers(),
+    this._SettingsService.getSettings().pipe(first())
+  ]).pipe(
+    switchMap(([players, settings]: [IPlayer[], ISetting[]]) => {
+      if (settings.length === 0) {
+        return this._SettingsService.addSettings(
+          new SettingRequest({ userLanguage: 'en' })
+        ).pipe(
+          first(),
+          map(newSetting => [players, newSetting] as [IPlayer[], ISetting])
+        );
+      }
 
-        this._successSnakBar('Application State Initialized');
-      }),
-      catchError((err) => {
-        console.error('[initializeApplicationState] - ', err);
-        this._errorSnakBar('[initializeApplicationState]');
-        this._endPathState(ctx);
-        return '';
-      })
-    );
-  }
+      return of([players, settings[0]] as [IPlayer[], ISetting]);
+    }),
+    tap(([players, Setting]: [IPlayer[], ISetting]) => {
+      ctx.patchState({
+        isStateReady: true,
+        settings: Setting,
+        games: this._applicationDataService.getGameData(),
+        players: players,
+      });
+
+      this._successSnakBar('Application State Initialized');
+    })
+  );
+}
+
 
 
   @Action(ApplicationStateActions.SaveApplicationSettings)

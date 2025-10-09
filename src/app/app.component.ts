@@ -1,12 +1,13 @@
 import { Component, OnInit, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApplicationStateSelectors } from './core/states/application.queries';
-import { IApplicationSettings } from './core/models/state/application-state-settings.model';
 import { HeadComponent } from './shared/components/head/head.component';
 import { ApplicationStateActions } from './core/states/application.actions';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseComponent } from './shared/components/base.component';
+import { ISetting } from './core/models/setting/setting.model';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent extends BaseComponent implements OnInit {
 
   currentLanguage: any = '';
 
-  applicationSettings: Signal<IApplicationSettings> = this._store.selectSignal(
+  applicationSettings$: Observable<ISetting> = this._store.select(
     ApplicationStateSelectors.getApplicationSettings
   );
 
@@ -37,6 +38,11 @@ export class AppComponent extends BaseComponent implements OnInit {
       new ApplicationStateActions.InitializeApplicationState()
     );
 
-    this._translocoService.setActiveLang('en');
+    this.applicationSettings$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (settings) => {
+        this._translocoService.setActiveLang(settings.userLanguage);
+      },
+    });
+
   }
 }

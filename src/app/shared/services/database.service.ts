@@ -24,6 +24,10 @@ export class DatabaseService {
     return this.dbService.getByKey<T>(storeName, key);
   }
 
+  public getByColumn<T>(storeName: string, column: string, value: string): Observable<T> {
+    return this.dbService.getByIndex<T>(storeName, column, value);
+  }
+
   public getAllByProperty<T>(
     storeName: string,
     property: string,

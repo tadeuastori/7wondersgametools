@@ -2,7 +2,7 @@ import { IMatchPlayers } from '../../features/score-sheet/models/match-players.m
 import { ApplicationStateActionsTypes } from '../enums/application-state-actions-types.enum';
 import { EGamesEnum } from '../enums/games.enum';
 import { IPlayerRequest } from '../models/player/player-request.model';
-import { IApplicationSettings } from '../models/state/application-state-settings.model';
+import { ISetting } from '../models/setting/setting.model';
 
 export namespace ApplicationStateActions {
   export class InitializeApplicationState {
@@ -12,7 +12,7 @@ export namespace ApplicationStateActions {
 
   export class SaveApplicationSettings {
     static readonly type = ApplicationStateActionsTypes.SaveApplicationSettings;
-    constructor(public payload: IApplicationSettings) {}
+    constructor(public payload: ISetting) {}
   }
 
   export class AddPlayerApplicationState {
