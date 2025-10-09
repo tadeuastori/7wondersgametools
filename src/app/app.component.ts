@@ -1,12 +1,12 @@
 import { Component, OnInit, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApplicationStateSelectors } from './core/states/application.queries';
-import { IApplicationSettings } from './core/models/state/application-state-settings.model';
 import { HeadComponent } from './shared/components/head/head.component';
 import { ApplicationStateActions } from './core/states/application.actions';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseComponent } from './shared/components/base.component';
+import { ISetting } from './core/models/setting/setting.model';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent extends BaseComponent implements OnInit {
 
   currentLanguage: any = '';
 
-  applicationSettings: Signal<IApplicationSettings> = this._store.selectSignal(
+  applicationSettings: Signal<ISetting> = this._store.selectSignal(
     ApplicationStateSelectors.getApplicationSettings
   );
 

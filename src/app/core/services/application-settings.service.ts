@@ -17,7 +17,7 @@ export class ApplicationSettingsService {
     }
   
     public addSettings(player: ISettingsRequest): Observable<ISettingsRequest> {
-      return this._dataBase.add<ISettingsRequest>(this._dataBaseSchema, player);
+      return this._dataBase.add<ISetting>(this._dataBaseSchema, player);
     }
   
     public updateSettings(player: ISetting): Observable<ISetting> {
