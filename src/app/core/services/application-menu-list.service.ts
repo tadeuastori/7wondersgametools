@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ERoutePaths } from '../enums/route-paths.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,7 @@ export class ApplicationMenuListService {
           order: 10,
           iconName: 'scoreboard',
           label: 'score_sheet',
-          routerLink: 'score-sheet-menu',
+          routerLink: ERoutePaths.ScoreSheetMenu,
           active: true,
         },
       ],
@@ -75,13 +76,13 @@ export class ApplicationMenuListService {
           iconName: 'group',
           label: 'players',
           routerLink: '',
-          active: true,
+          active: false,
         },
         {
           order: 20,
           iconName: 'account_balance',
           label: 'wonders',
-          routerLink: '',
+          routerLink: ERoutePaths.SettingsWonders,
           active: true,
         },
         {
@@ -89,7 +90,7 @@ export class ApplicationMenuListService {
           iconName: 'settings_applications',
           label: 'application',
           routerLink: '',
-          active: true,
+          active: false,
         },
       ],
     },
@@ -110,9 +111,15 @@ export class ApplicationMenuListService {
     },
   ];
 
-  public getFullMenuList() {
-    return this.menuList.filter(({ active }) => active);
-  }
+ public getFullMenuList() {
+  return this.menuList
+    .filter(menu => menu.active)
+    .map(menu => ({
+      ...menu,
+      items: menu.items.filter(item => item.active)
+    }));
+}
+
 
   public getGroupList() {
     return this.menuList
