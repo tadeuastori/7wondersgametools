@@ -28,7 +28,7 @@
         "submenu":{
             "game_tools": "Game Tools",
             "metrics": "Metrics",
-            "configuration": "Configuration",
+            "settings": "Settings",
             "information": "Information"
         },
         "items":{

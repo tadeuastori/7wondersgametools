@@ -67,7 +67,7 @@ export class ApplicationMenuListService {
     {
       order: 30,
       iconName: 'settings',
-      label: 'configuration',
+      label: 'settings',
       active: true,
       items: [
         {
