@@ -27,4 +27,8 @@ export class ApplicationSettingsService {
     public deleteSettings(player: ISetting): void {
       this._dataBase.deleteByKey(this._dataBaseSchema, player.id!);
     }
+
+    public getSettingById(id: number): Observable<ISetting> {
+      return this._dataBase.getByKey<ISetting>(this._dataBaseSchema, id);
+    }
 }
