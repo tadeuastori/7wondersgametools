@@ -28,7 +28,7 @@
         "submenu":{
             "game_tools": "Game Tools",
             "metrics": "Metrics",
-            "configuration": "Configuration",
+            "settings": "Settings",
             "information": "Information"
         },
         "items":{
@@ -37,7 +37,8 @@
             "matches": "Matches",
             "players": "Players",
             "wonders": "Wonders",
-            "Rules": "Rules"
+            "Rules": "Rules",
+            "application": "Application"
         }        
     },
     "pages": {

@@ -67,8 +67,8 @@ export class ApplicationMenuListService {
     {
       order: 30,
       iconName: 'settings',
-      label: 'configuration',
-      active: false,
+      label: 'settings',
+      active: true,
       items: [
         {
           order: 10,
@@ -81,6 +81,13 @@ export class ApplicationMenuListService {
           order: 20,
           iconName: 'account_balance',
           label: 'wonders',
+          routerLink: '',
+          active: true,
+        },
+        {
+          order: 30,
+          iconName: 'settings_applications',
+          label: 'application',
           routerLink: '',
           active: true,
         },
