@@ -7,7 +7,7 @@
             "game_base":"Score Sheet > 7 Wonders",
             "game_duel":"Score Sheet > 7w - Duel",
             "game_architects":"Score Sheet > 7w - Architects",
-            "settings_wonders":"Settings > Wonders"
+            "settings_players":"Settings > Players"
         }
     },
     "games": {
@@ -48,7 +48,12 @@
                 "expansions": "Expansions",
                 "players": "Players"                
             }
-        }        
+        },
+        "settings": {
+            "players": {
+                "player_title": "Players"
+            }
+        }
     },
     "table_forms": {
         "player": "Player",
