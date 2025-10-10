@@ -75,15 +75,15 @@ export class ApplicationMenuListService {
           order: 10,
           iconName: 'group',
           label: 'players',
-          routerLink: '',
-          active: false,
+          routerLink: ERoutePaths.SettingsPlayers,
+          active: true,
         },
         {
           order: 20,
           iconName: 'account_balance',
           label: 'wonders',
           routerLink: ERoutePaths.SettingsWonders,
-          active: true,
+          active: false,
         },
         {
           order: 30,
