@@ -34,7 +34,7 @@ import { IWonder } from '../../../../core/models/game/wonder.model';
 import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 import { MatchStateActions } from '../../../../core/states/match.action';
 import { configurationHasWonderValid, configurationIsReady } from '@score-sheet-menu/score-sheet.validation';
-import { PLAYER_ALREADY_EXISTS } from 'src/app/core/constants/snackbar-message';
+import { PLAYER_ALREADY_EXISTS_MATCH } from 'src/app/core/constants/snackbar-message';
 import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/add-player.component';
 import { TranslocoModule } from '@jsverse/transloco';
 
@@ -255,7 +255,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     );
 
     if (exist.length > 0) {
-      this._snackbarService.openDangerSnackBar(PLAYER_ALREADY_EXISTS);
+      this._snackbarService.openDangerSnackBar(PLAYER_ALREADY_EXISTS_MATCH);
        
       return;
     }
