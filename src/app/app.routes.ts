@@ -39,5 +39,11 @@ export const routes: Routes = [
     loadComponent: () => import('@settings/players/players.component')
         .then((c) => c.PlayersComponent),
     title: 'application.routes.settings_players',
+  },
+  {
+    path: ERoutePaths.SettingsWonders,
+    loadComponent: () => import('@settings/wonders/wonders.component')
+        .then((c) => c.WondersComponent),
+    title: 'application.routes.settings_wonders',
   }
 ];

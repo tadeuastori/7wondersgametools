@@ -83,7 +83,7 @@ export class ApplicationMenuListService {
           iconName: 'account_balance',
           label: 'wonders',
           routerLink: ERoutePaths.SettingsWonders,
-          active: false,
+          active: true,
         },
         {
           order: 30,
