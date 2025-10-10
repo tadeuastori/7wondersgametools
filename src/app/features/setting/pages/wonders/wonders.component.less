@@ -1,0 +1,60 @@
+@import url(../../../../../../public/styles/variables.less);
+
+.settings-configuration-container {
+  padding: 0.5rem;
+
+    .wonder-title {
+    padding: @score-sheet-config-space-content;
+    padding-bottom: 0%;
+
+    .mat-toolbar-single-row {
+      font-size: medium;
+      padding: 0rem;
+      height: 2rem;
+      font-family: gameFont;
+    }
+
+    .title-spacer {
+      flex: 1 1 auto;
+    }    
+  }
+
+    .players-list {
+    padding: @score-sheet-config-space-content;
+    padding-top: 0rem;
+    margin-bottom: 1rem;
+
+    table {
+      th {
+        font-family: gameFont;
+        font-size: small;
+      }
+
+      td {
+        font-size: small;
+      }
+
+      .mat-column-table-player {
+        width: 150px;
+      }     
+
+      .mat-column-table-wonder {
+        p {
+          display: flex;
+          align-items: center;
+          gap: 0.1rem;
+
+          mat-icon {
+            scale: 0.6;
+          }
+        }
+      }
+    }
+
+    .mat-mdc-table-sticky {
+      border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
+      border-top-width: var(--mat-table-row-item-outline-width, 1px);
+      border-top-style: solid;
+    }
+  }
+}
