@@ -133,9 +133,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
           });
       });
 
-    this.originalPlayersList = SortUtils.sortByProperty(
+    this.originalPlayersList = SortUtils.sortByProperties(
       this.originalPlayersList,
-      'name'
+      ['name']
     );
   }
 
@@ -164,9 +164,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
           });
 
         this._loadWondersList();
-        this.originalExpansionList = SortUtils.sortByProperty(
+        this.originalExpansionList = SortUtils.sortByProperties(
           this.originalExpansionList,
-          'name'
+          ['name']
         );
       });
   }
@@ -207,9 +207,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       });
     }
 
-    this.availableWonderList = SortUtils.sortByProperty(
+    this.availableWonderList = SortUtils.sortByProperties(
       this.availableWonderList,
-      'name'
+      ['name']
     );
   }
 

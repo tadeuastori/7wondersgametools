@@ -186,9 +186,9 @@ export class AddPlayerComponent extends BaseComponent implements OnInit, AfterVi
           });
       });
 
-    this.playersList = SortUtils.sortByProperty(
+    this.playersList = SortUtils.sortByProperties(
       this.playersList,
-      'name'
+      ['name']
     );
   }
 
