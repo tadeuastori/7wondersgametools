@@ -35,9 +35,9 @@ export const routes: Routes = [
     data: { gameType: EGamesEnum.GAME_ARCHITECTS },
   },
   {
-    path: ERoutePaths.SettingsWonders,
-    loadComponent: () => import('@settings/wonders/wonders.component')
-        .then((c) => c.WondersComponent),
-    title: 'application.routes.settings_wonders',
+    path: ERoutePaths.SettingsPlayers,
+    loadComponent: () => import('@settings/players/players.component')
+        .then((c) => c.PlayersComponent),
+    title: 'application.routes.settings_players',
   }
 ];
