@@ -122,11 +122,9 @@ export class ApplicationState extends BaseState {
       (item) => item.name.toLowerCase() === payload.name.toLowerCase()
     );
 
-    if (exists) {
-      ctx.patchState({
-        isStateReady: true,
-      });
+    if (exists) {      
       this._infoSnakBar('Player already added to the database');
+      this._endPathState(ctx);
       return;
     }
 
@@ -135,10 +133,10 @@ export class ApplicationState extends BaseState {
       tap({
         next: (player) => {
           ctx.patchState({
-            isStateReady: true,
             players: [...currentPlayers, player],
           });
           this._successSnakBar('Player Added');
+          this._endPathState(ctx);
         },
         error: (err) => {
           console.error('[addPlayerApplicationState] - ', err);
@@ -148,4 +146,42 @@ export class ApplicationState extends BaseState {
       })
     );
   }
+
+  @Action(ApplicationStateActions.DeletePlayerApplicationState)
+  deletePlayerApplicationState(
+    ctx: StateContext<IApplicationStateModel>,
+    { id }: ApplicationStateActions.DeletePlayerApplicationState
+  ) {
+    this._startPathState(ctx);
+
+    const currentPlayers = ctx.getState().players;
+    const exists = currentPlayers.some(
+      (item) => item.id === id
+    );
+
+    if (!exists) {
+      this._endPathState(ctx);
+      this._infoSnakBar('Player doesnt exist in the database');
+      return;
+    }
+
+    return this._PlayerService.deletePlayer(id).pipe(
+      tap({
+        next: (players) => {
+          console.log('[deletePlayerApplicationState] success - ', players);
+          ctx.patchState({
+            players: players,
+          });
+          this._successSnakBar('Player Deleted');
+          this._endPathState(ctx);
+        },
+        error: (err) => {
+          console.log('[deletePlayerApplicationState] error - ', id);
+          console.error('[deletePlayerApplicationState] - ', err);
+          this._errorSnakBar('[deletePlayerApplicationState]');
+          this._endPathState(ctx);
+        },
+      })
+    )
   }
+}
