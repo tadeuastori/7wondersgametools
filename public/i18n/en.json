@@ -7,7 +7,8 @@
             "game_base":"Score Sheet > 7 Wonders",
             "game_duel":"Score Sheet > 7w - Duel",
             "game_architects":"Score Sheet > 7w - Architects",
-            "settings_players":"Settings > Players"
+            "settings_players":"Settings > Players",
+            "settings_wonders":"Settings > Wonders"
         }
     },
     "games": {
@@ -52,6 +53,9 @@
         "settings": {
             "players": {
                 "player_title": "Players"
+            },
+            "wonders": {
+                "wonder_title": "Wonders"
             }
         }
     },
@@ -65,7 +69,8 @@
     "buttons": {
         "start_game":"Start Game",
         "add":"Add",
-        "cancel":"Cancel"    },
+        "cancel":"Cancel"
+    },
     "dialogs": {
         "add_player": "Add player"        
     }
