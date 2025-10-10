@@ -1,14 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseComponent } from '../../base.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { EGamesEnum } from '../../../../core/enums/games.enum';
 import { AddPlayerComponent } from '../../../../shared/components/dialog/add-player/add-player.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerDataSource } from '../../models/players-datasource.model';
@@ -23,12 +19,9 @@ import { PLAYER_ADD, PLAYER_ALREADY_EXISTS } from '../../../../core/constants/sn
 @Component({
   selector: 'app-players',
   imports: [MatToolbarModule,
-    MatSlideToggleModule,
     MatDividerModule,
-    MatButtonToggleModule,
     MatTableModule,
-    MatIconModule,
-    MatButtonModule,
+    MatIconModule,    
     TranslocoModule],
   templateUrl: './players.component.html',
   styleUrl: './players.component.less'
@@ -37,8 +30,6 @@ export class PlayersComponent extends BaseComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   applicationPlayersList$: Observable<IPlayer[]>;
-
-  eGameType = EGamesEnum;
 
   displayedColumns: string[] = ['table-player', 'table-action'];
   playerDataSource = new PlayerDataSource();
