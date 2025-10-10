@@ -51,6 +51,7 @@
 
       .mat-column-table-action {
         width: 30px;
+        text-align: right;
 
         .mat-mdc-icon-button {
           color: @base-bgcolor-red;
@@ -62,36 +63,6 @@
       border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
       border-top-width: var(--mat-table-row-item-outline-width, 1px);
       border-top-style: solid;
-    }
-
-    .table-footer{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-
-      button {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: nowrap;
-        width: 10rem;
-        // border-radius: 2rem;
-        background-color: transparent;
-        scale: 0.8;
-        border: none;
-        box-shadow: none;
-        color: @base-bgcolor-black;
-
-        .mat-icon {
-          height: 19.5px;
-          margin: 0;
-          padding: 0;
-        }
-      }
     }
   }
 }
