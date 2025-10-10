@@ -34,4 +34,10 @@ export const routes: Routes = [
     title: 'application.routes.game_architects',
     data: { gameType: EGamesEnum.GAME_ARCHITECTS },
   },
+  {
+    path: ERoutePaths.SettingsPlayers,
+    loadComponent: () => import('@settings/players/players.component')
+        .then((c) => c.PlayersComponent),
+    title: 'application.routes.settings_players',
+  }
 ];

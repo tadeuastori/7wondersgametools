@@ -20,4 +20,10 @@ export namespace ApplicationStateActions {
       ApplicationStateActionsTypes.AddPlayerApplicationState;
     constructor(public payload: IPlayerRequest) {}
   }
+
+  export class DeletePlayerApplicationState {
+    static readonly type =
+      ApplicationStateActionsTypes.DeletePlayerApplicationState;
+    constructor(public id: number) {}
+  }
 }

@@ -29,6 +29,9 @@
       ],
       "@score-sheet-configuration/*": [
         "src/app/features/score-sheet/pages/configuration/*"
+      ],
+      "@settings/*": [
+        "src/app/features/setting/pages/*"
       ]
     }
   },

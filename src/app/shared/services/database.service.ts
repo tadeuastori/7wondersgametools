@@ -16,8 +16,8 @@ export class DatabaseService {
     return this.dbService.update(storeName, data);
   }
 
-  public deleteByKey(storeName: string, id: number): void {
-    this.dbService.deleteByKey(storeName, id);
+  public deleteByKey<T>(storeName: string, id: number): Observable<T[]> {
+    return this.dbService.delete(storeName, id); 
   }
 
   public getByKey<T>(storeName: string, key: number): Observable<T> {
