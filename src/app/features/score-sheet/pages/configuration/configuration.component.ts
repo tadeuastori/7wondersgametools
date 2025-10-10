@@ -338,7 +338,9 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     );
   }
 
-  public openDialog(): void {
+  public openDialog(event: MouseEvent): void {
+    const el = event.currentTarget as HTMLElement;
+    el.blur();
     const dialogRef = this.dialog.open(AddPlayerComponent, {
       data: {
         wonders: this.availableWonderList,

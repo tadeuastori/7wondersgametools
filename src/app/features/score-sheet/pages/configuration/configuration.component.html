@@ -29,7 +29,7 @@
 
         @if ((gameType === eGameType.GAME_DUEL && matchPlayersList.length < 2) ||
         (gameType != eGameType.GAME_DUEL && matchPlayersList.length < 7)) {
-        <button mat-icon-button class="example-icon" (click)="openDialog()">
+        <button mat-icon-button class="example-icon" (click)="openDialog($event)">
           <mat-icon>person_add</mat-icon>
         </button>
         }
