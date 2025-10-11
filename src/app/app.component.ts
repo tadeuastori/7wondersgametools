@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseComponent } from './shared/components/base.component';
 import { ISetting } from './core/models/setting/setting.model';
 import { Observable, takeUntil } from 'rxjs';
+import { LanguageService } from './core/services/language.service';
 
 @Component({
     selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     ApplicationStateSelectors.getApplicationSettings
   );
 
-  constructor(private _translocoService: TranslocoService) {
+  constructor(private _translocoService: TranslocoService,private _languageService: LanguageService) {
     super()
     this._translocoService.langChanges$.pipe(takeUntilDestroyed()).subscribe({
       next: (lang) => {
@@ -40,7 +41,22 @@ export class AppComponent extends BaseComponent implements OnInit {
 
     this.applicationSettings$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (settings) => {
-        this._translocoService.setActiveLang(settings.userLanguage);
+        if(settings.userLanguage != 'OS') {
+          this._translocoService.setActiveLang(settings.userLanguage);
+          console.log(0);
+        } else {
+              const deviceLanguage: string = navigator.language;
+              var languageList = this._languageService.getLanguageList();
+
+              if (languageList.some((l) => l.code == deviceLanguage.toLowerCase())){
+                  this._translocoService.setActiveLang(deviceLanguage.toLowerCase());
+                  console.log(1);
+              } else {
+                  this._translocoService.setActiveLang('en');
+                  console.log(2);
+              }
+        }
+        
       },
     });
 
