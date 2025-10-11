@@ -1,6 +1,8 @@
 import {
   ApplicationConfig,
   provideZoneChangeDetection, isDevMode,
+  provideAppInitializer,
+  inject,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -11,6 +13,11 @@ import { ApplicationState } from './core/states/application.state';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslocoHttpLoader } from './core/services/transloco/transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
+import { IconsLoaderService } from './core/loaders/icons-loader.service';
+
+export function initializeIcons(iconLoader: IconsLoaderService): () => void {
+  return () => iconLoader.registerIcons();
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +34,10 @@ export const appConfig: ApplicationConfig = {
           prodMode: !isDevMode(),
         },
         loader: TranslocoHttpLoader
-      })
+      }),
+      provideAppInitializer(() => {
+      const iconLoader = inject(IconsLoaderService);
+      iconLoader.registerIcons();
+    }),
   ],
 };
