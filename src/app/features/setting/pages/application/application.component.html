@@ -1,1 +1,32 @@
-<p>application works!</p>
+<ng-container *transloco="let t">
+  @if (applicationStateIsReady()){
+    <form [formGroup]="settingsForm">
+        <div class="settings-application-container">
+            <mat-card appearance="raised">
+
+                <mat-card-header class="card-header">
+                    <mat-card-title>{{t('pages.settings.application.preferences_title')}}</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div class="language-list">
+                        <mat-form-field>
+                            <mat-label>{{t('pages.settings.application.application_language')}}</mat-label>
+                            <mat-select formControlName="userLanguage">
+                                <mat-option value="OS"><mat-icon></mat-icon>{{t('pages.settings.application.application_language_default')}}</mat-option>
+                                @for (language of languageList; track language) {
+                                <mat-option [value]="language.code">
+                                    <mat-icon [svgIcon]="language.icon"></mat-icon>
+                                    {{language.name}}
+                                </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </form>    
+}
+</ng-container>
+
