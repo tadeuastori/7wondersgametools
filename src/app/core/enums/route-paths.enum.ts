@@ -6,5 +6,6 @@ export enum ERoutePaths {
     ScoreSheetMenuDuel = 'score-sheet-menu/duel',
     ScoreSheetMenuArchitects = 'score-sheet-menu/architects',
     SettingsWonders = 'settings/wonders',
-    SettingsPlayers = 'settings/players'
+    SettingsPlayers = 'settings/players',
+    SettingsApplication = 'settings/application'
 }
