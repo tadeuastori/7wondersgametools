@@ -49,7 +49,7 @@ export class AppComponent extends BaseComponent implements OnInit {
               var languageList = this._languageService.getLanguageList();
 
               if (languageList.some((l) => l.code == deviceLanguage.toLowerCase())){
-                  this._translocoService.setActiveLang(deviceLanguage);
+                  this._translocoService.setActiveLang(deviceLanguage.toLowerCase());
                   console.log(1);
               } else {
                   this._translocoService.setActiveLang('en');
