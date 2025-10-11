@@ -55,7 +55,7 @@ export class ApplicationState extends BaseState {
       switchMap(([players, settings]: [IPlayer[], ISetting[]]) => {
         if (settings.length === 0) {
           return this._SettingsService.addSettings(
-            new SettingRequest({ userLanguage: 'en' })
+            new SettingRequest({ userLanguage: 'OS' })
           ).pipe(
             first(),
             map(newSetting => [players, newSetting] as [IPlayer[], ISetting])
@@ -88,26 +88,33 @@ export class ApplicationState extends BaseState {
   ) {
     this._startPathState(ctx);
 
-    try {
-      let settings = ctx.getState().settings;
-      settings = {
-        ...settings,
-        ...payload,
-      };
+    let settings = ctx.getState().settings;
+    settings = {
+      ...settings,
+      ...payload,
+    };
 
-      ctx.setState({
-        isStateReady: true,
-        settings: settings,
-        players: ctx.getState().players,
-        games: ctx.getState().games,
-      });
+    return this._SettingsService.updateSettings(settings).pipe(
+      first(),
+      tap({
+        next: (snewSetting) => {
+          ctx.setState({
+            isStateReady: true,
+            settings: snewSetting,
+            players: ctx.getState().players,
+            games: ctx.getState().games,
+          });
 
-      this._successSnakBar('Application Settings Saved');
-    } catch (error) {
-      console.log('[saveApplicationSettings] - ' + error);
-      this._errorSnakBar('[saveApplicationSettings]');
-      this._endPathState(ctx);
-    }
+          this._successSnakBar('Application Settings Saved');
+          this._endPathState(ctx);
+        },
+        error: (err) => {
+          console.error('[saveApplicationSettings] - ', err);
+          this._errorSnakBar('[saveApplicationSettings]');
+          this._endPathState(ctx);
+        },
+      })
+    );
   }
 
   @Action(ApplicationStateActions.AddPlayerApplicationState)
