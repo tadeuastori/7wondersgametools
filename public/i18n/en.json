@@ -8,7 +8,8 @@
             "game_duel":"Score Sheet > 7w - Duel",
             "game_architects":"Score Sheet > 7w - Architects",
             "settings_players":"Settings > Players",
-            "settings_wonders":"Settings > Wonders"
+            "settings_wonders":"Settings > Wonders",
+            "settings_application":"Settings > Application"
         }
     },
     "games": {
