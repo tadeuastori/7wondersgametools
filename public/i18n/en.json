@@ -57,6 +57,11 @@
             },
             "wonders": {
                 "wonder_title": "Wonders"
+            },
+            "application": {
+                "preferences_title": "Preferences",
+                "application_language": "Application language",
+                "application_language_default": "Device Language"
             }
         }
     },
