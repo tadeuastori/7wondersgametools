@@ -1,9 +1,9 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApplicationStateSelectors } from './core/states/application.queries';
 import { HeadComponent } from './shared/components/head/head.component';
 import { ApplicationStateActions } from './core/states/application.actions';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseComponent } from './shared/components/base.component';
 import { ISetting } from './core/models/setting/setting.model';
@@ -13,13 +13,11 @@ import { LanguageService } from './core/services/language.service';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, HeadComponent, TranslocoModule],
+    imports: [RouterOutlet, HeadComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.less'
 })
 export class AppComponent extends BaseComponent implements OnInit {
-
-
   currentLanguage: any = '';
 
   applicationSettings$: Observable<ISetting> = this._store.select(
@@ -60,5 +58,9 @@ export class AppComponent extends BaseComponent implements OnInit {
       },
     });
 
+  }
+
+  deleteItem(idx: string | number): void {
+    console.log(idx);
   }
 }
