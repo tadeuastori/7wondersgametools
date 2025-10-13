@@ -8,7 +8,7 @@
     padding-bottom: 0%;
 
     .mat-toolbar-single-row {
-      font-size: medium;
+      font-size: large;
       padding: 0rem;
       height: 2rem;
       font-family: gameFont;
@@ -22,42 +22,6 @@
     .players-list {
     padding: @score-sheet-config-space-content;
     padding-top: 0rem;
-
-    table {
-      th {
-        font-family: gameFont;
-        font-size: small;
-      }
-
-      td {
-        font-size: small;
-      }
-
-      .mat-column-table-player {
-        width: 150px;
-      }     
-
-      .mat-column-table-wonder {
-        p {
-          display: flex;
-          align-items: center;
-          gap: 0.1rem;
-
-          mat-icon {
-            scale: 0.6;
-          }
-        }
-      }
-
-      .mat-column-table-action {
-        width: 30px;
-        text-align: right;
-
-        .mat-mdc-icon-button {
-          color: @base-bgcolor-red;
-        }
-      }
-    }
 
     .mat-mdc-table-sticky {
       border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));

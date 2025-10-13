@@ -15,14 +15,17 @@ import { SortUtils } from '../../../../core/utils/sort.util';
 import { IPlayerRequest, PlayerRequest } from '../../../../core/models/player/player-request.model';
 import { ApplicationStateActions } from '../../../../core/states/application.actions';
 import { PLAYER_ADD, PLAYER_ALREADY_EXISTS } from '../../../../core/constants/snackbar-message';
+import {MatButtonModule} from '@angular/material/button';
+import { CardComponent } from "src/app/shared/controls/card/card.component";
 
 @Component({
   selector: 'app-players',
   imports: [MatToolbarModule,
     MatDividerModule,
     MatTableModule,
-    MatIconModule,    
-    TranslocoModule],
+    MatIconModule,
+    TranslocoModule,
+    MatButtonModule, CardComponent],
   templateUrl: './players.component.html',
   styleUrl: './players.component.less'
 })
