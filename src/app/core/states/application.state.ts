@@ -73,8 +73,7 @@ export class ApplicationState extends BaseState {
             players: players,
           })},
           error: (error) => {
-            console.log('[initializeApplicationState] - ' + error);
-            this._errorSnakBar('[initializeApplicationState]');
+            this._errorSnakBar('[initializeApplicationState]' + error);
             this._endPathState(ctx);
           },
       })
@@ -175,7 +174,6 @@ export class ApplicationState extends BaseState {
     return this._PlayerService.deletePlayer(id).pipe(
       tap({
         next: (players) => {
-          console.log('[deletePlayerApplicationState] success - ', players);
           ctx.patchState({
             players: players,
           });
@@ -183,9 +181,7 @@ export class ApplicationState extends BaseState {
           this._endPathState(ctx);
         },
         error: (err) => {
-          console.log('[deletePlayerApplicationState] error - ', id);
-          console.error('[deletePlayerApplicationState] - ', err);
-          this._errorSnakBar('[deletePlayerApplicationState]');
+          this._errorSnakBar('[deletePlayerApplicationState]' + err);
           this._endPathState(ctx);
         },
       })

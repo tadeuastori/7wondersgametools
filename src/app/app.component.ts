@@ -41,26 +41,20 @@ export class AppComponent extends BaseComponent implements OnInit {
       next: (settings) => {
         if(settings.userLanguage != 'OS') {
           this._translocoService.setActiveLang(settings.userLanguage);
-          console.log(0);
         } else {
               const deviceLanguage: string = navigator.language;
               var languageList = this._languageService.getLanguageList();
 
               if (languageList.some((l) => l.code == deviceLanguage.toLowerCase())){
                   this._translocoService.setActiveLang(deviceLanguage.toLowerCase());
-                  console.log(1);
               } else {
                   this._translocoService.setActiveLang('en');
-                  console.log(2);
               }
         }
-        
+
+        console.log(this._translocoService.getActiveLang());
       },
     });
 
-  }
-
-  deleteItem(idx: string | number): void {
-    console.log(idx);
   }
 }
