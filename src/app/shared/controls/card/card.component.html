@@ -1,0 +1,45 @@
+<mat-card appearance="raised">
+    
+    @if(title || subtitle) {
+        <mat-card-header>            
+            @if(title) {
+                <mat-card-title>{{title}}</mat-card-title>
+            }
+            @if(subtitle) {
+                <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+            }
+        </mat-card-header>
+    }
+
+    <mat-card-content>
+        @if(textLeft) {
+            <div class="left">
+                {{textLeft}}
+            </div>
+        }
+        @if(textRight) {
+            <div class="right">
+                @if (hasDelete) {
+                <button
+                    mat-icon-button
+                    class="example-icon"
+                    (click)="deleteItem(index)"
+                    >
+                    <mat-icon>delete</mat-icon>
+                </button>
+                } @else {
+                    {{textRight}}
+                }   
+                
+            </div>
+        }
+    </mat-card-content>
+
+    @if(buttons) {
+        <mat-card-actions></mat-card-actions>
+    }
+
+    @if(footer) {
+        <mat-card-footer>{{footer}}</mat-card-footer>
+    }
+</mat-card>

@@ -1,0 +1,73 @@
+@import "../../../../../public/styles/variables.less";
+
+.mat-mdc-card {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  padding: 0px;
+  border-radius: .2rem;
+
+  .mat-mdc-card-header {
+    padding: .5rem;
+  }
+
+  .mat-mdc-card-content {
+    padding: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    ;
+
+    .left, .right{
+      flex-grow: 1;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      padding-top: 0.1rem;
+      padding-bottom: 0.1rem;
+      align-self: flex-end;
+    }
+
+    .left{   
+      text-align: left;
+      font-weight: 500;
+      width: 50%;
+    }
+
+    .right{
+      text-align: right;
+      font-style: italic;
+      font-size: small;
+      align-items: flex-end;
+      width: 50%;
+
+      button {
+        color: @base-bgcolor-red;
+        align-self: flex-end;
+        margin: 0;
+        padding: 0;
+        height: 20px;
+        width: 20px;
+        vertical-align: bottom;
+
+        .mat-mdc-button-touch-target {
+            height: 0rem;
+            padding: 0rem;
+            margin: 0rem;
+        }
+
+        mat-icon {
+          scale: 0.8;
+        }
+      }
+    }
+  }
+
+  .mat-mdc-card-actions {
+    padding: .5rem;
+  }
+
+  .mat-mdc-card-footer {
+    padding: .5rem;
+  }
+}
