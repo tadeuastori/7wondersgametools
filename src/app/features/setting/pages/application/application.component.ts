@@ -51,7 +51,6 @@ export class ApplicationComponent extends BaseComponent implements OnInit {
     this.settingsForm.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((formValues) => {
-        console.log(formValues);
         this.saveSettings(formValues);
       });
   }
