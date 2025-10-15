@@ -1,9 +1,9 @@
 @import url(../../../../../../public/styles/variables.less);
 
 .settings-configuration-container {
-  padding: 0.5rem;
+  padding: @padding-page-default;
 
-    .wonder-title {
+  .page-title-wonder {
     padding: @score-sheet-config-space-content;
     padding-bottom: 0%;
 
@@ -11,7 +11,7 @@
       font-size: medium;
       padding: 0rem;
       height: 2rem;
-      font-family: gameFont;
+      font-family: @font-family-7wonder;      
     }
 
     .title-spacer {
@@ -19,42 +19,102 @@
     }    
   }
 
-    .players-list {
+  .games-list {
     padding: @score-sheet-config-space-content;
     padding-top: 0rem;
     margin-bottom: 1rem;
 
-    table {
-      th {
-        font-family: gameFont;
-        font-size: small;
+    .mat-expansion-panel-header{
+      background-color: @accordion-header-bgcolor;
+
+      .mat-expansion-panel-header-title{
+        font-family: @font-family-7wonder;
+        font-size: large;
       }
+    }
 
-      td {
-        font-size: small;
-      }
+    .game-wonders-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: .25rem;
+      margin-right: .25rem;     
+    }
 
-      .mat-column-table-player {
-        width: 150px;
-      }     
+    .expansion-label {
+      background-color: @accordion-header-bgcolor;
+      text-align: center;
+      margin-top: 1rem;
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+    }
 
-      .mat-column-table-wonder {
-        p {
-          display: flex;
-          align-items: center;
-          gap: 0.1rem;
+    .expansions-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: .5rem;
+      margin-left: .25rem;
+      margin-right: .25rem;
 
-          mat-icon {
-            scale: 0.6;
-          }
+      .expansion-title {
+        width: 100%;
+        border-bottom-color: @border-bottom-color-default;
+        border-bottom-width: @border-bottom-width-default;
+        border-bottom-style: @border-bottom-style-default;
+
+        text-align: left;
+        font-family: @font-family-7wonder;
+        // margin-bottom: .5rem;
+        margin-top: 1rem;
+
+        span {
+          margin-left: 0rem;
         }
       }
+
+      .expansion-title:first-of-type {
+        margin-top: 0rem;
+      }
     }
 
-    .mat-mdc-table-sticky {
-      border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
-      border-top-width: var(--mat-table-row-item-outline-width, 1px);
-      border-top-style: solid;
+    .wonders-list {
+      font-size: small;
+      margin-bottom: .5rem;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      flex-wrap: wrap;
+      align-content: space-between;
+      width: 100%;
+
+      .wonder {
+        border-color: @border-color-default;
+        border-width: @border-width-default;
+        border-style: @border-style-default;
+
+        border-radius: 12px;
+        margin: 0.5rem 0.5rem 0rem 0rem;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        min-width: 3rem;
+        text-align: center;          
+      }
     }
-  }
+
+    ::ng-deep .mat-expansion-panel:first-of-type {
+      margin-top: 1rem !important;
+    }
+
+    ::ng-deep .mat-expansion-panel-body {
+        padding: 0rem 0rem 1rem 0rem !important;
+    }
+
+    ::ng-deep .mat-expanded{
+        border-bottom-right-radius:0;
+        border-bottom-left-radius: 0;
+    }
+  } 
 }
+

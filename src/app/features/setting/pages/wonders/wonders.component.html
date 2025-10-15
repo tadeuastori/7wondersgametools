@@ -1,39 +1,43 @@
 <ng-container *transloco="let t">
   @if (applicationStateIsReady()){
     <div class="settings-configuration-container">
-        <div class="wonder-title">
+        <div class="page-title-wonder">
         <mat-toolbar>
             <span>{{t("pages.settings.wonders.wonder_title")}}</span>
             <span class="title-spacer"></span>            
         </mat-toolbar>
         <mat-divider></mat-divider>
         </div>
-        <div class="players-list">
-            <table
-                mat-table
-                [dataSource]="gameDataSource"
-                class="mat-elevation-z8"
-            >
-                <ng-container matColumnDef="table-game">
-                <td mat-cell *matCellDef="let element">
-                    <p>{{ element.game }}</p>
-                </td>
-                </ng-container>
+        <div class="games-list">
+            <mat-accordion>
+                @for (game of gameList; track $index) {                
+                    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" [expanded]="$index === 0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{game.name}}</mat-panel-title>
+                        </mat-expansion-panel-header>
 
-                <ng-container matColumnDef="table-expansion">
-                <td mat-cell *matCellDef="let element">
-                    <p>{{ element.expansion }}</p>
-                </td>
-                </ng-container>
-
-                <ng-container matColumnDef="table-wonder">
-                <td mat-cell *matCellDef="let element">
-                    <p>{{ element.wonder }}</p>
-                </td>
-                </ng-container>
-
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+                        <div class="game-wonders-list">
+                            <div class="wonders-list">
+                                    @for (wonder of orderWondersList(game.wonders); track $index) {
+                                        <div class="wonder">{{wonder.name}}</div>
+                                    }
+                            </div>
+                        </div>
+                        <div class="expansion-label">Expansions</div>
+                        <div class="expansions-list">
+                            @for (expansion of game.expansions; track $index) {
+                                <div class="expansion-title"><span>{{ expansion.name }}</span></div>
+                                <div class="wonders-list">                                
+                                    @for (wonder of orderWondersList(expansion.wonders); track $index) {
+                                        <div class="wonder">{{wonder.name}}</div>
+                                    }
+                                </div>
+                            }                            
+                        </div> 
+                    </mat-expansion-panel>                                  
+                }
+            </mat-accordion>
+             
         </div>
     </div>
 }
