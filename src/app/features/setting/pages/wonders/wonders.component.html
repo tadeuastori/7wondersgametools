@@ -1,6 +1,5 @@
 <ng-container *transloco="let t">
-  @if (applicationStateIsReady()){
-    <div class="settings-configuration-container">
+<div class="settings-configuration-container">
         <div class="games-list">
             <mat-accordion>
                 @for (game of gameList; track $index) {                
@@ -37,6 +36,5 @@
              
         </div>
     </div>
-}
 </ng-container>
 

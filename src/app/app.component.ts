@@ -9,11 +9,12 @@ import { BaseComponent } from './shared/components/base.component';
 import { ISetting } from './core/models/setting/setting.model';
 import { Observable, takeUntil } from 'rxjs';
 import { LanguageService } from './core/services/language.service';
+import { LoadingPageComponent } from "./shared/components/loading-page/loading-page.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, HeadComponent],
+    imports: [RouterOutlet, HeadComponent, LoadingPageComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.less'
 })
