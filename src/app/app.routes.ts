@@ -12,43 +12,53 @@ export const routes: Routes = [
     loadComponent: () => import('@score-sheet-menu/score-sheet.component')
         .then((c) => c.ScoreSheetComponent),
     title: 'application.routes.score_sheet',
+    children: [
+      {
+        path: ERoutePaths.ScoreSheetMenuArchitects,
+        loadComponent: () => import('@score-sheet-configuration/configuration.component')
+            .then((c) => c.ConfigurationComponent),
+        title: 'application.routes.game_architects',
+        data: { gameType: EGamesEnum.GAME_ARCHITECTS },
+      },
+      {
+        path: ERoutePaths.ScoreSheetMenuGameBase,
+        loadComponent: () => import('@score-sheet-configuration/configuration.component')
+            .then((c) => c.ConfigurationComponent),
+        title: 'application.routes.game_base',
+        data: { gameType: EGamesEnum.GAME_BASE },
+      },
+      {
+        path: ERoutePaths.ScoreSheetMenuDuel,
+        loadComponent: () => import('@score-sheet-configuration/configuration.component')
+            .then((c) => c.ConfigurationComponent),
+        title: 'application.routes.game_duel',
+        data: { gameType: EGamesEnum.GAME_DUEL },
+      },
+    ]
   },
-  {
-    path: ERoutePaths.ScoreSheetMenuGameBase,
-    loadComponent: () => import('@score-sheet-configuration/configuration.component')
-        .then((c) => c.ConfigurationComponent),
-    title: 'application.routes.game_base',
-    data: { gameType: EGamesEnum.GAME_BASE },
-  },
-  {
-    path: ERoutePaths.ScoreSheetMenuDuel,
-    loadComponent: () => import('@score-sheet-configuration/configuration.component')
-        .then((c) => c.ConfigurationComponent),
-    title: 'application.routes.game_duel',
-    data: { gameType: EGamesEnum.GAME_DUEL },
-  },
-  {
-    path: ERoutePaths.ScoreSheetMenuArchitects,
-    loadComponent: () => import('@score-sheet-configuration/configuration.component')
-        .then((c) => c.ConfigurationComponent),
-    title: 'application.routes.game_architects',
-    data: { gameType: EGamesEnum.GAME_ARCHITECTS },
-  },
+
+  // {
+  //   path: ERoutePaths.Settings,
+  //   loadComponent: () => import('@settings/setting.component')
+  //       .then((c) => c.SettingComponent),
+  //   title: 'application.routes.score_sheet',
+  //   children: []
+  // },
   {
     path: ERoutePaths.SettingsPlayers,
-    loadComponent: () => import('@settings/players/players.component')
+    loadComponent: () => import('@settings/pages/players/players.component')
         .then((c) => c.PlayersComponent),
     title: 'application.routes.settings_players',
   },
   {
     path: ERoutePaths.SettingsWonders,
-    loadComponent: () => import('@settings/wonders/wonders.component')
+    loadComponent: () => import('@settings/pages/wonders/wonders.component')
         .then((c) => c.WondersComponent),
     title: 'application.routes.settings_wonders',
   },
   {
     path: ERoutePaths.SettingsApplication,
-    loadComponent: () => import('@settings/application/application.component')
+    loadComponent: () => import('@settings/pages/application/application.component')
         .then((c) => c.ApplicationComponent),
     title: 'application.routes.settings_application',
   }

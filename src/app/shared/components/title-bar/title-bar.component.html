@@ -1,0 +1,16 @@
+<div class="title-bar">        
+    <div class="title">
+        
+        @if(title){
+            <span [class]="displayTextSize()">{{title}}</span>
+        }
+        <span class="title-spacer"></span>
+
+        @if(action != eTitleBarAction.NONE) {
+            <button mat-icon-button (click)="openAddPlayerDialog($event)" class="action-button">
+            <mat-icon>person_add</mat-icon>
+            </button>
+        }
+    </div>    
+    <div class="title-bar-divider"></div>
+</div>

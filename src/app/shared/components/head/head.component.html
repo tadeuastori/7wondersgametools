@@ -14,7 +14,7 @@
         <mat-selection-list>
           @for (group of menuGroupList; track group) {
 
-            <div mat-subheader class="subheader">
+            <div mat-subheader class="menu-group">
               @if(group.label) {
                 {{ t("menu.submenu." + group.label) }}
               } @else {
@@ -28,7 +28,7 @@
               (click)="sidenav.close()"
             >
               <mat-icon matListItemIcon>{{ item.iconName }}</mat-icon>
-              <div matListItemTitle>{{ t("menu.items." + item.label) }}</div>
+              <div matListItemTitle class="menu-item">{{ t("menu.items." + item.label) }}</div>
             </mat-list-item>
             } 
           }
@@ -49,14 +49,22 @@
       >
       <mat-icon>menu</mat-icon>        
       </button>
-      <span>{{ t(appName) }}</span>
+        <span>
+          @for (item of appName; track $index; let first = $first;) {
+            @if(first){
+              {{ t(item) }}
+            } @else{
+              {{ ' > ' + t(item) }}
+            }          
+          }
+        </span>
       <span class="head-spacer"></span>
       @if (!isHome()) {
        <div class="head-undo-icon">        
         <button
         mat-icon-button
         class="head-menu-button"        
-        (click)="undoPage()"
+        (click)="goBack()"
       >
         <mat-icon>reply</mat-icon>       
       </button>

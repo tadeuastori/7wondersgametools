@@ -21,7 +21,7 @@
     .menu-header {
       height: 100px;
       align-content: center;
-      background-color: @navbar-header-bgcolor;
+      background-color: @primary-color;
 
       img {
         width: 70px;
@@ -36,12 +36,16 @@
 
     .menu-content {
       flex-grow: 1;
-      background-color: @navbar-content-bgcolor;
+      background-color: @bg-color-primary;
 
-      .subheader {
+      .menu-group {
         margin: 1rem 16px 0rem 16px;
         font-size: small;
-        color: @navbar-content-font-color;
+        color: @text-color-primary;
+      }
+
+      .menu-item {
+        color: @text-color-primary;
       }
     }
 
@@ -49,16 +53,16 @@
       height: 30px;
       align-content: center;
       text-align: center;
-      background-color: @navbar-footer-bgcolor;
-      color: @navbar-footer-font-color;
+      background-color: @primary-color;
+      color: @text-color-secundary;
     }
   }
 
   .navbar-page-content {
     mat-toolbar {
-      background-color: @header-bgcolor;
+      background-color: @primary-color;
       padding: 0rem;
-      color: @header-font-color;
+      color: @text-color-secundary;
       font-size: medium;
 
       .head-spacer {
@@ -68,16 +72,16 @@
       .head-menu-button {
         margin-right: 5px;
         margin-left: 5px;
-        color: @header-icon-color;
+        color: @text-color-secundary;
       }
 
       span {
-        font-size: medium;
+        font-size: small;
         margin-left: 0.5rem;
       }
 
       .head-undo-icon {
-        margin-right: .5rem;
+        margin-right: 0rem;
       }
     }
   }

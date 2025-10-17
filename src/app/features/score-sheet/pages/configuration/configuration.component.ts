@@ -15,7 +15,7 @@ import { BaseComponent } from '../../pages/base.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { IMatchPlayers, MatchPlayers } from '../../models/match-players.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplicationStateSelectors } from '../../../../core/states/application.queries';
@@ -37,6 +37,8 @@ import { configurationHasWonderValid, configurationIsReady } from '@score-sheet-
 import { PLAYER_ALREADY_EXISTS_MATCH } from 'src/app/core/constants/snackbar-message';
 import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/add-player.component';
 import { TranslocoModule } from '@jsverse/transloco';
+import { TitleBarComponent } from "src/app/shared/components/title-bar/title-bar.component";
+import { ETitleBarAction } from 'src/app/core/enums/title-bar-action.enum';
 
 @Component({
   selector: 'app-configuration',
@@ -48,8 +50,9 @@ import { TranslocoModule } from '@jsverse/transloco';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    TranslocoModule
-  ],
+    TranslocoModule,
+    TitleBarComponent
+],
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,6 +77,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
 
   availableWonderList: Array<{ name: string; icon?: string }> = [];
 
+  eTitleBarAction = ETitleBarAction;
   eGameType = EGamesEnum;
   gameType: EGamesEnum = EGamesEnum.GAME_BASE;
 
@@ -82,6 +86,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = ['table-player', 'table-wonder', 'table-action'];
 
   isStartReady: boolean = false;
+  orderBy: any = 'asc';
 
   constructor(private route: ActivatedRoute) {
     super();
@@ -326,6 +331,16 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     this._validatedConfiguration();
   }
 
+  orderByPlayerName(): void {
+    this.orderBy = this.orderBy === 'name:asc' ? 'name:desc' : 'name:asc';
+
+    this.matchPlayersList = SortUtils.sortByProperties(
+      this.matchPlayersList,
+      [this.orderBy]
+    );
+    this.matchPlayerDataSource.setData(this.matchPlayersList);
+  }
+
   public createAndStartMatch(): void {
     this._store.dispatch(
       new MatchStateActions.CreateAndStartMatch(
@@ -338,21 +353,15 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     );
   }
 
-  public openDialog(event: MouseEvent): void {
-    const el = event.currentTarget as HTMLElement;
-    el.blur();
-    const dialogRef = this.dialog.open(AddPlayerComponent, {
-      data: {
-        wonders: this.availableWonderList,
-        multipleWonders: this.gameType === EGamesEnum.GAME_DUEL,
-        hasWonderSide: this.gameType === EGamesEnum.GAME_BASE,
-      },
-    });
+  public dialogData(): MatDialogConfig<any> {
+    const config = new MatDialogConfig<any>();
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result !== undefined) {
-        this.addPlayer(result);
-      }
-    });
+    config.data = {
+      wonders: this.availableWonderList,
+      multipleWonders: this.gameType === EGamesEnum.GAME_DUEL,
+      hasWonderSide: this.gameType === EGamesEnum.GAME_BASE,
+    };
+
+    return config;
   }
 }

@@ -14,6 +14,7 @@ import { IExpansion } from 'src/app/core/models/game/expansions.model';
 import { IWonder } from 'src/app/core/models/game/wonder.model';
 import { IGameDataSource } from '../../models/game-datasource.model';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { TitleBarComponent } from "src/app/shared/components/title-bar/title-bar.component";
 
 @Component({
   selector: 'app-wonders',
@@ -21,7 +22,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDividerModule,
     MatTableModule,
     MatIconModule,
-    TranslocoModule, MatExpansionModule],
+    TranslocoModule, MatExpansionModule, TitleBarComponent],
   templateUrl: './wonders.component.html',
   styleUrl: './wonders.component.less'
 })

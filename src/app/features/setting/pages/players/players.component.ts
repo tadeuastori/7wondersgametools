@@ -17,6 +17,8 @@ import { ApplicationStateActions } from '../../../../core/states/application.act
 import { PLAYER_ADD, PLAYER_ALREADY_EXISTS } from '../../../../core/constants/snackbar-message';
 import {MatButtonModule} from '@angular/material/button';
 import { CardComponent } from "src/app/shared/controls/card/card.component";
+import { TitleBarComponent } from "src/app/shared/components/title-bar/title-bar.component";
+import { ETitleBarAction } from 'src/app/core/enums/title-bar-action.enum';
 
 @Component({
   selector: 'app-players',
@@ -25,7 +27,7 @@ import { CardComponent } from "src/app/shared/controls/card/card.component";
     MatTableModule,
     MatIconModule,
     TranslocoModule,
-    MatButtonModule, CardComponent],
+    MatButtonModule, CardComponent, TitleBarComponent],
   templateUrl: './players.component.html',
   styleUrl: './players.component.less'
 })
@@ -37,6 +39,7 @@ export class PlayersComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = ['table-player', 'table-action'];
   playerDataSource = new PlayerDataSource();
   playersList: IPlayer[] = [];
+  eTitleBarAction = ETitleBarAction;
 
   constructor() {
     super();

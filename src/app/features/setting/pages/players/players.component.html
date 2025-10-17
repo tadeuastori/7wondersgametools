@@ -2,25 +2,24 @@
   @if (applicationStateIsReady()){
     <div class="settings-configuration-container">
         <div class="player-title">
-        <mat-toolbar>
-            <span>{{t("pages.settings.players.player_title")}}</span>
-            <span class="title-spacer"></span>
-            <button mat-icon-button (click)="openDialog($event)">
-            <mat-icon>person_add</mat-icon>
-            </button>
-        </mat-toolbar>
-        <mat-divider></mat-divider>
+        <app-title-bar 
+            [action]="eTitleBarAction.ADD_PLAYER"
+            (returnAddPlayerDialogEmitted)="addPlayer($event)"
+        ></app-title-bar>
         </div>
         <div class="players-list">
+            
             @if (playersList.length > 0) {
                 @for (player of playersList; track $index) {
-                    <app-card
-                    [textLeft]="player.name"
-                    [hasDelete]="true"
-                    (deleteItemEmitted)="removePlayer($index)"
-                    ></app-card>
+                    <div class="item">
+                        <app-card
+                        [textLeft]="player.name"
+                        [hasDelete]="true"
+                        (deleteItemEmitted)="removePlayer($index)"
+                        ></app-card>
+                    </div>
                 }
-            }            
+            }          
         </div>
     </div>
 }

@@ -12,10 +12,12 @@ import { Observable, takeUntil } from 'rxjs';
 import { ISetting } from 'src/app/core/models/setting/setting.model';
 import { ApplicationStateSelectors } from 'src/app/core/states/application.queries';
 import { ApplicationStateActions } from 'src/app/core/states/application.actions';
+import { TitleBarComponent } from "src/app/shared/components/title-bar/title-bar.component";
+import { ETitleBarAction } from 'src/app/core/enums/title-bar-action.enum';
 
 @Component({
   selector: 'app-application',
-  imports: [MatIconModule, MatSelectModule, MatCardModule, TranslocoModule, ReactiveFormsModule ],
+  imports: [MatIconModule, MatSelectModule, MatCardModule, TranslocoModule, ReactiveFormsModule, TitleBarComponent],
   templateUrl: './application.component.html',
   styleUrl: './application.component.less'
 })
@@ -24,6 +26,8 @@ export class ApplicationComponent extends BaseComponent implements OnInit {
   applicationSettings$: Observable<ISetting>;
   settingsForm: FormGroup = new FormGroup({});
   languageList: ILanguage[] = [];
+
+  eTitleBarAction = ETitleBarAction;
 
   constructor(private _languageService: LanguageService) {
     super();

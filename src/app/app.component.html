@@ -3,4 +3,99 @@
     <router-outlet />
     <!-- {{ applicationStateIsReady() }} -->  
   </app-head>
+    @if(false){
+      <br><br><br>
+      <!DOCTYPE html>
+      <html lang="pt">
+      <head>
+        <meta charset="UTF-8">
+        <title>Paleta de Cores</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+          }
+          .color-palette {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+          }
+          .color-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+          .color-box {
+            width: 60px;
+            height: 25px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            flex-shrink: 0;
+          }
+          .label {
+            font-weight: bold;
+            width: 150px;
+          }
+          .hex {
+            font-family: monospace;
+          }
+        </style>
+      </head>
+      <body>
+
+      <h2>Paleta de Cores</h2>
+
+      <div class="color-palette">
+        <div class="color-item">
+          <div class="color-box" style="background:#4A6741;"></div>
+          <div class="label">Primária</div>
+          <div class="hex">#4A6741</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#C9A14B;"></div>
+          <div class="label">Secundária</div>
+          <div class="hex">#C9A14B</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#506D84;"></div>
+          <div class="label">Acento</div>
+          <div class="hex">#506D84</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#F7F7F7;"></div>
+          <div class="label">Fundo (claro)</div>
+          <div class="hex">#F7F7F7</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#1E1E1E;"></div>
+          <div class="label">Fundo (escuro)</div>
+          <div class="hex">#1E1E1E</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#1A1A1A;"></div>
+          <div class="label">Texto claro</div>
+          <div class="hex">#1A1A1A</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#FFFFFF;"></div>
+          <div class="label">Texto escuro</div>
+          <div class="hex">#FFFFFF</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#D32F2F;"></div>
+          <div class="label">Erro / Atenção</div>
+          <div class="hex">#D32F2F</div>
+        </div>
+        <div class="color-item">
+          <div class="color-box" style="background:#4CAF50;"></div>
+          <div class="label">Sucesso</div>
+          <div class="hex">#4CAF50</div>
+        </div>
+      </div>
+
+      </body>
+      </html>
+    }
 </div>

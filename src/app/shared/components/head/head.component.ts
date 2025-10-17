@@ -13,8 +13,9 @@ import {
   RouterModule,
 } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { TranslocoDirective, TranslocoModule } from "@jsverse/transloco";
+import { TranslocoModule } from "@jsverse/transloco";
 import { BaseComponent } from '../base.component';
+import { ERoutePaths } from 'src/app/core/enums/route-paths.enum';
 
 @Component({
   selector: 'app-head',
@@ -31,9 +32,10 @@ import { BaseComponent } from '../base.component';
   styleUrl: './head.component.less',
 })
 export class HeadComponent extends BaseComponent implements OnInit {
-  appName: string = 'application.app_name';
+  appName: string[] = [];
   mode: MatDrawerMode = 'over';
   appVersion: string = environment.appVersion;
+  eRouter = ERoutePaths;
 
   menuGroupList: Array<any>;
 
@@ -66,19 +68,42 @@ export class HeadComponent extends BaseComponent implements OnInit {
             }
           }
 
-          return titles.join(' > ');
+          return titles;
         })
       )
-      .subscribe((title: string) => {
-        this.appName = title || 'application.app_name';
+      .subscribe((title: string[]) => {
+        this.appName = title.length > 0 ? title : ['application.app_name'];
       });
-  }
-
-  undoPage() {
-    window.history.back();
   }
 
   public isHome(): boolean {
     return this.router.url === '/';
+  }
+
+  goBack() {
+    const currentUrl = this.router.url;
+
+    const redirectToHome: string[] = [ERoutePaths.SettingsPlayers, ERoutePaths.SettingsWonders, ERoutePaths.SettingsApplication];
+
+    const matchToHome = redirectToHome.find((path) => currentUrl.includes(path));
+    if (matchToHome) {
+      this.router.navigateByUrl('/');
+      return;
+    }
+
+    const parentUrl = this.getParentUrl();
+    this.router.navigateByUrl(parentUrl);
+  }
+
+  private getParentUrl(): string {
+    const tree = this.router.parseUrl(this.router.url);
+    const segments = tree.root.children['primary']?.segments ?? [];
+
+    if (segments.length > 1) {
+      segments.pop();
+    }
+
+    const parentUrl = '/' + segments.map((s) => s.path).join('/');
+    return parentUrl || '/';
   }
 }

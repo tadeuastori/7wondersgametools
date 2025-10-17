@@ -4,6 +4,7 @@
   position: relative;
   min-height: 100vh;
   z-index: 0;
+  background-color: @bg-color-primary;
 }
 
 .app-container::before {
@@ -16,7 +17,7 @@
 
   background: url(@background-watermark-image) no-repeat center center;
   background-size: 200px 200px; /* ajuste do tamanho da imagem */
-  opacity: 0.1;        
+  opacity: 0.4;        
 
   z-index: -1;         /* garante que fique atrás do conteúdo */
   pointer-events: none; /* impede que a marca d’água bloqueie cliques */
