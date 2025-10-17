@@ -8,13 +8,12 @@ import { Injectable } from '@angular/core';
 import { ApplicationStateActions } from './application.actions';
 import { ApplicationDataService } from '../services/application-data.service';
 import { PlayerService } from '../services/player.service';
-import { catchError, combineLatest, combineLatestAll, first, map, of, switchMap, tap } from 'rxjs';
+import { combineLatest, delay, first, map, of, switchMap, tap } from 'rxjs';
 import { BaseState } from './base/base.state';
-import { ISetting, Setting } from '../models/setting/setting.model';
+import { ISetting} from '../models/setting/setting.model';
 import { ApplicationSettingsService } from '../services/application-settings.service';
 import { SettingRequest } from '../models/setting/setting-request.model';
 import { IPlayer } from '../models/player/player.model';
-import { error } from 'console';
 
 @State<IApplicationStateModel>({
   name: AppStoreKeys.ApplicationState,
@@ -66,12 +65,14 @@ export class ApplicationState extends BaseState {
       }),
       tap({
         next: ([players, Setting]: [IPlayer[], ISetting]) => {
-          ctx.patchState({
-            isStateReady: true,
+          ctx.patchState({        
             settings: Setting,
             games: currentGames,
             players: players,
-          })},
+          });
+        
+          this._endPathState(ctx);
+        },
           error: (error) => {
             this._errorSnakBar('[initializeApplicationState]' + error);
             this._endPathState(ctx);
@@ -97,8 +98,7 @@ export class ApplicationState extends BaseState {
       first(),
       tap({
         next: (snewSetting) => {
-          ctx.setState({
-            isStateReady: true,
+          ctx.patchState({
             settings: snewSetting,
             players: ctx.getState().players,
             games: ctx.getState().games,

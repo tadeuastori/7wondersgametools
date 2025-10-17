@@ -1,7 +1,10 @@
 <div class="app-container">
   <app-head> 
-    <router-outlet />
-    <!-- {{ applicationStateIsReady() }} -->  
+    @if (applicationStateIsReady()){
+      <router-outlet />
+    } @else {
+      <app-loading-page></app-loading-page>
+    }
   </app-head>
     @if(false){
       <br><br><br>
