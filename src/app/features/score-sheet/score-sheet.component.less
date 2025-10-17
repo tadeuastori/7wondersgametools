@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
   gap: 4rem;
   padding-top: 4rem;
 
@@ -14,8 +13,13 @@
     height: 5rem;
     font-size: large;
     font-weight: bold;
-    background-color: @game-sheet-button-bgcolor;
-    font-family: gameFont;
-    color: @game-sheet-button-font-color;
+    background-color: @bg-color-btn-white;
+    font-family: @font-family-7wonder;
+    color: @text-color-btn-temp;
+    letter-spacing: @letter-spacing-default;
+
+    // box-shadow:         0px 0px 18px 7px rgba(255, 213, 0,0.61) inset;
+    // -webkit-box-shadow: 0px 0px 25px 0px rgba(255, 213, 0,0.61) inset;
+    // -moz-box-shadow:    0px 0px 18px 7px rgba(255, 213, 0,0.61) inset;
   }
 }

@@ -1,13 +1,6 @@
 <ng-container *transloco="let t">
   @if (applicationStateIsReady()){
     <div class="settings-configuration-container">
-        <div class="page-title-wonder">
-        <mat-toolbar>
-            <span>{{t("pages.settings.wonders.wonder_title")}}</span>
-            <span class="title-spacer"></span>            
-        </mat-toolbar>
-        <mat-divider></mat-divider>
-        </div>
         <div class="games-list">
             <mat-accordion>
                 @for (game of gameList; track $index) {                
@@ -26,7 +19,11 @@
                         <div class="expansion-label">Expansions</div>
                         <div class="expansions-list">
                             @for (expansion of game.expansions; track $index) {
-                                <div class="expansion-title"><span>{{ expansion.name }}</span></div>
+                                <div class="expansion-title">
+                                    <app-title-bar                                         
+                                        [title]="expansion.name"
+                                    ></app-title-bar>
+                                </div>
                                 <div class="wonders-list">                                
                                     @for (wonder of orderWondersList(expansion.wonders); track $index) {
                                         <div class="wonder">{{wonder.name}}</div>

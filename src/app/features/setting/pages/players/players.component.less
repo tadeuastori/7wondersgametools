@@ -1,17 +1,17 @@
 @import url(../../../../../../public/styles/variables.less);
 
 .settings-configuration-container {
-  padding: 0.5rem;
+  padding: @padding-page-default;
+  background-color: @bg-color-primary;
 
     .player-title {
-    padding: @score-sheet-config-space-content;
     padding-bottom: 0%;
 
     .mat-toolbar-single-row {
       font-size: large;
       padding: 0rem;
       height: 2rem;
-      font-family: gameFont;
+      font-family: @font-family-7wonder;
     }
 
     .title-spacer {
@@ -19,14 +19,9 @@
     }    
   }
 
-    .players-list {
-    padding: @score-sheet-config-space-content;
-    padding-top: 0rem;
-
-    .mat-mdc-table-sticky {
-      border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
-      border-top-width: var(--mat-table-row-item-outline-width, 1px);
-      border-top-style: solid;
+  .players-list {
+    .item {
+      margin-top: .5rem;
     }
   }
 }

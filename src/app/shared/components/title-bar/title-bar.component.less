@@ -1,0 +1,44 @@
+@import "../../../../../public/styles/variables.less";
+
+.title-bar {
+    padding-bottom: 0%;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-family: @font-family-7wonder;
+        height: 40px;
+
+        .title-text-default {
+            font-size: medium;
+        }
+
+        .title-text-small {
+            font-size: small;
+        }
+
+        .title-text-large {
+            font-size: large;
+        }
+
+        .title-spacer {
+            flex: 1 1 auto;
+        } 
+
+        .action-button {
+            margin-right: .45rem;
+        }
+
+
+    }
+
+    .title-bar-divider {
+        border-bottom-color: @primary-color;
+        border-bottom-width: @border-bottom-width-default;
+        border-bottom-style: @border-bottom-style-default;
+    }
+    
+}

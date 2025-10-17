@@ -1,43 +1,37 @@
 @import url(../../../../../../public/styles/variables.less);
 
 .score-sheet-configuration-container {
-  padding: 0.5rem;
+  padding: @padding-page-default;
+  background-color: @bg-color-primary;
 
-  .game-version {
-    .mat-toolbar-single-row {
-      font-size: medium;
-      padding: 0rem;
-      height: 2rem;
-      font-family: gameFont;
-    }
-
-    .example-spacer {
-      flex: 1 1 auto;
-    }
+  .expansion-title {
+    
   }
 
   .expasions-list {
     margin: 0.5rem 0rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     height: 100%;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem .65rem;
     padding: @score-sheet-config-space-content;
 
     .button-toggle {
-      width: 40%;
-      background-color: @score-sheet-config-expansion-button-bgcolor-unselected;
-      font-family: gameFont;
+      width: 48%;
+      background-color: @bg-color-toggle-off;
+      font-family: @font-family-7wonder;
       border-radius: 0%;
-      color: @score-sheet-config-expansion-button-font-color-unselected;
+      color: @text-color-toggle-off;
+      border-color: @bg-color-btn-dark;
+      letter-spacing: @letter-spacing-default;
     }
 
     .mat-button-toggle-checked {
-      color: @score-sheet-config-expansion-button-font-color-selected;
-      background-color: @score-sheet-config-expansion-button-bgcolor-selected;
+      color: @text-color-toggle-on;
+      background-color: @bg-color-toggle-on;
     }
   }
 
@@ -49,7 +43,7 @@
       font-size: medium;
       padding: 0rem;
       height: 2rem;
-      font-family: gameFont;
+      font-family: @font-family-7wonder;
     }
 
     .example-spacer {
@@ -64,7 +58,7 @@
       gap: 1rem;
 
       button {
-        font-family: gameFont;
+        font-family: @font-family-7wonder;
         height: 2.5rem;
         border-radius: 0;
         font-size: small;
@@ -86,9 +80,22 @@
     padding-top: 0rem;
 
     table {
+
+      ::ng-deep .mat-mdc-header-row {
+        height: 1rem !important;
+        background-color: @bg-color-btn-dark !important; 
+        color: @text-color-btn-gold !important; 
+      }
+
+      ::ng-deep .mat-mdc-footer-row {        
+        height: 2.5rem !important;
+        color: @text-color-btn-gold !important; 
+      }
+
       th {
-        font-family: gameFont;
+        font-family: @font-family-7wonder;
         font-size: small;
+        height: 1rem;
       }
 
       td {
@@ -133,24 +140,27 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        gap: 0.3rem;
+        gap: 0.3rem;     
 
       button {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        flex-wrap: nowrap;
-        width: 10rem;
-        // border-radius: 2rem;
+        flex-wrap: nowrap;        
         background-color: transparent;
         scale: 0.8;
         border: none;
         box-shadow: none;
         color: @base-bgcolor-black;
+        height: 2rem;
+        width: 10rem;
+
+        border-left: 1px solid @base-bgcolor-black;
+        border-right: 1px solid @base-bgcolor-black;
 
         .mat-icon {
-          height: 19.5px;
+          // height: 19.5px;
           margin: 0;
           padding: 0;
         }
@@ -169,13 +179,12 @@
     button {
       width: 100%;
       height: 100%;
-      background-color: @score-sheet-config-start-button-bgcolor-enabled; /* Cor de fundo do botão */
-      color: @score-sheet-config-start-button-font-color-enabled;
+      background-color: @bg-color-btn-dark; 
+      color: @text-color-btn-gold;
       border: none;
       padding: 15px 0;
       font-size: 18px;
       cursor: pointer;
-
       border-radius: 20px 20px 0px 0px;
     }
 

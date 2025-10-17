@@ -1,12 +1,11 @@
 <ng-container *transloco="let t">
   @if (applicationStateIsReady()){
   <div class="score-sheet-configuration-container">
-    <div class="game-version">
-      <mat-toolbar>
-        <span>{{t("pages.score_sheet.configuration.expansions")}}</span>
-        <span class="example-spacer"></span>
-      </mat-toolbar>
-      <mat-divider></mat-divider>
+    <div class="expansion-title">
+      <app-title-bar
+        [title]="t('pages.score_sheet.configuration.expansions')"
+        [action]="eTitleBarAction.NONE"
+      ></app-title-bar>
     </div>
     <div class="expasions-list">
       @for (item of originalExpansionList; track $index; let i = $index) {
@@ -23,18 +22,12 @@
       }
     </div>
     <div class="player-type">
-      <mat-toolbar>
-        <span>{{t("pages.score_sheet.configuration.players")}}</span>
-        <span class="example-spacer"></span>
-
-        @if ((gameType === eGameType.GAME_DUEL && matchPlayersList.length < 2) ||
-        (gameType != eGameType.GAME_DUEL && matchPlayersList.length < 7)) {
-        <button mat-icon-button class="example-icon" (click)="openDialog($event)">
-          <mat-icon>person_add</mat-icon>
-        </button>
-        }
-      </mat-toolbar>
-      <mat-divider></mat-divider>
+      <app-title-bar
+        [title]="t('pages.score_sheet.configuration.players')"
+        [action]="((gameType === eGameType.GAME_DUEL && matchPlayersList.length < 2) || (gameType != eGameType.GAME_DUEL && matchPlayersList.length < 7)) ? eTitleBarAction.ADD_PLAYER : eTitleBarAction.NONE"
+        [matDialogConfig]="dialogData()"
+        (returnAddPlayerDialogEmitted)="addPlayer($event)"
+      ></app-title-bar>
     </div>
     <div class="players-list">
       <table
@@ -79,14 +72,18 @@
         
         <ng-container matColumnDef="disclaimer">
             <td mat-footer-cell *matFooterCellDef colspan="3">          
-              <div class="table-footer">
-                @if (matchPlayersList.length > 0) {
-                  <button mat-fab class="table_buttons" (click)="generateWonders()">
-                    <mat-icon>shuffle</mat-icon>
-                    <mat-icon>temple_hindu</mat-icon>
-                  </button>  
-                }
-              </div>                        
+              @if (matchPlayersList.length > 0) {
+                <div class="table-footer">
+                    <button mat-fab class="table_buttons" (click)="orderByPlayerName()">
+                      <mat-icon>sort_by_alpha</mat-icon>
+                      <mat-icon>person</mat-icon>
+                    </button>                    
+                    <button mat-fab class="table_buttons" (click)="generateWonders()">
+                      <mat-icon>shuffle</mat-icon>
+                      <mat-icon>temple_hindu</mat-icon>
+                    </button>  
+                </div>
+              }
             </td>        
         </ng-container>
 

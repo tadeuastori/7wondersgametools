@@ -1,11 +1,17 @@
-<ng-container *transloco="let t">
-<div class="score-sheet-container">
-  @for (item of gameList; track $index) {
-  <button mat-fab extended [routerLink]="item.routerLink">
-    <!-- <mat-icon>favorite</mat-icon> -->
-    {{ t(item.label) }}
-  </button>
-  }
-</div>
-</ng-container>
+@if(!hasChildRoute()) {
+  <ng-container *transloco="let t">
+    <div class="score-sheet-container">
+      @for (item of gameList; track $index) {
+      <button mat-fab extended [routerLink]="item.routerLink">
+        <!-- <mat-icon>favorite</mat-icon> -->
+        {{ t(item.label) }}
+      </button>
+      }
+    </div>
+  </ng-container>
+} @else {
+  <router-outlet></router-outlet>
+}
+
+
 
