@@ -39,6 +39,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "docs/prod",
               "budgets": [
                 {
                   "type": "initial",
@@ -47,13 +48,40 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
+                  "maximumWarning": "3kB",
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "alfatest": {
+              "outputPath": "docs/alfatest",
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.alfatest.ts"
+                }
+              ]
+            },
+            "betatest": {
+              "outputPath": "docs/betatest",
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betatest.ts"
+                }
+              ]
             },
             "development": {
+              "outputPath": "docs/dev",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
@@ -66,6 +94,12 @@
           "configurations": {
             "production": {
               "buildTarget": "7wondersgametools:build:production"
+            },
+            "alfatest": {
+              "buildTarget": "7wondersgametools:build:alfatest"
+            },
+            "betatest": {
+              "buildTarget": "7wondersgametools:build:betatest"
             },
             "development": {
               "buildTarget": "7wondersgametools:build:development"
