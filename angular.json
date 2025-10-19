@@ -39,7 +39,7 @@
           },
           "configurations": {
             "production": {
-              "outputPath": "docs/prod",
+              "outputPath": "docs/",
               "budgets": [
                 {
                   "type": "initial",
@@ -52,6 +52,7 @@
                   "maximumError": "4kB"
                 }
               ],
+              "baseHref": "/",
               "outputHashing": "all",
               "fileReplacements": [
                 {
@@ -62,6 +63,7 @@
             },
             "alfatest": {
               "outputPath": "docs/alfatest",
+              "baseHref": "/alfatest/",
               "outputHashing": "all",
               "fileReplacements": [
                 {
@@ -72,6 +74,7 @@
             },
             "betatest": {
               "outputPath": "docs/betatest",
+              "baseHref": "/betatest/",
               "outputHashing": "all",
               "fileReplacements": [
                 {
