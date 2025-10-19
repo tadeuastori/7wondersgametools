@@ -1,12 +1,29 @@
 {
   "name": "7wondersgametools",
   "version": "0.0.0",
+  "license": "MIT",
+  "alfaTestVersion":"0.0.0",
+  "betaTestVersion":"0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    
+    "prebuildAlfatest": "node scripts/pre-build-alfatest.js && ng build --configuration alfatest --output-path docs --base-href /7wondersgametools/",
+    "prebuildBetatest": "node scripts/pre-build-betatest.js && ng build --configuration betatest --output-path docs --base-href /7wondersgametools/",
+    "prebuildProd": "npm version patch && ng build --configuration production --output-path docs --base-href /7wondersgametools/",
+
+    "postbuild": "node scripts/post-build.js",
+
+    "deployAlfatest": "npm run prebuildAlfatest && ng build && npm run postbuild",
+    "deployBetatest": "npm run prebuildBetatest && ng build && npm run postbuild",
+    "deployProd": "npm run prebuildProd && ng build && npm run postbuild",
+
+    "deployAll": "npm run deployAlfatest && npm run deployBetatest && npm run deployProd"
   },
   "private": true,
   "dependencies": {
