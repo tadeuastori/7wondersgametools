@@ -1,4 +1,4 @@
 export const environment = {
-  appVersion: require('../../package.json').testVersion + '-AlfaTest',
+  appVersion: require('../../package.json').alfaTestVersion + '-AlfaTest',
   production: false,
 };
