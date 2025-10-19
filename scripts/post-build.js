@@ -22,8 +22,8 @@ async function moveBuildFiles(env) {
     try {
       await fs.copy(browserPath, targetPath);
       await fs.remove(browserPath);
-      await fs.remove("prerendered-routes.json");
-      await fs.remove("3rdpartylicenses.txt");
+      await fs.remove(path.join(targetPath, "prerendered-routes.json"));
+      await fs.remove(path.join(targetPath, "3rdpartylicenses.txt"));
       console.log(`✅ Build movido para ${targetPath}`);
     } catch (err) {
       console.error(`❌ Erro ao mover arquivos de ${env}:`, err);
