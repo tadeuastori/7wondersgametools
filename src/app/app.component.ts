@@ -40,20 +40,20 @@ export class AppComponent extends BaseComponent implements OnInit {
 
     this.applicationSettings$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (settings) => {
-        // if(settings.userLanguage != 'OS') {
-        //   this._translocoService.setActiveLang(settings.userLanguage);
-        // } else {
-        //       const deviceLanguage: string = navigator.language;
-        //       var languageList = this._languageService.getLanguageList();
+        if(settings.userLanguage != 'OS') {
+          this._translocoService.setActiveLang(settings.userLanguage);
+        } else {
+              const deviceLanguage: string = navigator.language;
+              var languageList = this._languageService.getLanguageList();
 
-        //       if (languageList.some((l) => l.code == deviceLanguage.toLowerCase())){
-        //           this._translocoService.setActiveLang(deviceLanguage.toLowerCase());
-        //       } else {
-        //           this._translocoService.setActiveLang('en');
-        //       }
-        // }
+              if (languageList.some((l) => l.code == deviceLanguage.toLowerCase())){
+                  this._translocoService.setActiveLang(deviceLanguage.toLowerCase());
+              } else {
+                  this._translocoService.setActiveLang('en-ca');
+              }
+        }
 
-        this._translocoService.setActiveLang('en');
+        this._translocoService.setActiveLang('en-ca');
 
         console.log(this._translocoService.getActiveLang());
       },

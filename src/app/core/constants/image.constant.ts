@@ -1,0 +1,1 @@
+export const MENU_HEADER = "assets/images/menu_header.png";

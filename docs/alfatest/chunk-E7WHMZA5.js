@@ -1,1 +1,0 @@
-import{aa as e}from"./chunk-AUS7JZSB.js";var a=(()=>{class t{constructor(){}languageList=[{code:"en",name:"English",icon:"en"},{code:"pt-br",name:"Portugues Brasil",icon:"pt-br"}];getLanguageList(){return this.languageList}static \u0275fac=function(n){return new(n||t)};static \u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}return t})();export{a};
