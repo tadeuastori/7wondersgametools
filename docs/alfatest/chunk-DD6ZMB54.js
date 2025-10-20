@@ -1,0 +1,1 @@
+import{aa as e}from"./chunk-QLFZEIEK.js";var o=(()=>{class t{constructor(){}languageList=[{code:"en-ca",language:"English",icon:"en-ca"}];getLanguageList(){return this.languageList}static \u0275fac=function(a){return new(a||t)};static \u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}return t})();export{o as a};
