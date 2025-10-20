@@ -2,7 +2,7 @@
   "name": "7wondersgametools",
   "version": "0.0.0",
   "license": "MIT",
-  "alfaTestVersion": "0.0.11",
+  "alfaTestVersion": "0.0.12",
   "betaTestVersion": "0.0.0",
   "scripts": {
     "ng": "ng",
