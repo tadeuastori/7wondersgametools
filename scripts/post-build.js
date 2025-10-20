@@ -41,10 +41,10 @@ async function moveBuildFiles(env) {
   }
 
   // Remove dist (se existir)
-  // if (await fs.pathExists("dist")) {
-  //   console.log("🧹 Removendo pasta dist...");
-  //   await fs.remove("dist");
-  // }
+  if (await fs.pathExists("dist")) {
+    console.log("🧹 Removendo pasta dist...");
+    await fs.remove("dist");
+  }
 
   console.log("🎉 Pós-build finalizado!");
 })();
