@@ -24,7 +24,7 @@
                                     } @else {
                                         @for (lang of languageList; track lang) {
                                             @if (lang.code === code) {
-                                                <mat-icon [svgIcon]="lang.icon"></mat-icon> {{ lang.name }}
+                                                <mat-icon [svgIcon]="lang.icon"></mat-icon> {{ lang.language }}
                                             }
                                         }
                                     }
@@ -37,7 +37,7 @@
                                 @for (language of languageList; track language) {
                                     <mat-option [value]="language.code">
                                     <mat-icon [svgIcon]="language.icon"></mat-icon>
-                                    {{ language.name }}
+                                    {{ language.language }}
                                     </mat-option>
                                 }
                             </mat-select>

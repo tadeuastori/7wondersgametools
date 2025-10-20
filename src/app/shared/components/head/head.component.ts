@@ -16,6 +16,7 @@ import { filter, map } from 'rxjs';
 import { TranslocoModule } from "@jsverse/transloco";
 import { BaseComponent } from '../base.component';
 import { ERoutePaths } from 'src/app/core/enums/route-paths.enum';
+import { MENU_HEADER } from 'src/app/core/constants/image.constant';
 
 @Component({
   selector: 'app-head',
@@ -36,6 +37,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
   mode: MatDrawerMode = 'over';
   appVersion: string = environment.appVersion;
   eRouter = ERoutePaths;
+  header_image = MENU_HEADER;
 
   menuGroupList: Array<any>;
 
@@ -83,7 +85,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
   goBack() {
     const currentUrl = this.router.url;
 
-    const redirectToHome: string[] = [ERoutePaths.SettingsPlayers, ERoutePaths.SettingsWonders, ERoutePaths.SettingsApplication];
+    const redirectToHome: string[] = [ERoutePaths.SettingsPlayers, ERoutePaths.SettingsWonders, ERoutePaths.SettingsApplication, ERoutePaths.ScoreSheetMenu];
 
     const matchToHome = redirectToHome.find((path) => currentUrl.includes(path));
     if (matchToHome) {

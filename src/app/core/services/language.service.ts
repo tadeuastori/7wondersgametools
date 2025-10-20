@@ -9,8 +9,8 @@ export class LanguageService {
   constructor() { }
 
   private languageList: ILanguage[] = [
-    { code: 'en', name: 'English', icon: 'en' },
-    { code: 'pt-br', name: 'Portugues Brasil', icon: 'pt-br' },
+    { code: 'en-ca', language: 'English', icon: 'en-ca' },
+    // { code: 'pt-br', name: 'Portugues Brasil', icon: '/assets/images/flags/br-flag.svg' },
   ];
 
   public getLanguageList(): ILanguage[] {
