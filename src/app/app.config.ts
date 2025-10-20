@@ -4,7 +4,7 @@ import {
   provideAppInitializer,
   inject,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideIndexedDb } from './database/database.config';
@@ -22,7 +22,7 @@ export function initializeIcons(iconLoader: IconsLoaderService): () => void {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideStore([ApplicationState]),
     provideIndexedDb(), 
     provideHttpClient(), 
