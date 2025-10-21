@@ -1,32 +1,22 @@
-import { EStages } from '../../enums/stages.enum';
+import { IPlayer, Player } from '../player/player.model';
+import { IMatchPlayersStages } from './match-players-stages.model';
 
 export interface IMatchPlayer {
-  name: string;
+  name: IPlayer;
   wonder: string[];
   group: number;
-  stages: Array<{
-    stage: EStages;
-    score: number;
-    order: number;
-    color: string;
-  }>;
+  stages: IMatchPlayersStages[];
 
-  totalStagesScore(): number;
-  stageScore(stage: EStages): number;
+  totalPlayerScores(): number;
 }
 
 export class MatchPlayer implements IMatchPlayer {
-  name: string;
+  name: IPlayer;
   wonder: string[];
   group: number;
-  stages: Array<{
-    stage: EStages;
-    score: number;
-    order: number;
-    color: string;
-  }>;
+  stages: IMatchPlayersStages[];
 
-  public totalStagesScore(): number {
+  public totalPlayerScores(): number {
     return this.stages.length == 0
       ? 0
       : this.stages
@@ -34,12 +24,8 @@ export class MatchPlayer implements IMatchPlayer {
           .reduce((total, item) => total + item, 0);
   }
 
-  public stageScore(stage: EStages): number {
-    return 0;
-  }
-
   constructor(clone?: IMatchPlayer) {
-    this.name = '';
+    this.name = new Player();
     this.wonder = [];
     this.group = 0;
     this.stages = [];
