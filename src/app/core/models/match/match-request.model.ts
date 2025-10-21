@@ -1,7 +1,7 @@
 import { EGamesEnum } from '../../enums/games.enum';
 import { IMatchPlayer } from './match-players.model';
 
-export interface IMatch {
+export interface IMatchRequest {
   id?: number;
   matchDate: Date;
   gameType: EGamesEnum;
@@ -9,14 +9,14 @@ export interface IMatch {
   players: IMatchPlayer[];
 }
 
-export class Match implements IMatch {
+export class Match implements IMatchRequest {
   id?: number;
   matchDate: Date;
   gameType: EGamesEnum;
   expansions?: string[];
   players: IMatchPlayer[];
 
-  constructor(clone?: IMatch) {
+  constructor(clone?: IMatchRequest) {
     this.matchDate = new Date();
     this.gameType = EGamesEnum.GAME_BASE;
     this.expansions = [];
