@@ -35,7 +35,6 @@ import { EWonderSide } from '../../../../core/enums/wonder-side.enum';
 import { MatchStateActions } from '../../../../core/states/match.action';
 import { configurationHasWonderValid, configurationIsReady } from '@score-sheet-menu/score-sheet.validation';
 import { PLAYER_ALREADY_EXISTS_MATCH } from 'src/app/core/constants/snackbar-message';
-import { AddPlayerComponent } from 'src/app/shared/components/dialog/add-player/add-player.component';
 import { TranslocoModule } from '@jsverse/transloco';
 import { TitleBarComponent } from "src/app/shared/components/title-bar/title-bar.component";
 import { ETitleBarAction } from 'src/app/core/enums/title-bar-action.enum';
