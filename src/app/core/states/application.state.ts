@@ -29,18 +29,6 @@ export class ApplicationState extends BaseState {
     super();
   }
 
-  private _startPathState(ctx: StateContext<IApplicationStateModel>) {
-    ctx.patchState({
-      isStateReady: false,
-    });
-  }
-
-  private _endPathState(ctx: StateContext<IApplicationStateModel>) {
-    ctx.patchState({
-      isStateReady: true,
-    });
-  }
-
  @Action(ApplicationStateActions.InitializeApplicationState)
   initializeApplicationState(ctx: StateContext<IApplicationStateModel>) {
     this._startPathState(ctx);
@@ -71,10 +59,11 @@ export class ApplicationState extends BaseState {
             players: players,
           });
         
+          this._successSnakBar('Application State Initialized');
           this._endPathState(ctx);
         },
-          error: (error) => {
-            this._errorSnakBar('[initializeApplicationState]' + error);
+          error: (error) => {            
+            this._errorSnakBar('[' + this.initializeApplicationState.name + ']' + error);
             this._endPathState(ctx);
           },
       })
@@ -108,8 +97,7 @@ export class ApplicationState extends BaseState {
           this._endPathState(ctx);
         },
         error: (err) => {
-          console.error('[saveApplicationSettings] - ', err);
-          this._errorSnakBar('[saveApplicationSettings]');
+          this._errorSnakBar('[' + this.saveApplicationSettings.name + ']' + err);
           this._endPathState(ctx);
         },
       })
@@ -145,8 +133,7 @@ export class ApplicationState extends BaseState {
           this._endPathState(ctx);
         },
         error: (err) => {
-          console.error('[addPlayerApplicationState] - ', err);
-          this._errorSnakBar('[addPlayerApplicationState]');
+          this._errorSnakBar('[' + this.addPlayerApplicationState.name + ']' + err);
           this._endPathState(ctx);
         },
       })
@@ -181,7 +168,7 @@ export class ApplicationState extends BaseState {
           this._endPathState(ctx);
         },
         error: (err) => {
-          this._errorSnakBar('[deletePlayerApplicationState]' + err);
+          this._errorSnakBar('[' + this.deletePlayerApplicationState.name + ']' +  err);
           this._endPathState(ctx);
         },
       })
