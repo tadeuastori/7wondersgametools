@@ -1,4 +1,5 @@
 import { EGamesEnum } from '../../enums/games.enum';
+import { IMatchPlayersStages } from './match-players-stages.model';
 import { IMatchPlayer } from './match-players.model';
 
 export interface IMatchRequest {

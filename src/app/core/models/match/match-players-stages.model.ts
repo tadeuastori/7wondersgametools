@@ -6,6 +6,7 @@ export interface IMatchPlayersStages {
     scoreCompass: number;
     scoreGear: number;
     scoreTable: number;
+    activated: boolean;
 
     setScientificStagesScore(compass: number, gear: number, table: number): void;
 }
@@ -16,6 +17,7 @@ export class MatchPlayersStages implements IMatchPlayersStages {
     scoreCompass: number;
     scoreGear: number;
     scoreTable: number;
+    activated: boolean;
 
     setScientificStagesScore(compass: number, gear: number, table: number): void {        
         this.scoreCompass = compass;
@@ -31,6 +33,7 @@ export class MatchPlayersStages implements IMatchPlayersStages {
         this.scoreCompass = 0;
         this.scoreGear = 0;
         this.scoreTable = 0;
+        this.activated = false;
 
         if (clone) {
             this.stage = clone.stage;
@@ -38,6 +41,7 @@ export class MatchPlayersStages implements IMatchPlayersStages {
             this.scoreCompass = clone.scoreCompass;
             this.scoreGear = clone.scoreGear;
             this.scoreTable = clone.scoreTable;
+            this.activated = clone.activated;
         }
     }
 }

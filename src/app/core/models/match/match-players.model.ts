@@ -1,6 +1,11 @@
+import { stagesList } from '../../constants/stages.constante';
+import { EStages } from '../../enums/stages.enum';
 import { EWonderSide } from '../../enums/wonder-side.enum';
+import { IExpansion } from '../game/expansions.model';
 import { IPlayer, Player } from '../player/player.model';
-import { IMatchPlayersStages } from './match-players-stages.model';
+import { IMatchPlayersStages, MatchPlayersStages } from './match-players-stages.model';
+
+const baseStage: EStages[] = [EStages.WONDER, EStages.COIN, EStages.DEBT, EStages.MILITARY, EStages.CIVIC, EStages.COMMERCE, EStages.SCIENCE, EStages.GUILD];
 
 export interface IMatchPlayer {
   player: IPlayer;
@@ -9,6 +14,8 @@ export interface IMatchPlayer {
   stages: IMatchPlayersStages[];
 
   totalPlayerScores(): number;
+
+  generateStages(expansionList: IExpansion[]): void;
 }
 
 export class MatchPlayer implements IMatchPlayer {
@@ -24,6 +31,26 @@ export class MatchPlayer implements IMatchPlayer {
           .map((item) => item.score)
           .reduce((total, item) => total + item, 0);
   }
+
+  generateStages(expansionList: IExpansion[]): void {
+
+    for (let i = 0; i < stagesList.length; i++) {
+      
+      let newStage: IMatchPlayersStages = new MatchPlayersStages();
+      newStage.stage = stagesList[i];
+
+      if(baseStage.includes(stagesList[i].stage)) {
+        newStage.activated = true;
+      } else {
+        expansionList.forEach((expansion) => {
+          newStage.activated = expansion.stage.includes(stagesList[i].stage);
+        });        
+      }      
+
+      this.stages.push(newStage);
+    }
+
+  };
 
   constructor(clone?: IMatchPlayer) {
     this.player = new Player();
