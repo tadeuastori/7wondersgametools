@@ -42,7 +42,7 @@ export const stagesList: IStage[] = [{
     color: '#000000',
     icon: ''
 },{
-    stage: EStages.CITY,
+    stage: EStages.CITIES,
     order: 8,
     color: '#000000',
     icon: ''
@@ -59,6 +59,24 @@ export const stagesList: IStage[] = [{
 },{
     stage: EStages.ISLAND,
     order: 11,
+    color: '#000000',
+    icon: ''
+},
+{
+    stage: EStages.MEDALS,
+    order: 12,
+    color: '#000000',
+    icon: ''
+},
+{
+    stage: EStages.AGORA,
+    order: 13,
+    color: '#000000',
+    icon: ''
+},
+{
+    stage: EStages.PANTHEON,
+    order: 14,
     color: '#000000',
     icon: ''
 }];
