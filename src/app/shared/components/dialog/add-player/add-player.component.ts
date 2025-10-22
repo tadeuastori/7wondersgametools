@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { IMatchPlayers, MatchPlayers } from '@score-sheet-menu/models/match-players.model';
 import { Observable, startWith, map, takeUntil } from 'rxjs';
 import { EWonderSide } from 'src/app/core/enums/wonder-side.enum';
 import { IPlayer, Player } from 'src/app/core/models/player/player.model';
@@ -17,6 +16,7 @@ import { ApplicationStateSelectors } from 'src/app/core/states/application.queri
 import { SortUtils } from 'src/app/core/utils/sort.util';
 import { BaseComponent } from '../../base.component';
 import { TranslocoModule } from '@jsverse/transloco';
+import { IMatchPlayersList, MatchPlayersList } from '@score-sheet-menu/models/match-players-list.model';
 
 @Component({
   selector: 'app-add-player',
@@ -128,7 +128,7 @@ export class AddPlayerComponent extends BaseComponent implements OnInit, AfterVi
     }
 
     if(this.fromMatchPages()){
-      let newMatchPlayer: IMatchPlayers = new MatchPlayers();
+      let newMatchPlayer: IMatchPlayersList = new MatchPlayersList();
 
       newMatchPlayer.name = newPlayer.name;
       newMatchPlayer.id = newPlayer.id;
@@ -142,12 +142,16 @@ export class AddPlayerComponent extends BaseComponent implements OnInit, AfterVi
 
         if (Array.isArray(this.selectedWonder)) {
           this.selectedWonder.forEach((item) => {
-            newWonderList.push({ name: item, icon: '' });
+            var wonderIcon = this.wonderList()?.find((wonder) => wonder.name === item.toString())?.icon ?? '';
+
+            newWonderList.push({ name: item, icon: wonderIcon });
           });
         } else {
+          var wonderIcon = this.wonderList()?.find((wonder) => wonder.name === this.selectedWonder.toString())?.icon ?? '';
+
           newWonderList.push({
             name: this.selectedWonder,
-            icon: '',
+            icon: wonderIcon,
             side:
               this.hasWonderSide() 
                 ? (this.wonderSide ? EWonderSide.NIGHT : EWonderSide.DAY) 
