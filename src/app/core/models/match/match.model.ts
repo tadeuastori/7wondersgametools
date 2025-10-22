@@ -5,7 +5,7 @@ export interface IMatch {
   id?: number;
   matchDate: Date;
   gameType: EGamesEnum;
-  expansions?: string[];
+  expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
 }
 
@@ -13,7 +13,7 @@ export class Match implements IMatch {
   id?: number;
   matchDate: Date;
   gameType: EGamesEnum;
-  expansions?: string[];
+  expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
 
   constructor(clone?: IMatch) {

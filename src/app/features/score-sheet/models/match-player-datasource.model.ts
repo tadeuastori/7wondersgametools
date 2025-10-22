@@ -1,24 +1,24 @@
 import { DataSource } from '@angular/cdk/collections';
 import { ReplaySubject, map, Observable } from 'rxjs';
-import { IMatchPlayers } from './match-players.model';
+import { IMatchPlayersList } from './match-players-list.model';
 
-export class MatchPlayerDataSource extends DataSource<IMatchPlayers> {
-  private _dataStream = new ReplaySubject<IMatchPlayers[]>();
+export class MatchPlayerDataSource extends DataSource<IMatchPlayersList> {
+  private _dataStream = new ReplaySubject<IMatchPlayersList[]>();
 
   public count = this._dataStream.pipe(map((data) => data.length));
 
-  constructor(initialData: IMatchPlayers[] = []) {
+  constructor(initialData: IMatchPlayersList[] = []) {
     super();
     this.setData(initialData);
   }
 
-  connect(): Observable<IMatchPlayers[]> {
+  connect(): Observable<IMatchPlayersList[]> {
     return this._dataStream;
   }
 
   disconnect() {}
 
-  setData(data: IMatchPlayers[]) {
+  setData(data: IMatchPlayersList[]) {
     this._dataStream.next(data);
   }
 }

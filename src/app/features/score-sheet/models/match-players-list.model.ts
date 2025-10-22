@@ -1,19 +1,19 @@
 import { EWonderSide } from '../../../core/enums/wonder-side.enum';
 
-export interface IMatchPlayers {
+export interface IMatchPlayersList {
   id?: number;
   name: string;
   wonder?: Array<{ name: string; icon?: string; side?: EWonderSide }>;
   group?: number;
 }
 
-export class MatchPlayers implements IMatchPlayers {
+export class MatchPlayersList implements IMatchPlayersList {
   id?: number;
   name: string;
   wonder?: Array<{ name: string; icon?: string; side?: EWonderSide }>;
   group?: number;
 
-  constructor(clone?: IMatchPlayers) {
+  constructor(clone?: IMatchPlayersList) {
     id: undefined;
     this.name = '';
     this.wonder = undefined;

@@ -2,18 +2,16 @@ import { EGamesEnum } from '../../enums/games.enum';
 import { IMatchPlayer } from './match-players.model';
 
 export interface IMatchRequest {
-  id?: number;
   matchDate: Date;
   gameType: EGamesEnum;
-  expansions?: string[];
+  expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
 }
 
-export class Match implements IMatchRequest {
-  id?: number;
+export class MatchRequest implements IMatchRequest {
   matchDate: Date;
   gameType: EGamesEnum;
-  expansions?: string[];
+  expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
 
   constructor(clone?: IMatchRequest) {
@@ -23,7 +21,6 @@ export class Match implements IMatchRequest {
     this.players = [];
 
     if (clone) {
-      this.id = clone.id;
       this.matchDate = clone.matchDate;
       this.gameType = clone.gameType;
       this.expansions = clone.expansions;
