@@ -7,8 +7,14 @@ export enum EStages {
   COMMERCE = 'Commerce',
   SCIENCE = 'Science',
   GUILD = 'Guild',
-  CITY = 'City',
+  
+  CITIES = 'Cities',
   LEADERS = 'Leaders',
   NAVAL = 'Naval',
   ISLAND = 'Island',
+  
+  MEDALS = 'Medals',
+
+  AGORA = 'Agora',
+  PANTHEON = 'Pantheon',
 }
