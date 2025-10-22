@@ -125,4 +125,8 @@ export class ApplicationDataService {
   public getGameData(): Game[] {
     return this.GameData;
   }
+
+  public getExpansionsFromGameType(gameType: EGamesEnum): Game[] {
+    return this.GameData.filter((game) => game.gameType === gameType);
+  }
 }
