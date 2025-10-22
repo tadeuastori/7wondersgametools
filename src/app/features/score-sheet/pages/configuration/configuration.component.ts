@@ -14,7 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BaseComponent } from '../../pages/base.component';
 
 import { MatTableModule } from '@angular/material/table';
-import { IMatchPlayers, MatchPlayers } from '../../models/match-players.model';
+import { IMatchPlayersList, MatchPlayersList } from '@score-sheet-menu/models/match-players-list.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -62,7 +62,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   applicationGames$: Observable<IGame[]>;
   applicationPlayersList$: Observable<IPlayer[]>;
 
-  readonly newPlayer: IMatchPlayers = signal(new MatchPlayers());
+  readonly newPlayer: IMatchPlayersList = signal(new MatchPlayersList());
 
   originalPlayersList: IPlayer[] = [];
   originalGameList: IGame[] = [];
@@ -81,7 +81,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   gameType: EGamesEnum = EGamesEnum.GAME_BASE;
 
   matchPlayerDataSource = new MatchPlayerDataSource();
-  matchPlayersList: IMatchPlayers[] = [];
+  matchPlayersList: IMatchPlayersList[] = [];
   displayedColumns: string[] = ['table-player', 'table-wonder', 'table-action'];
 
   isStartReady: boolean = false;
@@ -198,7 +198,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     });
 
     if(!resetList){
-      this.matchPlayersList.forEach((player: IMatchPlayers) => {
+      this.matchPlayersList.forEach((player: IMatchPlayersList) => {
         player.wonder?.forEach((wonder: any) => {
           var idx = this.availableWonderList.findIndex(
             (item) => item.name === wonder.name
@@ -219,7 +219,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
 
   private _refreshDataSourceList(): void {
     if (this.matchPlayersList.length > 0) {
-      this.matchPlayersList.forEach((player: IMatchPlayers) => {
+      this.matchPlayersList.forEach((player: IMatchPlayersList) => {
         player.wonder?.forEach((wonder: any) => {
           this.originalExpansionList.forEach((expansion: any) => {
             expansion.wondersList?.forEach((wonders: IWonder) => {
@@ -243,7 +243,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
     this.isStartReady = configurationIsReady(this.gameType, this.matchPlayersList.length, hasWonder);
   }
 
-  public addPlayer(player: IMatchPlayers): void {
+  public addPlayer(player: IMatchPlayersList): void {
     const newPlayer = new PlayerRequest({
       name: player.name,
     }) as IPlayerRequest;
@@ -312,7 +312,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
 
             wonder.push({
               name: availableWonders[wonderRandomIndex].name,
-              icon: '',
+              icon: availableWonders[wonderRandomIndex].icon ?? '',
               side:
                 this.gameType === EGamesEnum.GAME_BASE
                   ? wonderValues[sideRandomIndex]
@@ -343,11 +343,14 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
   public createAndStartMatch(): void {
     this._store.dispatch(
       new MatchStateActions.CreateAndStartMatch(
-        this.gameType,
+        this.gameType,        
+        this.matchPlayersList,
         this.originalExpansionList
           .filter((filter) => filter.value === true)
-          .map((item) => item.name),
-        this.matchPlayersList
+          .map((item) => ({
+            name: item.name,          
+            icon: item.icon,
+          })),
       )
     );
   }
