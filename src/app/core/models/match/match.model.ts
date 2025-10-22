@@ -7,6 +7,7 @@ export interface IMatch {
   gameType: EGamesEnum;
   expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
+  isCompleted: boolean;
 }
 
 export class Match implements IMatch {
@@ -15,12 +16,14 @@ export class Match implements IMatch {
   gameType: EGamesEnum;
   expansions: Array<{ name: string; icon?: string; }>;
   players: IMatchPlayer[];
+  isCompleted: boolean;
 
   constructor(clone?: IMatch) {
     this.matchDate = new Date();
     this.gameType = EGamesEnum.GAME_BASE;
     this.expansions = [];
     this.players = [];
+    this.isCompleted = false;
 
     if (clone) {
       this.id = clone.id;
@@ -28,6 +31,7 @@ export class Match implements IMatch {
       this.gameType = clone.gameType;
       this.expansions = clone.expansions;
       this.players = clone.players;
+      this.isCompleted = clone.isCompleted;
     }
   }
 }
