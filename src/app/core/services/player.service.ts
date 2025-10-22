@@ -27,4 +27,8 @@ export class PlayerService {
   public deletePlayer(playerId: number): Observable<IPlayer[]> {
     return this._dataBase.deleteByKey(this._dataBaseSchema, playerId);
   }
+
+  public getPlayerById(key: number): Observable<IPlayer> {
+    return this._dataBase.getByKey<IPlayer>(this._dataBaseSchema, key);
+  }
 }
