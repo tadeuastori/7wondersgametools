@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Game } from '../models/game/game.model';
 import { EGamesEnum } from '../enums/games.enum';
 import { EStages } from '../enums/stages.enum';
+import { IExpansion } from '../models/game/expansions.model';
 
 @Injectable({
   providedIn: 'root',
@@ -134,7 +135,7 @@ export class ApplicationDataService {
     return this.GameData;
   }
 
-  public getExpansionsFromGameType(gameType: EGamesEnum): Game[] {
-    return this.GameData.filter((game) => game.gameType === gameType);
+  public getExpansionsFromGameType(gameType: EGamesEnum): IExpansion[] {
+    return this.GameData.filter((game) => game.gameType === gameType).map((game) => game.expansions)[0];
   }
 }
