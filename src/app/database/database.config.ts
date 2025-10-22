@@ -6,7 +6,7 @@ import { matchSchema } from './schemas/match.schema';
 
 export const dbConfig: DBConfig = {
   name: '7WondersGameTools',
-  version: 1,
+  version: 2, // <- Update this if you want to create a new schema
   objectStoresMeta: [settingsSchema, playerSchema, matchSchema],
 };
 
