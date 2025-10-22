@@ -10,7 +10,7 @@ import { BaseState } from './base/base.state';
 import { MatchRequest } from '../models/match/match-request.model';
 import { MatchPlayer } from '../models/match/match-players.model';
 import { MatchGameService } from '../services/match-game.service';
-import { first, tap} from 'rxjs';
+import { first, forkJoin, map, switchMap, tap} from 'rxjs';
 import { PlayerService } from '../services/player.service';
 import { ApplicationDataService } from '../services/application-data.service';
 import { IExpansion } from '../models/game/expansions.model';
@@ -40,70 +40,67 @@ export class MatchState extends BaseState {
   }
 
   @Action(MatchStateActions.CreateAndStartMatch)
-  async createAndStartMatchMatchApplicationState(
-    ctx: StateContext<IMatchStateModel>,
-    { gameType, expansions, players }: MatchStateActions.CreateAndStartMatch
-  ) {
-    this._startPathState(ctx);
-    
-    let matchToAdd = new MatchRequest();
+createAndStartMatchMatchApplicationState(
+  ctx: StateContext<IMatchStateModel>,
+  { gameType, expansions, players }: MatchStateActions.CreateAndStartMatch
+) {
+  this._startPathState(ctx);
 
-    matchToAdd.gameType = gameType;
-    matchToAdd.expansions = expansions;    
+  const matchToAdd = new MatchRequest();
+  matchToAdd.gameType = gameType;
+  matchToAdd.expansions = expansions;
 
-    players.forEach((player) => {
+  const playerRequests$ = players.map((player) =>
+    this._playerService.getPlayerById(player.id ?? 0).pipe(
+      first(),
+      map((p) => {
+        const newMatchPlayer = new MatchPlayer();
+        newMatchPlayer.player = p;
+        newMatchPlayer.wonder =
+          player.wonder?.map((wonder) => ({
+            name: wonder.name,
+            icon: wonder.icon,
+            side: wonder.side,
+          })) ?? [];
 
-      let newMatchPlayer = new MatchPlayer();
+        const selectedExpansions: IExpansion[] = [];
 
-      this._playerService.getPlayerById(player.id ?? 0).pipe(
-        first())
-        .subscribe((p) => {
-          newMatchPlayer.player = p;
+        expansions.forEach((expansion) => {
+          if (expansion) {
+            const exp = this._applicationDataService
+              .getExpansionsFromGameType(gameType)
+              .find((e) => e.name === expansion.name);
+            if (exp) selectedExpansions.push(exp);
+          }
         });
-      
-      newMatchPlayer.wonder = player.wonder?.map((wonder) => ({
-        name: wonder.name,
-        icon: wonder.icon,
-        side: wonder.side          
-      })) ?? [];
 
-      let selectedExpansions: IExpansion[] = [];
+        newMatchPlayer.generateStages(selectedExpansions);
+        newMatchPlayer.group = player.group ?? 0;
 
-      expansions.forEach((expansion) => {
-        if (expansion) {
-          let exp = this._applicationDataService.getExpansionsFromGameType(gameType).find((e) => e.name === expansion.name);
-          if (exp) selectedExpansions.push(exp);         
-        }
-      });      
-            
-      newMatchPlayer.generateStages(selectedExpansions);
+        return newMatchPlayer;
+      })
+    )
+  );
 
-      newMatchPlayer.group = player.group ?? 0;
-
-      matchToAdd.players.push(newMatchPlayer);
+  return forkJoin(playerRequests$).pipe(
+    switchMap((matchPlayers) => {
+      matchToAdd.players = matchPlayers;
+      return this._matchGameService.addMatch(matchToAdd);
+    }),
+    tap({
+      next: (match) => {
+        ctx.patchState({ match });
+        this._successSnakBar('Match Added');
+        this._endPathState(ctx);
+      },
+      error: (err) => {
+        this._errorSnakBar(`[${this.createAndStartMatchMatchApplicationState.name}] ${err}`);
+        this._endPathState(ctx);
+      },
     })
+  );
+}
 
-    console.log(matchToAdd);
-
-    // return this._matchGameService.addMatch(matchToAdd).pipe(
-    //   tap({
-    //     next: (match) => {
-    //       ctx.patchState({
-    //         match: match,
-    //       });
-
-    //       this._successSnakBar('Match Added');
-    //       this._endPathState(ctx);
-    //     },
-    //     error: (err) => {
-    //       this._errorSnakBar('[' + this.createAndStartMatchMatchApplicationState.name + ']' + err);
-    //       this._endPathState(ctx);
-    //     },
-    //   }));
-
-    this._successSnakBar('Match Created');
-    this._endPathState(ctx);
-  }
 
   @Action(MatchStateActions.EndMatch)
   async endMatchApplicationState(ctx: StateContext<IMatchStateModel>) {
