@@ -362,6 +362,7 @@ export class ConfigurationComponent extends BaseComponent implements OnInit {
       wonders: this.availableWonderList,
       multipleWonders: this.gameType === EGamesEnum.GAME_DUEL,
       hasWonderSide: this.gameType === EGamesEnum.GAME_BASE,
+      matchPlayersIdList: this.matchPlayersList.map((item) => item.name),
     };
 
     return config;

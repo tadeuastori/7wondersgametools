@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, inject, model, ModelSignal, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, model, ModelSignal, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -49,6 +49,7 @@ export class AddPlayerComponent extends BaseComponent implements OnInit, AfterVi
   readonly wonderList: ModelSignal<Array<{ name: string; icon?: string }>> = model(this.data?.wonders ?? null);
   readonly multipleWonders: ModelSignal<boolean> = model(this.data?.multipleWonders ?? null);
   readonly hasWonderSide: ModelSignal<boolean> = model(this.data?.hasWonderSide ?? null);
+  readonly matchPlayersIdList: ModelSignal<string[]> = model(this.data?.matchPlayersIdList ?? null);
 
   autoCompleteOptions: Observable<string[]> = new Observable<string[]>();
   applicationPlayersList$: Observable<IPlayer[]>;
@@ -71,13 +72,16 @@ export class AddPlayerComponent extends BaseComponent implements OnInit, AfterVi
     this.autoCompleteOptions = this.newPlayerControl.valueChanges.pipe(
       startWith(''),
       map((value) => {
-        return value
+        let options = value
           ? this._filter(value as string)
           : this.playersList
               .map((player) => player.name)
               .slice();
+
+        return options.filter((option) => !this.matchPlayersIdList().includes(option));
       })
     );
+
   }
 
   ngAfterViewInit() {
