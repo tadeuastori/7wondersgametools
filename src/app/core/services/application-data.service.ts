@@ -25,7 +25,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'fort',
           wonders: [{ name: 'Petra' }, { name: 'Byzantium' }],
-          stage: [EStages.CITIES]
+          stage: [EStages.CITIES, EStages.DEBT]
         },
         {
           name: 'Edifice',
@@ -76,7 +76,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'groups',
           wonders: [{ name: 'The Sanctuary' }, { name: 'The Divine Theater' }],
-          stage: [EStages.AGORA]
+          stage: []
         },
         {
           name: 'Pantheon',

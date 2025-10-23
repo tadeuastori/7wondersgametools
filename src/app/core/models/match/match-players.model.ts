@@ -5,7 +5,7 @@ import { IExpansion } from '../game/expansions.model';
 import { IPlayer, Player } from '../player/player.model';
 import { IMatchPlayersStages, MatchPlayersStages } from './match-players-stages.model';
 
-const baseStage: EStages[] = [EStages.WONDER, EStages.COIN, EStages.DEBT, EStages.MILITARY, EStages.CIVIC, EStages.COMMERCE, EStages.SCIENCE, EStages.GUILD];
+const baseStage: EStages[] = [EStages.WONDER, EStages.COIN, EStages.MILITARY, EStages.CIVIC, EStages.COMMERCE, EStages.SCIENCE, EStages.GUILD];
 
 export interface IMatchPlayer {
   player: IPlayer;
