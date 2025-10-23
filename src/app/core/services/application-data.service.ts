@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../models/game/game.model';
 import { EGamesEnum } from '../enums/games.enum';
+import { EStages } from '../enums/stages.enum';
+import { IExpansion } from '../models/game/expansions.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +25,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'fort',
           wonders: [{ name: 'Petra' }, { name: 'Byzantium' }],
+          stage: [EStages.CITIES, EStages.DEBT]
         },
         {
           name: 'Edifice',
@@ -30,6 +33,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'apartment',
           wonders: [{ name: 'Ur' }, { name: 'Carthage' }],
+          stage: []
         },
         {
           name: 'Leaders',
@@ -37,6 +41,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'groups',
           wonders: [{ name: 'Roma' }, { name: 'Abu Simbel' }],
+          stage: [EStages.LEADERS]
         },
         {
           name: 'Armada',
@@ -44,6 +49,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'sailing',
           wonders: [{ name: 'Siracusa' }],
+          stage: [EStages.ISLAND, EStages.NAVAL]
         },
       ],
       wonders: [
@@ -70,6 +76,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'groups',
           wonders: [{ name: 'The Sanctuary' }, { name: 'The Divine Theater' }],
+          stage: []
         },
         {
           name: 'Pantheon',
@@ -77,6 +84,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'synagogue',
           wonders: [{ name: 'Curia Julia' }, { name: 'Knossos' }],
+          stage: [EStages.PANTHEON]
         },
       ],
       wonders: [
@@ -108,6 +116,7 @@ export class ApplicationDataService {
           description: '',
           icon: 'workspace_premium',
           wonders: [{ name: 'Ur' }, { name: 'Rome' }],
+          stage: [EStages.MEDALS]
         },
       ],
       wonders: [
@@ -124,5 +133,9 @@ export class ApplicationDataService {
 
   public getGameData(): Game[] {
     return this.GameData;
+  }
+
+  public getExpansionsFromGameType(gameType: EGamesEnum): IExpansion[] {
+    return this.GameData.filter((game) => game.gameType === gameType).map((game) => game.expansions)[0];
   }
 }

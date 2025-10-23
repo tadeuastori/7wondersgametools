@@ -1,3 +1,4 @@
+import { EStages } from '../../enums/stages.enum';
 import { IWonder, Wonder } from './wonder.model';
 
 export interface IExpansion {
@@ -6,6 +7,7 @@ export interface IExpansion {
   description?: string;
   wonders?: IWonder[];
   icon: string;
+  stage: EStages[];
 }
 
 export class Expansion implements IExpansion {
@@ -14,6 +16,7 @@ export class Expansion implements IExpansion {
   description?: string;
   wonders?: IWonder[];
   icon: string;
+  stage: EStages[];
 
   constructor(clone?: IExpansion) {
     this.name = '';
@@ -21,6 +24,7 @@ export class Expansion implements IExpansion {
     this.description = '';
     this.wonders = [new Wonder()] as IWonder[];
     this.icon = '';
+    this.stage = [];
 
     if (clone) {
       this.name = clone.name;
@@ -28,6 +32,7 @@ export class Expansion implements IExpansion {
       this.description = clone.description;
       this.wonders = clone.wonders;
       this.icon = clone.icon;
+      this.stage = clone.stage;
     }
   }
 }

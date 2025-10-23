@@ -1,4 +1,4 @@
-import { IMatchPlayers } from '../../features/score-sheet/models/match-players.model';
+import { IMatchPlayersList } from '@score-sheet-menu/models/match-players-list.model';
 import { EGamesEnum } from '../enums/games.enum';
 import { MatchStateActionsTypes } from '../enums/match-state-actions-types.enum';
 
@@ -10,9 +10,9 @@ export namespace MatchStateActions {
   export class CreateAndStartMatch {
     static readonly type = MatchStateActionsTypes.CreateAndStartMatch;
     constructor(
-      public game: EGamesEnum,
-      public expansions: string[],
-      public players: IMatchPlayers[]
+      public gameType: EGamesEnum,
+      public players: IMatchPlayersList[],
+      public expansions: Array<{ name: string; icon?: string; }>     
     ) {}
   }
 

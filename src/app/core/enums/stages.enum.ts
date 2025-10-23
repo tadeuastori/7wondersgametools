@@ -1,4 +1,5 @@
 export enum EStages {
+  //base stages
   WONDER = 'Wonder',
   COIN = 'Coin',
   DEBT = 'Debt',
@@ -7,8 +8,17 @@ export enum EStages {
   COMMERCE = 'Commerce',
   SCIENCE = 'Science',
   GUILD = 'Guild',
-  CITY = 'City',
+  
+  //game base
+  CITIES = 'Cities',
   LEADERS = 'Leaders',
   NAVAL = 'Naval',
   ISLAND = 'Island',
+  
+  // architects
+  MEDALS = 'Medals',
+
+  // duel
+  AGORA = 'Agora',
+  PANTHEON = 'Pantheon',
 }

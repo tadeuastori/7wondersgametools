@@ -1,6 +1,4 @@
-import { IMatchPlayers } from '../../features/score-sheet/models/match-players.model';
 import { ApplicationStateActionsTypes } from '../enums/application-state-actions-types.enum';
-import { EGamesEnum } from '../enums/games.enum';
 import { IPlayerRequest } from '../models/player/player-request.model';
 import { ISetting } from '../models/setting/setting.model';
 

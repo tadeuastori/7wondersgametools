@@ -10,6 +10,7 @@ import { ISetting } from './core/models/setting/setting.model';
 import { Observable, takeUntil } from 'rxjs';
 import { LanguageService } from './core/services/language.service';
 import { LoadingPageComponent } from "./shared/components/loading-page/loading-page.component";
+import { MatchStateActions } from './core/states/match.action';
 
 @Component({
     selector: 'app-root',
@@ -35,7 +36,11 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   ngOnInit(): void {
     this._store.dispatch(
-      new ApplicationStateActions.InitializeApplicationState()
+      new ApplicationStateActions.InitializeApplicationState(),
+    );
+
+    this._store.dispatch(
+      new MatchStateActions.InitializeMatchState()
     );
 
     this.applicationSettings$.pipe(takeUntil(this.destroy$)).subscribe({
