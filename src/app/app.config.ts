@@ -15,6 +15,7 @@ import { TranslocoHttpLoader } from './core/services/transloco/transloco-loader'
 import { provideTransloco } from '@jsverse/transloco';
 import { IconsLoaderService } from './core/loaders/icons-loader.service';
 import { MatchState } from './core/states/match.state';
+import { environment } from 'src/environments/environment';
 
 export function initializeIcons(iconLoader: IconsLoaderService): () => void {
   return () => iconLoader.registerIcons();
@@ -22,8 +23,8 @@ export function initializeIcons(iconLoader: IconsLoaderService): () => void {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withHashLocation()),
+    provideZoneChangeDetection({ eventCoalescing: true }),    
+    environment.production ? provideRouter(routes, withHashLocation()) : provideRouter(routes),
     provideStore([ApplicationState, MatchState]),
     provideIndexedDb(), 
     provideHttpClient(), 

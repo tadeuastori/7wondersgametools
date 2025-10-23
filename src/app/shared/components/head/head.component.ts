@@ -84,17 +84,36 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
   goBack() {
     const currentUrl = this.router.url;
+    const usingHash = this.isHashRouting();
 
-    const redirectToHome: string[] = [ERoutePaths.SettingsPlayers, ERoutePaths.SettingsWonders, ERoutePaths.SettingsApplication, ERoutePaths.ScoreSheetMenu];
+    const redirectToHome: string[] = [
+      ERoutePaths.SettingsPlayers,
+      ERoutePaths.SettingsWonders,
+      ERoutePaths.SettingsApplication,
+      ERoutePaths.ScoreSheetMenu
+    ];
 
-    const matchToHome = redirectToHome.find((path) => currentUrl.includes(path));
+    const matchToHome = redirectToHome.find((path) => currentUrl.endsWith(path));
     if (matchToHome) {
       this.router.navigateByUrl('/');
       return;
     }
 
     const parentUrl = this.getParentUrl();
-    this.router.navigateByUrl(parentUrl);
+
+    if (usingHash) {
+      if (parentUrl !== currentUrl) {
+        this.router.navigateByUrl(parentUrl);
+      } else {
+        window.history.back();
+      }
+    } else {
+      if (parentUrl !== currentUrl && parentUrl !== '/') {
+        this.router.navigateByUrl(parentUrl);
+      } else {
+        window.history.back();
+      }
+    }
   }
 
   private getParentUrl(): string {
@@ -107,5 +126,9 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
     const parentUrl = '/' + segments.map((s) => s.path).join('/');
     return parentUrl || '/';
+  }
+
+  private isHashRouting(): boolean {
+    return window.location.hash.startsWith('#/');
   }
 }
