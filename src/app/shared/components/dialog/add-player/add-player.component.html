@@ -7,14 +7,15 @@
     <mat-dialog-content>
       <mat-form-field>
         <mat-label>{{t("table_forms.players_name")}}</mat-label>
-        <input
+        @if(fromMatchPages()){
+          <input
           type="text"
           matInput
           [formControl]="newPlayerControl"
           [matAutocomplete]="auto"
           required="true"
-        />
-        <mat-autocomplete
+          />
+          <mat-autocomplete
           autoActiveFirstOption
           #auto="matAutocomplete"
           [displayWith]="displayFn"
@@ -23,6 +24,14 @@
           <mat-option [value]="option">{{ option }}</mat-option>
           }
         </mat-autocomplete>
+        } @else {
+          <input
+          type="text"
+          matInput
+          [formControl]="newPlayerControl"
+          required="true"
+          />
+        }
       </mat-form-field>
       @if(fromMatchPages()) {
           <mat-form-field>
@@ -60,7 +69,8 @@
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button (click)="onNoClick()">{{t("buttons.cancel")}}</button>
-      <button
+      @if(newPlayerControl) {
+          <button
         mat-button
         (click)="onAddPlayer()"
         [disabled]="
@@ -70,6 +80,7 @@
       >
         {{t("buttons.add")}}
       </button>
+      }
     </mat-dialog-actions>
   </div>
 </ng-container>
