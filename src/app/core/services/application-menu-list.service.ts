@@ -105,6 +105,21 @@ export class ApplicationMenuListService {
           iconName: 'question_mark',
           label: 'rules',
           routerLink: '',
+          active: false,
+        },
+      ],
+    },
+    {
+      order: 50,
+      iconName: 'pageview',
+      label: 'page_test',
+      active: true,
+      items: [
+        {
+          order: 10,
+          iconName: 'pageview',
+          label: 'page_test',
+          routerLink: 'page_test',
           active: true,
         },
       ],
