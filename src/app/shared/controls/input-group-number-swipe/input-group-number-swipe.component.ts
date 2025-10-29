@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import 'hammerjs';
+import { HammerDirective } from 'src/app/core/directives/hammer.directive';
 
 @Component({
     selector: 'app-input-group-number-swipe',
-    imports: [FormsModule],
+    imports: [HammerDirective, FormsModule], 
     templateUrl: './input-group-number-swipe.component.html',
     styleUrl: './input-group-number-swipe.component.less'
 })
@@ -25,17 +26,21 @@ export class InputGroupNumberSwipeComponent implements OnInit {
   }
 
   onSwipeLeft(index: number) {
-    this.hideLabel();
-    this.values[index]++;
-    this.updateSum();
-    this.resetLabelTimeout();
+    if (index < 3) {
+      this.hideLabel();
+      this.values[index]++;
+      this.updateSum();
+      this.updateD();
+      this.resetLabelTimeout();
+    }
   }
 
   onSwipeRight(index: number) {
-    if (this.allowNegative || this.values[index] > 0) {
+    if (index < 3 && this.allowNegative || this.values[index] > 0) {
       this.hideLabel();
       this.values[index]--;
       this.updateSum();
+      this.updateD();
       this.resetLabelTimeout();
     }
   }
@@ -43,7 +48,7 @@ export class InputGroupNumberSwipeComponent implements OnInit {
   onInputChange(event: any, index: number) {
     const newValue = event.target.valueAsNumber;
 
-    if (Number.isNaN(newValue)) return;
+    if (Number.isNaN(newValue) || index < 3) return;
 
     if (!this.allowNegative || newValue < 0) {
       this.values[index] = Math.max(0, newValue);
@@ -51,6 +56,7 @@ export class InputGroupNumberSwipeComponent implements OnInit {
     }
 
     this.updateSum();
+    this.updateD();
   }
 
   onInputFocus(event: any) {
@@ -64,7 +70,7 @@ export class InputGroupNumberSwipeComponent implements OnInit {
   }
 
   updateSum() {
-    this.sum = this.values.reduce((a, b) => a + b, 0);
+    this.sum = this.values.slice(0, 3).reduce((a, b) => a + b, 0);
   }
 
   resetLabelTimeout() {
@@ -77,4 +83,13 @@ export class InputGroupNumberSwipeComponent implements OnInit {
       this.updateSum();
     }, 1000);
   }
+
+  updateD() {  
+  const firstThree = this.values.slice(0, 3).filter(n => n !== null && n >= 0);
+  if (firstThree.length > 0) {
+    this.values[3] = Math.min(...firstThree);
+  } else {
+    this.values[3] = 0;
+  }
+}
 }

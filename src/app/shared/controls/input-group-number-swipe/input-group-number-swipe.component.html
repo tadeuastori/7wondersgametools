@@ -9,7 +9,7 @@
 
   @for(inputValue of values; track $index; let i = $index) {
   <div class="input-wrapper">
-    <input
+    <input appHammer
       type="number"
       [(ngModel)]="values[i]"
       (input)="onInputChange($event, i)"
@@ -17,10 +17,15 @@
       (blur)="onInputBlur()"
       (panleft)="onSwipeLeft(i)"
       (panright)="onSwipeRight(i)"
+      [readonly]="i === 3"
     />
+
     @if(i < values.length - 1){
     <div class="vertical-line"></div>
-    }
+    }    
+
   </div>
   }
+
+
 </div>
