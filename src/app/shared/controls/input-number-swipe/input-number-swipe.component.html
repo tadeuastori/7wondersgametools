@@ -1,24 +1,48 @@
-<div class="input-carousel-container">
-  <div class="line"></div>
-  <div
-    class="input-carousel-content"
-    (panleft)="onSwipeLeft()"
-    (panright)="onSwipeRight()"
-  >
-    @for (number of visibleNumbers; track $index; let i = $index) {
-    <div class="input-carousel-item">
-      @if(i !== 1) { @if (number >= 0 || allowNegative) {
-      {{ number }}
-      } } @else {
-      <input
-        type="number"
-        [(ngModel)]="value"
-        (input)="onInputChange($event)"
-        (focus)="onInputFocus($event)"
-      />
-      }
+<div class="input-carousel-container" [class.single-number]="displaySingleNumber">
+  @if(displaySum) {
+    <div
+      class="sum-label"
+      [class.hidden]="isEditing || score === 0"
+      (click)="hideLabel()"
+    >
+      {{ score }}
     </div>
-    }
+  }
+  <div class="input-wrapper">
+    <div class="line"></div>
+        <div appHammer
+          class="input-carousel-content"
+          (pan)="onPan($event)"
+          (panend)="onPanEnd($event)">
+
+          @for (number of visibleNumbers; track $index; let i = $index) {
+          <div class="input-carousel-item" 
+            [class.active]="i === CENTER_INDEX || i === activeIndex"
+            [class.deactive]="displaySingleNumber && i != CENTER_INDEX && i != activeIndex"
+            >
+            
+            @if(i !== CENTER_INDEX) {
+              @if (i < CENTER_INDEX && (allowNegative || number >= 0) && (minimumNegativeNumber === 0 || (minimumNegativeNumber > 0 && number < 0 && number >= -minimumNegativeNumber))) {
+                {{ number }}
+              }          
+              @if (i > CENTER_INDEX && (allowPositive || number <= 0) && (maximumPositiveNumber === 0 || (maximumPositiveNumber > 0 && number >= 0 && number <= maximumPositiveNumber))) {
+                {{ number }}
+              }
+            } @else {
+              <input
+                type="number"
+                inputmode="numeric"
+                [(ngModel)]="valueStage"
+                (input)="onInputChange($event)"
+                (focus)="onInputFocus($event)"
+                (blur)="onInputBlur()"
+                pattern="[0-9]{3}"
+                [readonly]="isReadonly"
+              />
+            }
+          </div>
+          }
+        </div>
+      <div class="line"></div>  
   </div>
-  <div class="line"></div>
 </div>
