@@ -17,7 +17,7 @@
 
           @for (number of visibleNumbers; track $index; let i = $index) {
           <div class="input-carousel-item" 
-            [class.active]="i === CENTER_INDEX || i === activeIndex"
+            [class.active]="0 === activeIndex || i === activeIndex"
             [class.deactive]="displaySingleNumber && i != CENTER_INDEX && i != activeIndex"
             >
             

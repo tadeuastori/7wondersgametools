@@ -88,7 +88,6 @@ export class InputNumberSwipeComponent implements OnInit {
 
     const el = event.target.closest('.input-carousel-content');
     el.style.transition = 'none';
-
     el.style.transform = `translateX(${nextOffset}px)`;
 
     this.activeIndex = Math.round(this.CENTER_INDEX - partialShift);
