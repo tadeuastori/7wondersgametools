@@ -9,7 +9,8 @@
             "game_architects":"7w - Architects",
             "settings_players":"Settings > Players",
             "settings_wonders":"Settings > Wonders",
-            "settings_application":"Settings > Application"
+            "settings_application":"Settings > Application",
+            "page_test":"Page Test"
         }
     },
     "games": {
@@ -32,7 +33,8 @@
             "game_tools": "Game Tools",
             "metrics": "Metrics",
             "settings": "Settings",
-            "information": "Information"
+            "information": "Information",
+            "page_test": "Page Test"
         },
         "items":{
             "home": "Home",
@@ -41,7 +43,8 @@
             "players": "Players",
             "wonders": "Wonders",
             "Rules": "Rules",
-            "application": "Application"
+            "application": "Application",
+            "page_test": "Stages table test"
         }        
     },
     "pages": {
@@ -68,6 +71,7 @@
     "table_forms": {
         "player": "Player",
         "wonder": "Wonder",
+        "score": "Score",
         "players_name": "Player's name",
         "wonders_name": "Wonder's name",
         "wonders_side": "Wonder's side"        

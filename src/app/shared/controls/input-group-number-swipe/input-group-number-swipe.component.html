@@ -1,26 +1,29 @@
 <div class="grouped-input-container">
   <div
     class="sum-label"
-    [class.hidden]="isEditing || sum === 0"
+    [class.hidden]="!displaySum || isEditing || score === 0"
     (click)="hideLabel()"
   >
-    {{ sum }}
+    {{ score }}
   </div>
-
   @for(inputValue of values; track $index; let i = $index) {
   <div class="input-wrapper">
-    <input
-      type="number"
-      [(ngModel)]="values[i]"
-      (input)="onInputChange($event, i)"
-      (focus)="onInputFocus($event)"
-      (blur)="onInputBlur()"
-      (panleft)="onSwipeLeft(i)"
-      (panright)="onSwipeRight(i)"
-    />
+    <app-input-number-swipe
+        [valueStage]="inputValue"    
+        [score]="score"    
+        [allowNegative]="allowNegative"
+        [allowPositive]="allowPositive"
+        [displaySingleNumber]="true"
+        [isReadonly]="i === 3"
+        (valuesChanged)="onChangeValues(i, $event)"
+        (touchstart)="onTouchStart($event)"
+        (blur)="onInputBlur()"
+    >        
+    </app-input-number-swipe>
+
     @if(i < values.length - 1){
     <div class="vertical-line"></div>
-    }
+    }    
   </div>
   }
 </div>
