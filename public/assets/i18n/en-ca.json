@@ -71,6 +71,7 @@
     "table_forms": {
         "player": "Player",
         "wonder": "Wonder",
+        "score": "Score",
         "players_name": "Player's name",
         "wonders_name": "Wonder's name",
         "wonders_side": "Wonder's side"        

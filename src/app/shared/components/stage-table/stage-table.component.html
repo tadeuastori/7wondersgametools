@@ -1,32 +1,35 @@
-<table [dataSource]="stagePlayerDataSource" mat-table class="mat-elevation-z8">
-  <ng-container matColumnDef="table-player">
-    <th mat-header-cell *matHeaderCellDef> Player </th>
-    <td mat-cell *matCellDef="let element"> <p>{{element.player.name}}</p> </td>
-  </ng-container>
-  <ng-container matColumnDef="table-score">
-    <th mat-header-cell *matHeaderCellDef> Score </th>
-    <td mat-cell *matCellDef="let element; let i = index" [class.array]="hasArrayValue()"> 
-        @if (hasArrayValue()){
-            <app-input-group-number-swipe
-                [values]="getValueStageAsArray(i)"
-                [score]="element.stages.stage.hasScoreCalculated ? element.stages.score : 0"
-                [allowNegative]="element.stages.stage.hasNegativeValue"
-                [allowPositive]="element.stages.stage.hasPositiveValue"
-                [displaySum]="element.stages.stage.hasScoreCalculated"
-                (valuesChanged)="updateValue($event, i)"
-            ></app-input-group-number-swipe>
-        } @else {
-            <app-input-number-swipe
-                [valueStage]="getValueStageAsNumber(i)"
-                [score]="element.stages.stage.hasScoreCalculated ? element.stages.score : 0"
-                [allowNegative]="element.stages.stage.hasNegativeValue"
-                [allowPositive]="element.stages.stage.hasPositiveValue"
-                [displaySum]="element.stages.stage.hasScoreCalculated"
-                (valuesChanged)="updateValue($event, i)"
-            ></app-input-number-swipe>
-        }        
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<ng-container *transloco="let t">
+  <table [dataSource]="stagePlayerDataSource" mat-table class="mat-elevation-z8">
+    <ng-container matColumnDef="table-player">
+      <th mat-header-cell *matHeaderCellDef> {{t("table_forms.player")}} </th>
+      <td mat-cell *matCellDef="let element"> <p>{{element.player.name}}</p> </td>
+    </ng-container>
+    <ng-container matColumnDef="table-score">
+      <th mat-header-cell *matHeaderCellDef> {{t("table_forms.score")}} </th>
+      <td mat-cell *matCellDef="let element; let i = index" [class.array]="hasArrayValue()"> 
+          @if (hasArrayValue()){
+              <app-input-group-number-swipe
+                  [values]="getValueStageAsArray(i)"
+                  [score]="element.stages.stage.hasScoreCalculated ? element.stages.score : 0"
+                  [allowNegative]="element.stages.stage.hasNegativeValue"
+                  [allowPositive]="element.stages.stage.hasPositiveValue"
+                  [displaySum]="element.stages.stage.hasScoreCalculated"
+                  (valuesChanged)="updateValue($event, i)"
+              ></app-input-group-number-swipe>
+          } @else {
+              <app-input-number-swipe
+                  [valueStage]="getValueStageAsNumber(i)"
+                  [score]="element.stages.stage.hasScoreCalculated ? element.stages.score : 0"
+                  [allowNegative]="element.stages.stage.hasNegativeValue"
+                  [allowPositive]="element.stages.stage.hasPositiveValue"
+                  [displaySum]="element.stages.stage.hasScoreCalculated"
+                  (valuesChanged)="updateValue($event, i)"
+              ></app-input-number-swipe>
+          }        
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-container>
+
