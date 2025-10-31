@@ -113,7 +113,7 @@ export class ApplicationMenuListService {
       order: 50,
       iconName: 'pageview',
       label: 'page_test',
-      active: true,
+      active: false,
       items: [
         {
           order: 10,

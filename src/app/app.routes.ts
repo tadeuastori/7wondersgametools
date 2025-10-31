@@ -63,11 +63,11 @@ export const routes: Routes = [
     title: 'application.routes.settings_application',
   }
 
-  ,{
-    path: 'page_test',
-    loadComponent: () => import('src/app/shared/components/stage-table/stage-table.component')
-        .then((c) => c.StageTableComponent),
-    title: 'application.routes.page_test',
-    children: []
-  },
+  // ,{
+  //   path: 'page_test',
+  //   loadComponent: () => import('src/app/shared/components/stage-table/stage-table.component')
+  //       .then((c) => c.StageTableComponent),
+  //   title: 'application.routes.page_test',
+  //   children: []
+  // },
 ];
