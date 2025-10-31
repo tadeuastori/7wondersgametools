@@ -1,0 +1,77 @@
+    @import url(../../../../../public/assets/styles/variables.less);
+
+    table {
+
+        ::ng-deep .mat-mdc-header-row {
+        height: 1rem !important;
+            background-color: @bg-color-btn-dark !important; 
+            color: @text-color-btn-gold !important; 
+        }
+
+        ::ng-deep .mat-mdc-footer-row {        
+            height: 2.5rem !important;
+            color: @text-color-btn-gold !important; 
+        }
+
+        th {
+            font-family: @font-family-7wonder;
+            font-size: small;
+            height: 1rem;
+        }
+
+        td {
+            font-size: small;
+        }
+
+        .mat-column-table-player {
+            font-size: 15px;  
+        }     
+
+        .mat-column-table-score {        
+            text-align: center;
+            width: 150px;
+        }
+
+        .mat-column-table-score.array{
+            width: 218px;
+        }
+    }
+
+    .mat-mdc-table-sticky {
+        border-top-color: var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
+        border-top-width: var(--mat-table-row-item-outline-width, 1px);
+        border-top-style: solid;
+    }
+
+    .table-footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.3rem;     
+
+        button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;        
+        background-color: transparent;
+        scale: 0.8;
+        border: none;
+        box-shadow: none;
+        color: @base-bgcolor-black;
+        height: 2rem;
+        width: 10rem;
+
+        border-left: 1px solid @base-bgcolor-black;
+        border-right: 1px solid @base-bgcolor-black;
+
+        .mat-icon {
+            // height: 19.5px;
+            margin: 0;
+            padding: 0;
+        }
+        }
+    }
